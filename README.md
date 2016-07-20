@@ -29,7 +29,7 @@ para.dt     = para.TR/para.T; % fine scale time resolution.
 
 para.TD_DD = 2; % time and dispersion derivative
 
-para.AR_lag = 2; % AR(2) noise autocorrelation.
+para.AR_lag = 1; % AR(1) noise autocorrelation.
 
 para.thr = 1; % (mean+) para.thr*standard deviation threshold to detect event.
 
