@@ -7,8 +7,15 @@ Please find more complete documentation for HRF blind deconvolution at
 http://users.ugent.be/~dmarinaz/HRF_deconvolution.html
 
 
-Demo
-—————
+Demo code for HRF estimation with canonical HRF with its delay and dispersion derivatives 
+-------------
+(we denote it as canon2dd) 
+
+temporal_mask = []; % without mask, it's equal to temporal_mask = ones(nobs,1); nobs: number of observation = size(data,1).
+
+% if want to exclude first 1~5 time points let temporal_mask(1:5)=0;
+
+data: nobs x nvar,  (200x90, 200x 50000, ....)
 
 TR = 2;
 
@@ -24,25 +31,24 @@ para.TD_DD = 2; % time and dispersion derivative
 
 para.AR_lag = 2; % AR(2) noise autocorrelation.
 
-para.thr = 1; % SD threshold to detect event.
+para.thr = 1; % (mean+) para.thr*standard deviation threshold to detect event.
 
 para.len = 24; % length of HRF, here 24 seconds
 
 para.lag  = fix(3/para.dt):fix(9/para.dt); % 3 to 9 seconds
 
-temporal_mask = []; % without mask, it's equal to temporal_mask = ones(nobs,1); nobs: number of observation = size(data,1).
-% if want to exclude first 1~5 time points let temporal_mask(1:5)=0;
 
 ```
 [beta_hrf bf event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,para,temporal_mask);
 ```
 
-hrf = bf*beta_hrf(1:size(bf,2),:); %HRF
+hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 
 call the code to calculate HRF parameters: PARA
 
 ```
-[PARA] = wgr_get_parameters(mf1,para.TR/para.T);```
+[PARA] = wgr_get_parameters(hrfa,para.TR/para.T);
+```
 
 response height (percent signal change) = PARA(1)./beta_hrf(end-1,:)*100; 
 
