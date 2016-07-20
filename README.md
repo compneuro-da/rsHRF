@@ -4,6 +4,8 @@ Matlab code for resting state HRF estimation
 Quickstart 
 -------------
 (canon2dd: canonical HRF with its delay and dispersion derivatives) 
+
+parameters setting
 ```
 temporal_mask = []; 
 ```
@@ -36,6 +38,7 @@ para.len = 24; % length of HRF, here 24 seconds
 
 para.lag  = fix(3/para.dt):fix(9/para.dt); % 3 to 9 seconds
 ```
+HRF estimation
 
 ```
 [beta_hrf bf event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,para,temporal_mask);
@@ -43,7 +46,7 @@ para.lag  = fix(3/para.dt):fix(9/para.dt); % 3 to 9 seconds
 ```
 hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 ```
-calculate HRF parameters: PARA
+HRF parameters estimation: PARA
 
 ```
 hrf1 = hrfa(:,1); % do a for loop for other variable 
