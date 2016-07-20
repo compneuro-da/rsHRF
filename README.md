@@ -43,7 +43,7 @@ para.lag  = fix(3/para.dt):fix(9/para.dt); % 3 to 9 seconds
 ```
 hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 ```
-call the code to calculate HRF parameters: PARA
+calculate HRF parameters: PARA
 
 ```
 [PARA] = wgr_get_parameters(hrfa,para.TR/para.T);
@@ -51,8 +51,6 @@ call the code to calculate HRF parameters: PARA
 ```
 response height (percent signal change) = PARA(1)./beta_hrf(end-1,:)*100; 
 ```
-this is more meaningful than PARA(1), the map on brain is not like the one we see in MIA paper.
-but you can also use PARA(1)---it's a absolute value. 
 
 Documentation
 -------------
@@ -62,8 +60,8 @@ http://users.ugent.be/~dmarinaz/HRF_deconvolution.html
 **Citation**
 --------
 
-_Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374.
+_Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374._
 
-_Guo-Rong Wu, Daniele Marinazzo. "Sensitivity of the resting state hemodynamic response function estimation to autonomic nervous system fluctuations." Philosophical Transactions of the Royal Society A, 2016, 374: 20150190.
+_Guo-Rong Wu, Daniele Marinazzo. "Sensitivity of the resting state hemodynamic response function estimation to autonomic nervous system fluctuations." Philosophical Transactions of the Royal Society A, 2016, 374: 20150190._
 
-_Guo-Rong Wu, Daniele Marinazzo. "Retrieving the Hemodynamic Response Function in resting state fMRI: methodology and applications." PeerJ PrePrints, 2015.
+_Guo-Rong Wu, Daniele Marinazzo. "Retrieving the Hemodynamic Response Function in resting state fMRI: methodology and applications." PeerJ PrePrints, 2015._
