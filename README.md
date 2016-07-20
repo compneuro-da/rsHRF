@@ -18,12 +18,11 @@ TR = 2;
 
 para.TR = TR;
 
-para.T = 11;
+para.T = 5; % temporal grid: TR/5.
 
-para.T0 = 6;
+para.T0 = 3; % slice ref time, I always reference to middle slice time (preprocessing: slice timing)
 ```
 
- % slice ref time, I always reference to middle slice time (preprocessing: slice timing)
 ```
 para.dt     = para.TR/para.T; % fine scale time resolution.
 
@@ -63,8 +62,8 @@ http://users.ugent.be/~dmarinaz/HRF_deconvolution.html
 **Citation**
 --------
 
-Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374.
+_Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374.
 
-Guo-Rong Wu, Daniele Marinazzo. "Sensitivity of the resting state hemodynamic response function estimation to autonomic nervous system fluctuations." Philosophical Transactions of the Royal Society A, 2016, 374: 20150190.
+_Guo-Rong Wu, Daniele Marinazzo. "Sensitivity of the resting state hemodynamic response function estimation to autonomic nervous system fluctuations." Philosophical Transactions of the Royal Society A, 2016, 374: 20150190.
 
-Guo-Rong Wu, Daniele Marinazzo. "Retrieving the Hemodynamic Response Function in resting state fMRI: methodology and applications." PeerJ PrePrints, 2015.
+_Guo-Rong Wu, Daniele Marinazzo. "Retrieving the Hemodynamic Response Function in resting state fMRI: methodology and applications." PeerJ PrePrints, 2015.
