@@ -13,7 +13,7 @@ temporal_mask = [];
 
 % if want to exclude first 1~5 time points let temporal_mask(1:5)=0;
 ```
-data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x 50000, ....)
+**BOLD fMRI** data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x 50000, ....)
 ```
 ```
 TR = 2;
