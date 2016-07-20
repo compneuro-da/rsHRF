@@ -48,8 +48,21 @@ hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 HRF parameters estimation: PARA
 
 ```
-hrf1 = hrfa(:,1); % do a for loop for other variable: for i=1:size(hrfa,2); hrf1 = hrfa(:,i); 'estimate HRF parameter'; end
-[PARA] = wgr_get_parameters(hrf1,para.TR/para.T);
+hrf1 = hrfa(:,1); 
+
+plot(hrf1) % HRF shape visualisation
+
+% do a for loop for other variable: 
+
+nvar = size(hrfa,2); PARA = zeros(3,nvar);
+
+for i=1:nvar; 
+
+	hrf1 = hrfa(:,i); 
+	
+	[PARA(:,i)] = wgr_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter 
+	
+end
 ```
 ```
 PARA(1): response height (response magnitude of neuronal activity)
