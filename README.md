@@ -48,14 +48,15 @@ hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 HRF parameters estimation: PARA
 
 ```
-hrf1 = hrfa(:,1); % do a for loop for other variable 
+hrf1 = hrfa(:,1); % do a for loop for other variable: for i=1:size(hrfa,2); hrf1 = hrfa(:,i); 'estimate HRF parameter'; end
 [PARA] = wgr_get_parameters(hrf1,para.TR/para.T);
 ```
 ```
-response height : PARA(1)
-response height (percent signal change) = PARA(1)./beta_hrf(end-1,:)*100; 
-PARA(2): Time to peak
-PARA(3): Width / FWHM
+PARA(1): response height (response magnitude of neuronal activity)
+PARA(2): Time to peak (latency of neuronal activity)
+PARA(3): Width / FWHM (duration of neuronal activity)
+Response height (percent signal change) = PARA(1)./beta_hrf(end-1,:)*100; 
+
 ```
 
 Documentation
