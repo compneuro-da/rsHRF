@@ -10,9 +10,9 @@ Quickstart
 ```
 temporal_mask = []; 
 ```
-% without mask, it's equal to temporal_mask = ones(nobs,1); nobs: number of observation = size(data,1).
+% without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1).
 
-% if want to exclude first 1~5 time points let temporal_mask(1:5)=0;
+% if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 ```
 data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x 50000, ....)
 ```
@@ -21,11 +21,11 @@ TR = 2;
 
 para.TR = TR;
 
-para.T = 5; % temporal grid: TR/5.
+para.T   = 5; % temporal grid: TR/5.
 
 para.T0 = 3; % slice ref time, I always reference to middle slice time (preprocessing: slice timing)
 
-para.dt     = para.TR/para.T; % fine scale time resolution.
+para.dt  = para.TR/para.T; % fine scale time resolution.
 
 para.TD_DD = 2; % time and dispersion derivative
 
@@ -45,7 +45,7 @@ HRF estimation
 ```
 hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 ```
-HRF parameters estimation: PARA
+HRF parameters estimation (PARA)
 
 ```
 hrf1 = hrfa(:,1); 
