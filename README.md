@@ -65,10 +65,10 @@ for i=1:nvar;
 end
 ```
 ```
-PARA(1): response height (response magnitude of neuronal activity)
-PARA(2): Time to peak (latency of neuronal activity)
-PARA(3): Width / FWHM (duration of neuronal activity)
-Response height (percent signal change) = PARA(1)./beta_hrf(end-1,:)*100; 
+PARA(1,:): response height (response magnitude of neuronal activity)
+PARA(2,:): Time to peak (latency of neuronal activity)
+PARA(3,:): Width / FWHM (duration of neuronal activity)
+Response height (percent signal change) = PARA(1,:)./beta_hrf(end-1,:)*100; 
 
 ```
 
