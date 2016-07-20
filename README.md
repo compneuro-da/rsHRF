@@ -27,7 +27,9 @@ para.lag  = fix(3/para.dt):fix(9/para.dt); % 3 to 9 seconds
 temporal_mask = []; % without mask, it's equal to temporal_mask = ones(nobs,1); nobs: number of observation = size(data,1).
 % if want to exclude first 1~5 time points let temporal_mask(1:5)=0;
 
+‘’’
 [beta_hrf bf event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,para,temporal_mask);
+‘’’
 
 hrf = bf*beta_hrf(1:size(bf,2),:); %HRF
 
