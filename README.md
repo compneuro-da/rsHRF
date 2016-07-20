@@ -1,5 +1,6 @@
 Matlab code for resting state HRF estimation
 ========
+![BOLD HRF](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
 Quickstart 
 -------------
