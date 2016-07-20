@@ -5,7 +5,7 @@ Quickstart
 -------------
 (canon2dd: canonical HRF with its delay and dispersion derivatives) 
 
-parameters setting
+**BOLD fMRI** parameters setting
 ```
 temporal_mask = []; 
 ```
@@ -13,7 +13,7 @@ temporal_mask = [];
 
 % if want to exclude first 1~5 time points let temporal_mask(1:5)=0;
 ```
-**BOLD fMRI** data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x 50000, ....)
+data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x 50000, ....)
 ```
 ```
 TR = 2;
@@ -23,9 +23,7 @@ para.TR = TR;
 para.T = 5; % temporal grid: TR/5.
 
 para.T0 = 3; % slice ref time, I always reference to middle slice time (preprocessing: slice timing)
-```
 
-```
 para.dt     = para.TR/para.T; % fine scale time resolution.
 
 para.TD_DD = 2; % time and dispersion derivative
