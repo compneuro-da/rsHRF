@@ -46,10 +46,14 @@ hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 calculate HRF parameters: PARA
 
 ```
-[PARA] = wgr_get_parameters(hrfa,para.TR/para.T);
+hrf1 = hrfa(:,1); % do a for loop for other variable 
+[PARA] = wgr_get_parameters(hrf1,para.TR/para.T);
 ```
 ```
+response height : PARA(1)
 response height (percent signal change) = PARA(1)./beta_hrf(end-1,:)*100; 
+PARA(2): Time to peak
+PARA(3): Width / FWHM
 ```
 
 Documentation
