@@ -267,7 +267,7 @@ for r = 1:max_iter
     
 end
 res_sum = sum(resid.^2);
-if r == max_iter
-    fprintf('Maximum %d iteration reached.\n',max_iter)    
-end
+%if r == max_iter
+%    fprintf('Maximum %d iteration reached.\n',max_iter)    
+%end
 return
