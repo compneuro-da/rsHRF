@@ -21,9 +21,9 @@ TR = 2;
 
 para.TR = TR;
 
-para.T   = 5; % temporal grid: TR/5.
+para.T  = 5; % temporal grid: TR/5. magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
 
-para.T0 = 3; % slice ref time, I always reference to middle slice time (preprocessing: slice timing)
+para.T0 = 3; % position of the reference slice in bins, on the grid defined by para.T. For example, if the reference slice is the middle one, then para.T0=fix(para.T/2)
 
 para.dt  = para.TR/para.T; % fine scale time resolution.
 
