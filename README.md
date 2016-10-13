@@ -7,12 +7,8 @@ Quickstart
 (canon2dd: canonical HRF with its delay and dispersion derivatives) 
 
 **BOLD fMRI** parameters setting
-```
-temporal_mask = []; 
-```
-% without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1).
 
-% if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
+temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 ```
 data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x 50000, ....)
 ```
