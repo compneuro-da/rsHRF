@@ -3,7 +3,7 @@ function [param] = wgr_get_parameters(hdrf,dt)
 % Find model parameters
 %
 % Height - h
-% Time to peak - p (in time units of TR seconds)
+% Time to peak - p (in time units of dt seconds, dt = TR/para.T)
 % Width (at half peak) - w  
 % Calculate Heights and Time to peak:
 % modified from get_parameters2.m
