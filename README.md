@@ -69,6 +69,7 @@ Response height (percent signal change) = PARA(1,:)./beta_hrf(end-1,:)*100;
 
 ```
 
+
 Documentation
 -------------
 Please find more complete documentation for HRF blind deconvolution at
