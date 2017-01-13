@@ -2,6 +2,8 @@ Matlab code for resting state HRF estimation
 ========
 ![BOLD HRF](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
+**PLEASE visit <https://guorongwu.github.io/HRF/>  for detail information for resting-state HRF deconvolution.**
+
 Quickstart 
 -------------
 (canon2dd: canonical HRF with its delay and dispersion derivatives) 
@@ -70,10 +72,6 @@ Response height (percent signal change) = PARA(1,:)./beta_hrf(end-1,:)*100;
 ```
 
 
-Documentation
--------------
-Please find more complete documentation for HRF blind deconvolution at
-http://users.ugent.be/~dmarinaz/HRF_deconvolution.html
 
 **Citation**
 --------
