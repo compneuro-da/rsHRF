@@ -1,0 +1,19 @@
+│   demo_4d_rsHRF.m
+│   mask_3mm_278ROIs.nii
+│   README.md
+│   tree.txt
+│   wgr_get_parameters.m
+│   wgr_rshrf_estimation_canonhrf2dd_par2.m
+│   
+├───input_BOLD_data
+│   └───sub_001
+│           processed_fmri_data_4D.nii
+│           
+└───output_HRF_Deconv
+    └───input_BOLD_data
+        └───sub_001
+                processed_fmri_data_4D_deconv.nii
+                processed_fmri_data_4D_FWHM.nii
+                processed_fmri_data_4D_Height.nii
+                processed_fmri_data_4D_hrf.mat
+                processed_fmri_data_4D_Time2peak.nii
