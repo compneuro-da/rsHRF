@@ -1,0 +1,23 @@
+Folder PATH listing for volume OS
+Volume serial number is 000000E0 E2C9:70AE
+C:.
+³   demo_4d_rsHRF.m
+³   mask_3mm_278ROIs.nii
+³   README.md
+³   tree.txt
+³   wgr_get_parameters.m
+³   wgr_rshrf_estimation_canonhrf2dd_par2.m
+³   
+ÃÄÄÄinput_BOLD_data
+³   ÀÄÄÄsub_001
+³           processed_fmri_data_4D.nii
+³           
+ÀÄÄÄoutput_HRF_Deconv
+    ÀÄÄÄinput_BOLD_data
+        ÀÄÄÄsub_001
+                processed_fmri_data_4D_deconv.nii
+                processed_fmri_data_4D_FWHM.nii
+                processed_fmri_data_4D_Height.nii
+                processed_fmri_data_4D_hrf.mat
+                processed_fmri_data_4D_Time2peak.nii
+                

@@ -50,11 +50,11 @@ para.lag  = fix(3/para.dt):fix(9/para.dt); % 3 to 9 seconds
 
 %%===========fMRI Data========================
 main= pwd;  % data directory
-save_dir = fullfile(main,'HRF_Deconv'); %% save dir, change the name as you like.
+save_dir = fullfile(main,'output_HRF_Deconv'); %% save dir, change the name as you like.
 
 %% list all your 4D files (change names and directories accordingly)
 sub={
-    [pwd '\sub_001\processed_fmri_data_4D.nii']
+    [pwd '\input_BOLD_data\sub_001\processed_fmri_data_4D.nii']
     };
 
 for isub=1:length(sub)
