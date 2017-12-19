@@ -84,7 +84,7 @@ for isub=1%:length(sub)
     disp('Retrieving HRF ...');
     tic
     %[data_deconv onset hrf event_lag PARA] = wgr_deconv_canonhrf_par(rsig,thr,event_lag_max,TR);
-    [sig_deconv, hdrf] = hrf_retrieval_and_deconvolution(rsig,thr,event_lag_max,TR,T,flag_HRF);
+    [sig_deconv, hdrf] = hrf_retrieval_and_deconvolution_para(rsig,thr,event_lag_max,TR,T,flag_HRF);
     toc
     disp('Done');
     tic
