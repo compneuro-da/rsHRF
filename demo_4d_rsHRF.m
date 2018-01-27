@@ -34,6 +34,9 @@ para.TR = TR;
 para.T  = 3; % temporal grid: TR/5. magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
 
 para.T0 = 3; % position of the reference slice in bins, on the grid defined by para.T. For example, if the reference slice is the middle one, then para.T0=fix(para.T/2)
+if para.T==1
+    para.T0 = 1;
+end
 
 para.dt  = para.TR/para.T; % fine scale time resolution.
 
@@ -96,8 +99,13 @@ for isub=1:length(sub)
     disp('Deconvolving HRF ...');
     tic
     T = round(para.len/TR);
+    if para.T>1
+        hrfa_TR = resample(hrfa,1,para.T);
+    else
+        hrfa_TR = hrfa;
+    end
     for voxel_id=1:nvar;
-        hrf=hrfa(:,voxel_id);
+        hrf=hrfa_TR(:,voxel_id);
         H=fft([hrf; zeros(nobs-length(hrf),1)]);
         M=fft(bold_sig(:,voxel_id));
         data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
