@@ -27,7 +27,7 @@ data_dir=fullfile(main,'/RS_HCP'); %directory containing the folders of each sub
 dir_out=main; %change also here. This is the directory to store the results, best use the previous directory, going a folder back
 sub = dir(data_dir);
 sub(1:2)=[]; %this removes the "." and ".."
-flag_HRF=3; % flag 1 for FIR, 2 for canonical, 3 for rbeta
+flag_HRF=3; % flag 1 for rbeta, 2 for canonical, 3 for FIR
 dir_hrf={'/FIR/','/canon/','/rbeta/'};
 save_dir = fullfile(dir_out,'/results_deconv_HCP',dir_hrf{flag_HRF}); %% save dir, change the name as you like.
 
