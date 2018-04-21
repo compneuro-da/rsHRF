@@ -3,6 +3,16 @@ from spm import *
 from scipy.sparse import lil_matrix
 from scipy import stats
 
+def wgr_glm_estimation(dat,u,bf,T,T0,AR_lag):
+    """
+    @u - BOLD event vector (microtime).
+    """
+    nscans = dat.shape[0]
+    x = wgr_onset_design(u,bf,T,T0,nscans)
+    X = np.append(x,np.ones((nscans,1)),axis=1)
+    res_sum, Beta = wgr_glsco(X,dat,AR_lag)
+    return res_sum, Beta
+
 def wgr_onset_design(u,bf,T,T0,nscans):
     """
     @u - BOLD event vector (microtime).
