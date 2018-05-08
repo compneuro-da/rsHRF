@@ -115,3 +115,16 @@ def spm_detrend(x,p=0):
         G[:,i] = d.flatten(1)
     y = x - G.dot(np.linalg.pinv(G).dot(x))
     return y
+
+def spm_write_vol(image_volume_info,image_voxels,image_name):
+    """
+    Writes an image volume to disk
+
+    @image_volume_info - a structure containing image volume information (see spm_vol)
+    @image_voxels - a one, two or three dimensional matrix containing the image voxels
+    @image_name - name of the file to save the image in
+    """
+    data = image_voxels
+    affine = image_volume_info.affine
+    image_volume_info = nib.Nifti1Image(data, affine)
+    nib.save(image_volume_info,image_name)
