@@ -86,3 +86,32 @@ def spm_hrf(RT, P=None, fMRI_T=16):
     hrf = np.nan_to_num(hrf)
     hrf = hrf / np.sum(hrf)
     return hrf
+
+def spm_detrend(x,p=0):
+    """
+    Polynomial detrending over columns
+
+    spm_detrend removes linear and nonlinear trends
+    from column-wise data matrices.
+
+    @x - data matrix
+    @p - order of polynomial [default : 0]
+
+    Returns:
+    y - detrended data matrix
+    """
+    m,n = x.shape
+    if (not m) or (not n):
+        y = []
+        return y
+
+    if (not p):
+        y = x - np.ones((m,1),dtype='int')*x.mean(axis=0)
+        return y
+
+    G = np.zeros((m,p+1))
+    for i in range(0,p+1):
+        d = np.arange(1,m+1) ** i
+        G[:,i] = d.flatten(1)
+    y = x - G.dot(np.linalg.pinv(G).dot(x))
+    return y
