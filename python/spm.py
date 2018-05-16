@@ -128,3 +128,28 @@ def spm_write_vol(image_volume_info,image_voxels,image_name):
     affine = image_volume_info.affine
     image_volume_info = nib.Nifti1Image(data, affine)
     nib.save(image_volume_info,image_name)
+
+def spm_get_bf(xBF):
+    dt = xBF['dt']
+    p = np.array([6, 16, 1, 1, 6, 0, 32], dtype=float)
+    bf = spm_hrf(dt)
+
+    if len(bf.shape)==1:
+        bf = bf[:,np.newaxis]
+
+    dp = 1
+    p[5] = p[5] + dp
+    D = (bf[:,0] - spm_hrf(dt,p)) / dp
+    bf = np.column_stack((bf,D.flatten(1)))
+    p[5] = p[5] - dp
+
+    dp = 0.01
+    p[2] = p[2] + dp
+    D = (bf[:,0] - spm_hrf(dt, p)) / dp
+    bf = np.column_stack((bf, D.flatten(1)))
+
+    xBF['length'] = bf.shape[0]*dt
+    xBF['order'] = bf.shape[1]
+
+    xBF['bf'] = spm_orth(bf)
+    return xBF
