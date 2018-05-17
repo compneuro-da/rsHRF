@@ -3,6 +3,23 @@ from spm import *
 from scipy.sparse import lil_matrix
 from scipy import stats
 
+def wgr_hrf_fit(dat,length,xBF,u,N,bf):
+    """
+    @u    - BOLD event vector (microtime).
+    @nlag - time lag from neural event to BOLD event
+    """
+    lag = xBF['lag']
+    AR_lag = xBF['AR_lag']
+    nlag = len(lag)
+    erm = np.zeros((1,nlag))
+    beta = np.zeros((bf.shape[1]+1,nlag))
+    for i in range(nlag):
+        u_lag = np.append(u[0,lag[i]:],np.zeros((1,lag[i]))).T
+        erm[0,i], beta[:,i] = wgr_glm_estimation(dat,u_lag,bf,xBF['T'],xBF['T0'],AR_lag)
+
+    idx = np.argmin(erm)
+    return beta[:,idx], lag[idx]
+
 def wgr_glm_estimation(dat,u,bf,T,T0,AR_lag):
     """
     @u - BOLD event vector (microtime).
