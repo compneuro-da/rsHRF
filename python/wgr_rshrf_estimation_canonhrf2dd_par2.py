@@ -3,6 +3,19 @@ from spm import *
 from scipy.sparse import lil_matrix
 from scipy import stats
 
+def wgr_hrf_estimation_canon(dat,xBF,length,N,bf,temporal_mask):
+    """
+    Estimate HRF
+    """
+    thr = xBF['thr']
+    u0 = wgr_BOLD_event_vector(N,dat,thr,temporal_mask)
+    u = np.append(u0.toarray(),np.zeros((xBF['T']-1,N)),axis=0)
+    u = np.reshape(u,(1,-1),order = 'F')
+    beta, lag = wgr_hrf_fit(dat,length,xBF,u,N,bf)
+    beta_hrf = beta
+    beta_hrf = np.append(beta_hrf,lag)
+    return beta_hrf, u0
+
 def wgr_BOLD_event_vector(N,matrix,thr,temporal_mask):
     """
     Detect BOLD event.
