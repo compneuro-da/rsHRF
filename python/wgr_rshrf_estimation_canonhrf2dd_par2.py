@@ -3,6 +3,18 @@ from spm import *
 from scipy.sparse import lil_matrix
 from scipy import stats
 
+def wgr_spm_Volterra(bf,xBF):
+    bf2 = []
+    if 'Volterra' in xBF:
+        if xBF['Volterra']==2:
+            bf2 = []
+            for p in range(bf.shape[1]):
+                for q in range(bf.shape[1]):
+                    bf2.append((bf[:,p] * bf[:,q]))
+            bf2 = np.array(bf2).T
+            bf2 = spm_orth(bf2)
+    return bf2
+
 def wgr_hrf_estimation_canon(dat,xBF,length,N,bf,temporal_mask):
     """
     Estimate HRF
