@@ -3,6 +3,23 @@ from spm import *
 from scipy.sparse import lil_matrix
 from scipy import stats
 
+def wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask):
+    N, nvar = data.shape
+    bf = wgr_spm_get_canonhrf(xBF)
+    bf2 = wgr_spm_Volterra(bf,xBF)
+    if bf2!=[]:
+        bf = np.column_stack((bf,bf2))
+
+    length = xBF['len']
+    beta_hrf = []
+    event_bold= []
+
+    for i in range(nvar):
+        beta_hrf_out, event_bold_out = wgr_hrf_estimation_canon(data[:,i],xBF,length,N,bf,temporal_mask)
+        beta_hrf.append(beta_hrf_out)
+        event_bold.append(event_bold_out)
+    return np.array(beta_hrf).T, bf, np.array(event_bold)
+
 def wgr_spm_Volterra(bf,xBF):
     bf2 = []
     if 'Volterra' in xBF:
