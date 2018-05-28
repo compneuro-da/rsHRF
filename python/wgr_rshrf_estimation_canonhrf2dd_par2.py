@@ -81,7 +81,7 @@ def wgr_BOLD_event_vector(N,matrix,thr,temporal_mask):
     data = lil_matrix((1,N))
     matrix = matrix[:,np.newaxis]
     if 0 in np.array(temporal_mask).shape:
-        matrix = stats.zscore(matrix)
+        matrix = stats.zscore(matrix,ddof=1)
         for t in range(3,N-1):
             if ( matrix[t-1,0] > thr and matrix[t-1,0] < 3.1 and np.all(matrix[t-3:t-1,0] < matrix[t-1,0]) and np.all(matrix[t-1,0] > matrix[t:t+2,0]) ):
                 data[0,t-1] = 1
@@ -164,7 +164,7 @@ def wgr_glsco(X,Y,AR_lag=1,max_iter=20):
     Beta = estimator corresponding to the k regressors
     """
     nobs, nvar = X.shape
-    Beta = np.linalg.lstsq(X,Y)[0]
+    Beta = np.linalg.lstsq(X,Y,rcond=None)[0]
     resid = Y - (X.dot(Beta))
 
     max_tol = min(1e-6,max(np.absolute(Beta))/1000)
@@ -176,7 +176,7 @@ def wgr_glsco(X,Y,AR_lag=1,max_iter=20):
             X_AR[:,m] = resid[AR_lag-m-1:nobs-AR_lag-m-1]
 
         Y_AR = resid[AR_lag:nobs-AR_lag]
-        AR_para = np.linalg.lstsq(X_AR,Y_AR)[0]
+        AR_para = np.linalg.lstsq(X_AR,Y_AR,rcond=None)[0]
 
         X_main = X[AR_lag:nobs,:]
         Y_main = Y[AR_lag:nobs]
@@ -185,7 +185,7 @@ def wgr_glsco(X,Y,AR_lag=1,max_iter=20):
             X_main = X_main - (AR_para[m]*(X[AR_lag-m-1:nobs-m-1,:]))
             Y_main = Y_main - (AR_para[m]*(Y[AR_lag-m-1:nobs-m-1]))
 
-        Beta = np.linalg.lstsq(X_main,Y_main)[0]
+        Beta = np.linalg.lstsq(X_main,Y_main,rcond=None)[0]
         resid = Y[AR_lag:nobs] - X[AR_lag:nobs,:].dot(Beta)
         if(max(np.absolute(Beta - Beta_temp))<max_tol):
             break
