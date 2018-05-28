@@ -28,7 +28,7 @@ dir_out=main; %change also here. This is the directory to store the results, bes
 sub = dir(data_dir);
 sub(1:2)=[]; %this removes the "." and ".."
 flag_HRF=3; % flag 1 for rbeta, 2 for canonical, 3 for FIR
-dir_hrf={'/FIR/','/canon/','/rbeta/'};
+dir_hrf = {'/rbeta/', '/FIR/','/canon/'};
 save_dir = fullfile(dir_out,'/results_deconv_HCP',dir_hrf{flag_HRF}); %% save dir, change the name as you like.
 
 % make directories for the HRF parameters
