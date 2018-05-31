@@ -32,7 +32,7 @@ para['T'] = 3
 para['T0'] = 3
 
 if para['T'] == 1:
-    para['T0'] == 1
+    para['T0'] = 1
 
 para['dt'] = para['TR'] / para['T']
 
