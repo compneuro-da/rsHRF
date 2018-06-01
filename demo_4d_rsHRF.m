@@ -94,7 +94,7 @@ for isub=1:length(sub)
         
     elseif strfind(para.estimation, 'FIR')
         tic
-        [hrfa,event_bold] = wgr_rsHRF_FIR(data,para);
+        [hrfa,event_bold] = wgr_rsHRF_FIR(bold_sig,para);
         
         
     end
