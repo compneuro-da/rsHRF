@@ -1,15 +1,12 @@
-function [beta_rshrf,event_bold] = wgr_rsHRF_FIR(data,para)
+function [beta_rshrf,event_bold] = wgr_rsHRF_FIR(data,para,temporal_mask)
 % matlab R2015b
 % temporal_mask: generated from scrubbing.
 % By: Guo-Rong Wu (gronwu@gmail.com).
 % Faculty of Psychology, Southwest University.
 % History:
 % - 2015-04-17 - Initial version.
-
+para.temporal_mask=temporal_mask;
 [N,nvar] = size(data);
-if ~isfield(para,'temporal_mask')
-    para.temporal_mask=[];
-end
 if nnz(para.thr)==1
     para.thr(2)=inf;
 end
