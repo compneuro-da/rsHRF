@@ -1,250 +1,76 @@
-function [sig_deconv hdrf] = hrf_retrieval_and_deconvolution(data,thr,event_lag_max,TR,T,flag)
-
-[N nvar] = size(data);
-
-% temporal smoothing
-data(2:end-1,:) = 0.25*data(1:end-2,:) + 0.5*data(2:end-1,:) + 0.25*data(3:end,:); % you can choose whether leaving or commenting this
-
-% raw onset.
-[even_new]=wgr_trigger_onset(data,thr);
-
-
-% inital HRF and its parameter.
-HRF = zeros(T,nvar);
-sig_deconv = single(zeros(N,nvar));
-limits=round(nvar/10:nvar/10:nvar)';
-limnew=zeros(length(limits)+1,1);
-limnew(1)=0;limnew(2:end)=limits;
-limits=limnew;clear limnew;
-
-
-% adjust onset and reconstruct HRF.
-warning off
-if flag==1
-    for ilimits=1:length(limits)-1;
-        parfor i=limits(ilimits)+1:limits(ilimits+1)
-            [sig_deconv(:,i) HRF(:,i) event{i} adjust_global(i)] = wgr_adjust_onset_rbeta(data(:,i),even_new{i},event_lag_max,TR,T,N);
-        end
-    end
-    hdrf.model{1} = 'rbeta';
-    hdrf.HRF{1} = HRF;
-    hdrf.event{1} = event;
-    hdrf.adjust_global{1} = adjust_global;
-    %     hdrf.PARA{1} = PARA;
-elseif flag==2
-    p_m = 3; %3 - canonical + time and dispersion derivative
-    for ilimits=1:length(limits)-1;
-        parfor i=limits(ilimits)+1:limits(ilimits+1)
-            [sig_deconv(:,i) HRF(:,i) event{i} adjust_global(i)] = wgr_adjust_onset_canonhrf(data(:,i),even_new{i},event_lag_max,TR,p_m,T,N)
-        end
-    end
-    hdrf.model{1} = ['canonical, model type ',num2str(p_m)];
-    hdrf.HRF{1} = HRF;
-    hdrf.event{1} = event;
-    hdrf.adjust_global{1} = adjust_global;
-    %     hdrf.PARA{1} = PARA;
-elseif flag==3
-    mode = 1; %1 - smooth FIR
-    for ilimits=1:length(limits)-1;
-        parfor i=limits(ilimits)+1:limits(ilimits+1)
-            [sig_deconv(:,i) HRF(:,i) event{i} adjust_global(i)] = wgr_adjust_onset_sFIR(data(:,i),even_new{i},event_lag_max,TR,mode,T,N)
-        end
-    end
-    hdrf.model{1} = ['FIR, model type ',num2str(mode)];
-    hdrf.HRF{1} = HRF;
-    hdrf.event{1} = event;
-    hdrf.adjust_global{1} = adjust_global;
-    %     hdrf.PARA{1} = PARA;
-else
-    error('choose a flag value between 1 and 3');
+function [beta_rshrf,event_bold] = wgr_rsHRF_FIR(data,para,temporal_mask)
+% matlab R2015b
+% temporal_mask: generated from scrubbing.
+% By: Guo-Rong Wu (gronwu@gmail.com).
+% Faculty of Psychology, Southwest University.
+% History:
+% - 2015-04-17 - Initial version.
+para.temporal_mask=temporal_mask;
+[N,nvar] = size(data);
+if nnz(para.thr)==1
+    para.thr(2)=inf;
 end
 
-warning on
-clear HRF event adjust_global
+% warning off
+beta_rshrf = cell(1,nvar);
+parfor i=1:nvar
+    [beta_rshrf{i}, event_bold{i}] = wgr_FIR_estimation_HRF(data(:,i),para,N);
+end
+beta_rshrf  =cell2mat(beta_rshrf);
+% warning on
+return
 
-
-% function [hrf even_new ad_global param] = wgr_adjust_onset_rbeta(dat2,even_new,event_lag_max,TR,T,N)
-function [dat_deconv hrf even_new ad_global] = wgr_adjust_onset_rbeta(dat2,even_new,event_lag_max,TR,T,N)
+function [rsH,u] = wgr_FIR_estimation_HRF(data,para,N)
+firmode=double(strcmp(para.estimation,'sFIR'));
+u = wgr_BOLD_event_vector(N,data,para.thr,para.temporal_mask);
+u = find(full(u(:)));
+lag = para.lag;
+nlag = length(lag);
+len_bin=floor(para.len/para.TR);
+hrf = zeros(len_bin,nlag);
+Cov_E = zeros(1,nlag);
 kk=1;
-hrf = zeros(T,event_lag_max+1);
-Cov_E = zeros(1,event_lag_max+1);
-
-for event_lag=0:event_lag_max
-    RR = even_new-event_lag; RR(RR<=0|RR+T-1>N)=[];
+for i_lag=1:nlag
+    RR = u-i_lag; RR(RR<=0)=[];
     if ~isempty(RR)
         design = zeros(N,1);
         design(RR) = 1;
-        matrix = repmat(RR,T,1)+repmat([0:T-1]',1,length(RR));%dat(t-past:t+future);
-        hrf(:,kk) = mean(dat2(matrix),2); hrf(:,kk)=hrf(:,kk)-hrf(1,kk) ;
-        s_h = conv(design,hrf(:,kk)) ;
-        e3 = dat2 - s_h(1:N,1);
+        [hrf(:,kk),e3] = Fit_sFIR2(data,para.TR,design,len_bin,firmode);
         Cov_E(kk) = cov(e3);
     else
         Cov_E(kk) = inf;
     end
     kk = kk+1;
 end
-[C ind] = min(Cov_E);
-ad_global=ind-1;%begin with 0.
-even_new = even_new-ad_global; even_new(even_new<=0)=[];
-hrf = hrf(:,ind);
-%% linear deconvolution.
-H=fft([hrf; zeros(N-T,1)]);
-M=fft(dat);
-dat_deconv = single(ifft(conj(H).*M./(H.*conj(H)+C)));
-return
-
-% function [hrf even_new ad_global param] = wgr_adjust_onset_canonhrf(dat,even_new,event_lag_max,TR,p_m,T,N)
-function [dat_deconv hrf even_new ad_global] = wgr_adjust_onset_canonhrf(dat,even_new,event_lag_max,TR,p_m,T,N)
-%% global adjust.
-kk=1;
-hrf = zeros(T,event_lag_max+1);
-for event_lag=0:event_lag_max
-    RR = even_new-event_lag; RR(RR<=0)=[];
-    design = zeros(N,1);
-    design(RR) = 1;
-    [hrf(:,kk), e3] = Fit_Canonical_HRF2(dat,TR,design,T,p_m);
-    Cov_E(kk) = cov(e3);
-    kk = kk+1;
-end
-[C ind] = min(Cov_E); ad_global=ind-1;%begin with 0.
-even_new = even_new-ad_global; even_new(even_new<=0)=[];
-hrf = hrf(:,ind);
-%% linear deconvolution.
-H=fft([hrf; zeros(N-T,1)]);
-M=fft(dat);
-dat_deconv = single(ifft(conj(H).*M./(H.*conj(H)+C)));
-return
+[~, ind] = knee_pt(Cov_E); % this is a function to find the elbow point of a curve, there should be an equivalent in Python
+rsH = hrf(:,ind+1);
 
 
-% function [hrf even_new ad_global param] = wgr_adjust_onset_sFIR(dat,even_new,event_lag_max,TR,mode,T,N)
-function [dat_deconv hrf even_new ad_global] = wgr_adjust_onset_sFIR(dat,even_new,event_lag_max,TR,mode,T,N)
-kk=1;
-hrf = zeros(T,event_lag_max+1);
-for event_lag=0:event_lag_max
-    RR = even_new-event_lag; RR(RR<=0)=[];
-    design = zeros(N,1);
-    design(RR) = 1;
-    [hrf(:,kk),e3] = Fit_sFIR2(dat,TR,design,T,mode);
-    Cov_E(kk) = cov(e3);
-    kk = kk+1;
-end
-[C ind] = min(Cov_E); ad_global=ind-1;%begin with 0.
-even_new = even_new-ad_global; even_new(even_new<=0)=[];
-hrf = hrf(:,ind);
-%% linear deconvolution.
-H=fft([hrf; zeros(N-T,1)]);
-M=fft(dat);
-dat_deconv = single(ifft(conj(H).*M./(H.*conj(H)+C)));
-return
-
-
-
-function [oneset] = wgr_trigger_onset(matrix,thr)
-[N nvar] = size(matrix);
-%matrix = zscore(matrix);
-% Computes pseudo event.
-for i = 1:nvar
-    sig_vox=zscore(matrix(:,i));
-    oneset_temp = [];
-    for t  = 2:N-1
-        if sig_vox(t) > thr && sig_vox(t-1)<sig_vox(t) && sig_vox(t)>sig_vox(t+1)% detects threshold
-            oneset_temp = [oneset_temp t] ;
+function data = wgr_BOLD_event_vector(N,matrix,thr,temporal_mask)
+%detect BOLD event.  event>thr & event<3.1
+data = sparse(1,N);
+if isempty(temporal_mask)
+    matrix = zscore(matrix);
+    for t  = 3:N-2
+        if matrix(t,1) > thr(1) && matrix(t,1) < thr(2) && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
+            data(t) = 1 ;
         end
     end
-    oneset{i} = oneset_temp;
-end
-
+else
+    datm = mean(matrix(temporal_mask));
+    datstd = std(matrix(temporal_mask));
+    datstd(datstd==0) = 1;%in case datstd==0;
+    matrix = (matrix-datm)./datstd;
+    for t  = 3:N-2
+        if temporal_mask(t)
+            if matrix(t,1) > thr(1) && matrix(t,1) < thr(2) && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
+                data(t) = 1 ;
+            end
+        end
+    end
+end    
 return
 
-
-function [hrf, e] = Fit_Canonical_HRF2(tc,TR,Run,T,p)
-%
-% Fits GLM using canonical hrf (with option of using time and dispersion derivatives)';
-%
-% INPUTS:
-%
-% tc    - time course
-% TR    - time resolution
-% Runs  - expermental design
-% T     - length of estimated HRF
-% p     - Model type
-%
-% Options: p=1 - only canonical HRF
-%          p=2 - canonical + temporal derivative
-%          p=3 - canonical + time and dispersion derivative
-%
-% OUTPUTS:
-%
-% hrf   - estimated hemodynamic response function
-% fit   - estimated time course
-% e     - residual time course
-% param - estimated amplitude, height and width
-
-len = length(Run);
-
-X = zeros(len,p);
-
-[h, dh, dh2] = CanonicalBasisSet(TR,T);
-v = conv(Run,h);
-X(:,1) = v(1:len);
-
-if (p>1)
-    v = conv(Run,dh);
-    X(:,2) = v(1:len);
-end
-
-if (p>2)
-    v = conv(Run,dh2);
-    X(:,3) = v(1:len);
-end
-
-X = [(zeros(len,1)+1) X];
-b = pinv(X)*tc;
-e = tc-X*b;
-% fit = X*b;
-
-b = b(2:end);
-
-if (p == 2)
-    bc = sign(b(1))*sqrt(b(1)^2 + b(2)^2);
-    H = [h dh];
-elseif (p==1)
-    bc = b(1);
-    H = h;
-elseif (p>2)
-    bc = sign(b(1))*sqrt(b(1)^2 + b(2)^2 + b(3)^2);
-    H = [h dh dh2];
-end
-
-hrf = H*b;
-
-
-return
-% END MAIN FUNCTION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-function [h, dh, dh2] = CanonicalBasisSet(TR,len)
-
-% len = round(30/TR);
-xBF.dt = TR;
-xBF.length= len;
-xBF.name = 'hrf (with time and dispersion derivatives)';
-xBF = spm_get_bf(xBF);
-
-v1 = xBF.bf(1:len,1);
-v2 = xBF.bf(1:len,2);
-v3 = xBF.bf(1:len,3);
-
-h = v1;
-dh =  v2 - (v2'*v1/norm(v1)^2).*v1;
-dh2 =  v3 - (v3'*v1/norm(v1)^2).*v1 - (v3'*dh/norm(dh)^2).*dh;
-
-h = h./max(h);
-dh = dh./max(dh);
-dh2 = dh2./max(dh2);
-
-return
 
 function [hrf, e] = Fit_sFIR2(tc,TR,Runs,T,mode)
 % function [hrf, fit, e, param] = Fit_sFIR(tc,TR,Runs,T,mode)
@@ -485,4 +311,3 @@ end
 
 
 return
-

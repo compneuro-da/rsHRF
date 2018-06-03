@@ -25,18 +25,29 @@ try
 end
 
 %%===========PARAMETERS========================
+% choose the set of basis functions THIS MUST BE AN INPUT
+
+%para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
+para.estimation='sFIR'; % this one for smoothed FIR
+%para.estimation='FIR'; % this one for unsmoothed FIR
+
 temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 
-TR = 2;
+TR = 2; % THIS WILL BE READ FROM THE BIDS DATA
 
 para.TR = TR;
 
-para.T  = 3; % temporal grid: TR/5. magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
+%%% the following parameter (upsample grid) can be > 1 only for Canonical.
+%%% Set = 1 for FIR
+para.T  = 3; % magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
 
 para.T0 = 3; % position of the reference slice in bins, on the grid defined by para.T. For example, if the reference slice is the middle one, then para.T0=fix(para.T/2)
 if para.T==1
     para.T0 = 1;
 end
+
+min_onset_search = 4; % minimum delay allowed between event and HRF onset (seconds)
+max_onset_search = 8; % maximum delay allowed between event and HRF onset (seconds)
 
 para.dt  = para.TR/para.T; % fine scale time resolution.
 
@@ -46,9 +57,10 @@ para.AR_lag = 1; % AR(1) noise autocorrelation.
 
 para.thr = 1; % (mean+) para.thr*standard deviation threshold to detect event.
 
-para.len = 24; % length of HRF, here 24 seconds
+para.len = 24; % length of HRF, in seconds
 
-para.lag  = fix(3/para.dt):fix(9/para.dt); % 3 to 9 seconds
+para.lag  = fix(min_onset_search/para.dt):fix(max_onset_search/para.dt);
+
 %%===================================
 
 %%===========fMRI Data========================
@@ -77,15 +89,25 @@ for isub=1:length(sub)
     data_deconv=zeros(size(bold_sig));
     
     disp('Retrieving HRF ...');
-    tic
-    [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(bold_sig,para,temporal_mask);
-    hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
+    if strfind(para.estimation, 'canon')
+        tic
+        [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(bold_sig,para,temporal_mask);
+        hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
+        
+    elseif strfind(para.estimation, 'FIR')
+        tic
+        para.T=1; % this needs to be = 1 for FIR 
+        [hrfa,event_bold] = wgr_rsHRF_FIR(bold_sig,para, temporal_mask);
+        
+        
+    end
     
-    hrf1 = hrfa(:,1);
-   
+    
+    
+    
     nvar = size(hrfa,2); PARA = zeros(3,nvar);
     
-    for voxel_id=1:nvar;
+    for voxel_id=1:nvar
         
         hrf1 = hrfa(:,voxel_id);
         
@@ -96,6 +118,8 @@ for isub=1:length(sub)
     toc
     disp('Done');
     
+    
+    
     disp('Deconvolving HRF ...');
     tic
     T = round(para.len/TR);
@@ -104,7 +128,7 @@ for isub=1:length(sub)
     else
         hrfa_TR = hrfa;
     end
-    for voxel_id=1:nvar;
+    for voxel_id=1:nvar
         hrf=hrfa_TR(:,voxel_id);
         H=fft([hrf; zeros(nobs-length(hrf),1)]);
         M=fft(bold_sig(:,voxel_id));
