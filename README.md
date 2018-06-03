@@ -13,16 +13,17 @@ Quickstart
 para.estimation='sFIR'; % this one for smoothed FIR
 %para.estimation='FIR'; % this one for unsmoothed FIR
 
-TR = 2; 
+TR = 2; % choose the TR here
 temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 ```
 ```
-data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x 50000, ....)
+data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x50000, ....)
 
 
 para.TR = TR;
 
-para.T  = 5; % temporal grid: TR/5. magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid. Used for Canonical only
+%%% upsampling of the temporal grid. For Canonical estimation only. Leave=1 for FIR.
+para.T  = 5; % agnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid. Used for Canonical only
 
 para.T0 = 3; % position of the reference slice in bins, on the grid defined by para.T. For example, if the reference slice is the middle one, then para.T0=fix(para.T/2)
 if para.T==1
