@@ -37,7 +37,9 @@ TR = 2; % THIS WILL BE READ FROM THE BIDS DATA
 
 para.TR = TR;
 
-para.T  = 3; % temporal grid: TR/5. magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
+%%% the following parameter (upsample grid) can be > 1 only for Canonical.
+%%% Set = 1 for FIR
+para.T  = 3; % magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
 
 para.T0 = 3; % position of the reference slice in bins, on the grid defined by para.T. For example, if the reference slice is the middle one, then para.T0=fix(para.T/2)
 if para.T==1
@@ -94,7 +96,8 @@ for isub=1:length(sub)
         
     elseif strfind(para.estimation, 'FIR')
         tic
-        [hrfa,event_bold] = wgr_rsHRF_FIR(bold_sig,para);
+        para.T=1; % this needs to be = 1 for FIR 
+        [hrfa,event_bold] = wgr_rsHRF_FIR(bold_sig,para, temporal_mask);
         
         
     end
