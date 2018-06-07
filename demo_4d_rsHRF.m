@@ -33,7 +33,7 @@ para.estimation='sFIR'; % this one for smoothed FIR
 
 temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 
-TR = 2; % THIS WILL BE READ FROM THE BIDS DATA
+TR = 1.5; % THIS WILL BE READ FROM THE BIDS DATA
 
 para.TR = TR;
 
@@ -87,6 +87,7 @@ for isub=1:length(sub)
     data1 = reshape(data1,[],nobs)';
     bold_sig =  data1(:,voxel_ind);
     data_deconv=zeros(size(bold_sig));
+    event_number=zeros(1,size(bold_sig,2));
     
     disp('Retrieving HRF ...');
     if strfind(para.estimation, 'canon')
@@ -96,7 +97,7 @@ for isub=1:length(sub)
         
     elseif strfind(para.estimation, 'FIR')
         tic
-        para.T=1; % this needs to be = 1 for FIR 
+        para.T=1; % this needs to be = 1 for FIR
         [hrfa,event_bold] = wgr_rsHRF_FIR(bold_sig,para, temporal_mask);
         
         
@@ -133,6 +134,7 @@ for isub=1:length(sub)
         H=fft([hrf; zeros(nobs-length(hrf),1)]);
         M=fft(bold_sig(:,voxel_id));
         data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
+        event_number(voxel_id)=length(event_bold{1,voxel_id});
     end
     toc
     disp('Done');
@@ -140,6 +142,7 @@ for isub=1:length(sub)
     
     save(fullfile(sub_save_dir,[name,'_hrf.mat']), 'para', 'hrfa', 'event_bold', 'PARA','-v7.3');
     
+    %write nifti maps of the three HRF parameters
     HRF_para_str = {'Height.nii', 'Time2peak.nii','FWHM.nii'};
     data= zeros(v.dim);
     for i=1:3
@@ -147,8 +150,12 @@ for isub=1:length(sub)
         data(voxel_ind)=PARA(i,:);
         spm_write_vol(v,data);
     end
+    % write number of events
+    v.fname = fullfile(sub_save_dir,[name,'_event_number.nii']);
+    data(voxel_ind)=event_number;
+    spm_write_vol(v,data);
     
-    % writing back into nifti file
+    % writing back deconvolved data into nifti file
     dat3 = zeros(v1(1).dim);
     for i=1:nobs
         v1(i).fname = fullfile(sub_save_dir,[name,'_deconv',ext]);
