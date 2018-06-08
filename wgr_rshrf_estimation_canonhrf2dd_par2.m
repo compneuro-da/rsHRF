@@ -1,4 +1,4 @@
-function [beta_hrf bf event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
+function [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
 %% 
 % xBF.TR = 2;
 % xBF.T = 8;
@@ -13,7 +13,7 @@ function [beta_hrf bf event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,x
 % Faculty of Psychology, Southwest University.
 % History:
 % - 2015-04-17 - Initial version.
-[N nvar] = size(data);
+[N, nvar] = size(data);
 bf = wgr_spm_get_canonhrf(xBF);
 bf2 = wgr_spm_Volterra(bf,xBF);
 bf  = [bf bf2];
@@ -30,10 +30,10 @@ warning off
 fprintf('%d ',nvar)
 % beta_hrf = sparse(nvar,xBF.TD_DD+3);
 beta_hrf = cell(1,nvar);
-event_bold= cell(nvar,1);
+event_bold= cell(1,nvar);
 parfor i=1:nvar
 %     fprintf('%d \n',i)
-    [beta_hrf{1,i}  event_bold{i}] =wgr_hrf_estimation_canon(data(:,i),xBF,len,N,bf,temporal_mask);
+    [beta_hrf{1,i},  event_bold{i}] =wgr_hrf_estimation_canon(data(:,i),xBF,len,N,bf,temporal_mask);
 end
 
 beta_hrf  =cell2mat(beta_hrf);
@@ -126,15 +126,16 @@ bf = spm_orth(bf);
 
 return
 
-function [beta_hrf u0]= wgr_hrf_estimation_canon(dat,xBF,len,N,bf,temporal_mask)
+function [beta_hrf, u0]= wgr_hrf_estimation_canon(dat,xBF,len,N,bf,temporal_mask)
 %% estimate HRF
 thr = xBF.thr;
 u0 = wgr_BOLD_event_vector(N,dat,thr,temporal_mask);
 u = [    full(u0)  
     zeros(xBF.T-1,N) ];
 u = reshape(u,1,[]);  %(microtime)
-[beta lag] = wgr_hrf_fit(dat,len,xBF,u,N,bf);
+[beta, lag] = wgr_hrf_fit(dat,len,xBF,u,N,bf);
 beta_hrf = beta; beta_hrf(end+1) = lag;
+u0 = find(full(u0(:))); %this is to uniform the storage of event_bold between canon and FIR
 return
 
 function data = wgr_BOLD_event_vector(N,matrix,thr,temporal_mask)
@@ -174,9 +175,9 @@ beta = zeros(size(bf,2)+1,nlag);
 % fprintf('Converged after ')
 for i=1:nlag
     u_lag = [u(1,lag(i)+1:end) zeros(1,lag(i))]';
-    [erm(i) beta(:,i)] = wgr_glm_estimation(dat,u_lag,bf,xBF.T,xBF.T0,AR_lag);
+    [erm(i), beta(:,i)] = wgr_glm_estimation(dat,u_lag,bf,xBF.T,xBF.T0,AR_lag);
 end
-[ermin id] = min(erm); 
+[ermin, id] = min(erm); 
 varargout{1} = beta(:,id);
 if nargout>1
    varargout{2} = lag(id);
@@ -184,12 +185,12 @@ end
 % fprintf('iterations!\n')
 return
 
-function [res_sum Beta] = wgr_glm_estimation(dat,u,bf,T,T0,AR_lag)
+function [res_sum, Beta] = wgr_glm_estimation(dat,u,bf,T,T0,AR_lag)
 % u: BOLD event vector (microtime).
 nscans = size(dat,1);
 x = wgr_onset_design(u,bf,T,T0,nscans);
 X = [x ones(nscans,1)];
-[res_sum Beta] = wgr_glsco(X,dat,AR_lag);
+[res_sum, Beta] = wgr_glsco(X,dat,AR_lag);
 
 return
 
@@ -210,7 +211,7 @@ X = X( (0:(nscans - 1))*T + T0, :);
 
 return
 
-function [res_sum Beta] = wgr_glsco(X,Y,AR_lag)
+function [res_sum, Beta] = wgr_glsco(X,Y,AR_lag)
 % Linear regression when disturbance terms follow AR(p)
 % -----------------------------------
 % Model:

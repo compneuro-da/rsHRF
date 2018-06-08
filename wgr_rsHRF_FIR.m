@@ -13,6 +13,7 @@ end
 
 % warning off
 beta_rshrf = cell(1,nvar);
+event_bold= cell(1,nvar);
 parfor i=1:nvar
     [beta_rshrf{i}, event_bold{i}] = wgr_FIR_estimation_HRF(data(:,i),para,N);
 end
