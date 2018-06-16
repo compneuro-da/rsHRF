@@ -29,7 +29,6 @@ end
 
 para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
 %para.estimation='sFIR'; % this one for smoothed FIR
-%para.estimation='FIR'; % this one for unsmoothed FIR
 
 temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 
