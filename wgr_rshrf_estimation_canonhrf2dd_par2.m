@@ -135,7 +135,9 @@ u = [    full(u0)
 u = reshape(u,1,[]);  %(microtime)
 [beta, lag] = wgr_hrf_fit(dat,len,xBF,u,N,bf);
 beta_hrf = beta; beta_hrf(end+1) = lag;
+u0old=u0;
 u0 = find(full(u0(:))); %this is to uniform the storage of event_bold between canon and FIR
+save eve u0 u0old
 return
 
 function data = wgr_BOLD_event_vector(N,matrix,thr,temporal_mask)
