@@ -29,6 +29,7 @@ end
 
 para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
 %para.estimation='sFIR'; % this one for smoothed FIR
+%para.estimation='FIR'; % this one for unsmoothed FIR
 
 temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 
@@ -164,5 +165,7 @@ for isub=1:length(sub)
 end
 
 %% example plots
+event_plot=sparse(1,nobs);
+event_plot(event_bold{1,1})=1;
 figure;plot(hrfa(:,1));
 figure;plot(zscore(bold_sig(:,1)));hold on;plot(zscore(data_deconv(:,1)),'r');stem(event_bold{1,1},'k');legend('BOLD','deconvolved','events')
