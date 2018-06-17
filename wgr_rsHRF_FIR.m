@@ -69,7 +69,7 @@ else
             end
         end
     end
-end    
+end
 return
 
 
@@ -113,7 +113,7 @@ if mode == 1
     R = v*exp(-h/2*(C-C').^2);
     RI = inv(R);
     
-    b = inv(DX2'*DX2+sig^2*RI)*DX2'*tc;
+    b = (DX2'*DX2+sig^2*RI)\DX2'*tc;
     %     fit = DX2*b;
     e = tc - DX2*b;
     
@@ -122,7 +122,7 @@ elseif mode == 0
     b = pinv(DX)*tc;
     %     fit = DX*b;
     e = tc - DX*b;
-    
+    b=b(1:T);
 end
 
 hrf = b;
