@@ -168,5 +168,7 @@ end
 %% example plots
 event_plot=sparse(1,nobs);
 event_plot(event_bold{1,1})=1;
-figure;plot(hrfa(:,1));
-figure;plot(zscore(bold_sig(:,1)));hold on;plot(zscore(data_deconv(:,1)),'r');stem(event_plot,'k');legend('BOLD','deconvolved','events')
+figure;plot((1:length(hrfa(:,1)))*TR,hrfa(:,1));xlabel('time (s)')
+figure;plot((1:nobs)*TR,zscore(bold_sig(:,1)));
+hold on;plot((1:nobs)*TR,zscore(data_deconv(:,1)),'r');
+stem((1:nobs)*TR,event_plot,'k');legend('BOLD','deconvolved','events');xlabel('time (s)')
