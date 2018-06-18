@@ -85,7 +85,8 @@ for isub=1:length(sub)
     data1 = spm_read_vols(v1);
     nobs = size(data1,4);
     data1 = reshape(data1,[],nobs)';
-    bold_sig =  data1(:,voxel_ind);
+    bold_sig =  zscore(data1(:,voxel_ind));
+    bold_sig = rest_IdealFilter(bold_sig, TR, [0.01 0.1]);
     data_deconv=zeros(size(bold_sig));
     event_number=zeros(1,size(bold_sig,2));
     
