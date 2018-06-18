@@ -2,7 +2,6 @@ Code for resting state HRF estimation and deconvolution (Matlab, and coming soon
 ========
 ![BOLD HRF](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
-**PLEASE visit <https://guorongwu.github.io/HRF/>  for more detailed information.**
 
 The basic idea 
 -------------
@@ -10,9 +9,11 @@ The basic idea
 This toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from resting state fMRI BOLD voxel-wise signal.
 It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the HRF onset, as well as the HRF shape, using either the canonical shape with two derivatives, or a (smoothed) Finite Impulse Response.
 
+![BOLD HRF](http://users.ugent.be/~dmarinaz/example_hrf.png)
+
 Once that the HRF has been retrieved for each voxel, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates), or one can map the shape parameters everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator.
 
-![BOLD HRF](http://users.ugent.be/~dmarinaz/FIR_Height_full_layout.png)
+![HRF map](http://users.ugent.be/~dmarinaz/FIR_Height_full_layout.png)
 
 How to use the toolbox 
 -------------
@@ -33,6 +34,16 @@ The demos allow you to run the analyses on several formats of input data.
 Towards Python and BIDS-app 
 -------------
 Currently we are working to translate the toolbox to Python, and to build a [BIDS-app](https://bids-apps.neuroimaging.io/)_ out of it.
+
+Collaborators 
+-------------
+Guorong Wu
+Nigel Colenbier
+Sofie Van Den Bossche
+Daniele Marinazzo
+
+Madhur Tandon (Python - BIDS)
+Asier Erramuzpe (Python - BIDS)
 
 
 **Citation**
