@@ -37,6 +37,8 @@ TR = 1.5; % THIS WILL BE READ FROM THE BIDS DATA
 
 para.TR = TR;
 
+para.passband=[0.01 0.08]; %bandpass filter lower and upper bound
+
 %%% the following parameter (upsample grid) can be > 1 only for Canonical.
 %%% Set = 1 for FIR
 para.T  = 3; % magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
@@ -86,7 +88,7 @@ for isub=1:length(sub)
     nobs = size(data1,4);
     data1 = reshape(data1,[],nobs)';
     bold_sig =  zscore(data1(:,voxel_ind));
-    bold_sig = rest_IdealFilter(bold_sig, TR, [0.01 0.1]);
+    bold_sig = rest_IdealFilter(bold_sig, para.TR, para.passband);
     data_deconv=zeros(size(bold_sig));
     event_number=zeros(1,size(bold_sig,2));
     
