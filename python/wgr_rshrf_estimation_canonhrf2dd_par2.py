@@ -71,7 +71,7 @@ def wgr_hrf_estimation_canon(dat,xBF,length,N,bf,temporal_mask):
     beta, lag = wgr_hrf_fit(dat,length,xBF,u,N,bf)
     beta_hrf = beta
     beta_hrf = np.append(beta_hrf,lag)
-    return beta_hrf, u0
+    return beta_hrf, u0.toarray()[0].nonzero()[0]
 
 def wgr_BOLD_event_vector(N,matrix,thr,temporal_mask):
     """
