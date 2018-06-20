@@ -113,3 +113,29 @@ def tor_make_deconv_mtx3(sf,tp,eres):
         DX[:,wh] = DX[:,wh] - np.tile(np.mean(DX[:,wh]),(DX.shape[0],1))
     return DX, sf
 
+def Fit_sFIR2(tc,TR,Runs,T,mode):
+    DX, sf = tor_make_deconv_mtx3(Runs,T,1)
+    DX2 = DX[:,0:T]
+    num = T
+
+    if mode == 1:
+        C = np.arange(1,num+1).reshape((1,num)).conj().T.dot(np.ones((1,num)))
+        h = np.sqrt(1/(7/TR))
+
+        v = 0.1
+        sig = 1
+
+        R = v * np.exp(-h/2*(C - C.conj().T)**2)
+        RI = np.linalg.inv(R)
+
+        b = np.linalg.solve((DX2.conj().T.dot(DX2) + sig ** 2 * RI),(DX2.conj().T)).dot(tc)
+        e = tc - DX2.dot(b)
+
+    elif mode ==0:
+        b = np.linalg.pinv(DX).dot(tc)
+        e = tc - DX.dot(b)
+        b = b[0:T]
+
+    hrf = b
+    return hrf, e
+
