@@ -2,91 +2,55 @@ Code for resting state HRF estimation and deconvolution (Matlab, and coming soon
 ========
 ![BOLD HRF](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
-**PLEASE visit <https://guorongwu.github.io/HRF/>  for detail information for resting-state HRF deconvolution.**
 
-Quickstart 
+The basic idea 
 -------------
-(canon2dd: canonical HRF with its delay and dispersion derivatives) 
 
-**BOLD fMRI** parameters setting
-%para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
-para.estimation='sFIR'; % this one for smoothed FIR
-%para.estimation='FIR'; % this one for unsmoothed FIR
+This toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from resting state fMRI BOLD voxel-wise signal.
+It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the HRF onset, as well as the HRF shape, using either the canonical shape with two derivatives, or a (smoothed) Finite Impulse Response.
 
-TR = 2; % choose the TR here
-temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
-```
-```
-data: nobs x nvar (nvar: number of variables; e.g. 200x90, 200x50000, ....)
+![BOLD HRF](http://users.ugent.be/~dmarinaz/example_hrf.png)
 
+Once that the HRF has been retrieved for each voxel, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates), or one can map the shape parameters everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator.
 
-para.TR = TR;
+![HRF map](http://users.ugent.be/~dmarinaz/FIR_Height_full_layout.png)
 
-%%% upsampling of the temporal grid. For Canonical estimation only. Leave=1 for FIR.
-para.T  = 5; % agnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid. Used for Canonical only
+How to use the toolbox 
+-------------
 
-para.T0 = 3; % position of the reference slice in bins, on the grid defined by para.T. For example, if the reference slice is the middle one, then para.T0=fix(para.T/2)
-if para.T==1
-    para.T0 = 1;
-end
+The input is voxelwise BOLD signal, already preprocessed according to your favorite recipe. Important thing are:
 
-min_onset_search = 4; % minimum delay allowed between event and HRF onset (seconds)
-max_onset_search = 8; % maximum delay allowed between event and HRF onset (seconds)
+* bandpass filter in the 0.01-0.08 Hz interval (or something like that)
+* z-score the voxel BOLD time series
 
-para.dt  = para.TR/para.T; % fine scale time resolution.
+To be on the safe side, these steps are performed again in the code.
 
-para.TD_DD = 2; % time and dispersion derivative
+The input can be images (3D or 4D), or directly matrices of [observation x voxels].
 
-para.AR_lag = 1; % AR(1) noise autocorrelation.
+It is possible to use a temporal mask to exclude some time points (for example after scrubbing).
 
-para.thr = 1; % (mean+) para.thr*standard deviation threshold to detect event.
+The demos allow you to run the analyses on several formats of input data.
 
-para.len = 24; % length of HRF, in seconds
+Towards Python and BIDS-app 
+-------------
+Currently we are working to translate the toolbox to Python, and to build a [BIDS-app](https://bids-apps.neuroimaging.io/) out of it.
 
-para.lag  = fix(min_onset_search/para.dt):fix(max_onset_search/para.dt);
-```
-HRF estimation
+Collaborators 
+-------------
+* Guorong Wu
+* Nigel Colenbier
+* Sofie Van Den Bossche
+* Daniele Marinazzo
 
-```
-[beta_hrf bf event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,para,temporal_mask);
-```
-```
-hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
-```
-HRF parameters estimation (PARA)
-
-```
-hrf1 = hrfa(:,1); 
-
-plot(hrf1) % HRF shape visualisation
-
-% do a for loop for other variable: 
-
-nvar = size(hrfa,2); PARA = zeros(3,nvar);
-
-for i=1:nvar; 
-
-	hrf1 = hrfa(:,i); 
-	
-	[PARA(:,i)] = wgr_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter 
-	
-end
-```
-```
-PARA(1,:): response height (response magnitude of neuronal activity)
-PARA(2,:): Time to peak (latency of neuronal activity)
-PARA(3,:): Width / FWHM (duration of neuronal activity)
-Response height (percent signal change) = PARA(1,:)./beta_hrf(end-1,:)*100; 
-
-```
-
+* Madhur Tandon (Python - BIDS)
+* Asier Erramuzpe (Python - BIDS)
 
 
 **Citation**
 --------
 
-_Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374. [PDF](https://github.com/guorongwu/rsHRF/raw/master/docs/2013_MIA.pdf)_
+1. Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374. [PDF](https://github.com/guorongwu/rsHRF/raw/master/docs/2013_MIA.pdf)
 
-_Guo-Rong Wu, Daniele Marinazzo. "Sensitivity of the resting state hemodynamic response function estimation to autonomic nervous system fluctuations." Philosophical Transactions of the Royal Society A, 2016, 374: 20150190.[PDF](https://github.com/guorongwu/rsHRF/raw/master/docs/2016_PTA.pdf)_
+2. Guo-Rong Wu, Daniele Marinazzo. "Sensitivity of the resting state hemodynamic response function estimation to autonomic nervous system fluctuations." Philosophical Transactions of the Royal Society A, 2016, 374: 20150190. [PDF](https://github.com/guorongwu/rsHRF/raw/master/docs/2016_PTA.pdf)
 
-_Guo-Rong Wu, Daniele Marinazzo. "Retrieving the Hemodynamic Response Function in resting state fMRI: methodology and applications." PeerJ PrePrints, 2015.[PDF](https://github.com/guorongwu/rsHRF/raw/master/docs/poster_OHBM2016_HRF.pdf)_
+3. Guo-Rong Wu, Daniele Marinazzo. "Retrieving the Hemodynamic Response Function in resting state fMRI: methodology and applications." PeerJ PrePrints, 2015. [PDF](https://github.com/guorongwu/rsHRF/raw/master/docs/poster_OHBM2016_HRF.pdf)

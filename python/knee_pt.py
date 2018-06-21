@@ -58,8 +58,10 @@ def knee_pt(y,x=None):
                     error_curve[breakpt] = np.sum(np.abs(delsfwd)) + np.sum(np.abs(delsbck))
                 else:
                     error_curve[breakpt] = np.sqrt(np.sum(np.multiply(delsfwd,delsfwd))) + np.sqrt(np.sum(np.multiply(delsbck,delsbck)))
-
-            loc = np.nanargmin(error_curve)
+            try:
+                loc = np.nanargmin(error_curve)
+            except ValueError as e:
+                loc = 0
             res_x = x[loc]
             idx_of_result = idx[loc]
     return res_x, idx_of_result

@@ -16,22 +16,22 @@ def rest_nextpow2_one35(n):
     for x in range(0,np.amax(tbl.shape)):
         Result = tbl[x]
         f,p = np.frexp(Result)
-        if(np.amax(f.shape)!=0) and f==0.5:
+        if f.size!=0 and f==0.5:
             return Result
         if(np.remainder(Result,3*5)==0):
             y = Result / (3*5)
             f,p = np.frexp(y)
-            if(np.amax(f.shape)!=0) and f==0.5:
+            if f.size!=0 and f==0.5:
                 return Result
         if(np.remainder(Result,3)==0):
             y = Result / 3
             f,p = np.frexp(y)
-            if(np.amax(f.shape)!=0) and f==0.5:
+            if f.size!=0 and f==0.5:
                 return Result
         if(np.remainder(Result,5)==0):
             y = Result / 5
             f,p = np.frexp(y)
-            if(np.amax(f.shape)!=0) and f==0.5:
+            if f.size!=0 and f==0.5:
                 return Result
     Result = np.nan
     return Result
