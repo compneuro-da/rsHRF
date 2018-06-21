@@ -12,6 +12,7 @@ def wgr_BOLD_event_vector(N,matrix,thr,temporal_mask):
     matrix = matrix[:,np.newaxis]
     if 0 in np.array(temporal_mask).shape:
         matrix = stats.zscore(matrix,ddof=1)
+        matrix = np.nan_to_num(matrix)
         for t in range(3,N-1):
             if ( matrix[t-1,0] > thr[0] and matrix[t-1,0] < thr[1] and np.all(matrix[t-3:t-1,0] < matrix[t-1,0]) and np.all(matrix[t-1,0] > matrix[t:t+2,0]) ):
                 data[0,t-1] = 1

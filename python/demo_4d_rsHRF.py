@@ -28,7 +28,7 @@ temporal_mask = []
 TR = 1.5
 para = {}
 
-para['estimation'] = 'sFIR'
+para['estimation'] = 'canon2dd'
 
 para['TR'] = TR
 
@@ -86,6 +86,7 @@ for isub in range(len(sub)):
         nobs = data.shape[3]
         data1 = np.reshape(data, (-1, nobs), order='F').T
         bold_sig = stats.zscore(data1[:, voxel_ind],ddof=1)
+        bold_sig = np.nan_to_num(bold_sig)
         bold_sig = rest_IdealFilter(bold_sig,para['TR'],para['passband'])
         data_deconv = np.zeros(bold_sig.shape)
         event_number = np.zeros((1,bold_sig.shape[1]))
@@ -159,8 +160,8 @@ for isub in range(len(sub)):
         plt.xlabel('time (s)')
         plt.show()
 
-        plt.plot(TR*np.arange(1,nobs+1),stats.zscore(bold_sig[:,0],ddof=1),linewidth=1)
-        plt.plot(TR*np.arange(1,nobs+1),stats.zscore(data_deconv[:,0],ddof=1),color='r',linewidth=1)
+        plt.plot(TR*np.arange(1,nobs+1),np.nan_to_num(stats.zscore(bold_sig[:,0],ddof=1)),linewidth=1)
+        plt.plot(TR*np.arange(1,nobs+1),np.nan_to_num(stats.zscore(data_deconv[:,0],ddof=1)),color='r',linewidth=1)
         markerline, stemlines, baseline = plt.stem(TR*np.arange(1,nobs+1),event_plot)
         plt.setp(baseline,'color','k','markersize',1)
         plt.setp(stemlines,'color','k','markersize',1)
