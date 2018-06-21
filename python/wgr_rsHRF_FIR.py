@@ -139,3 +139,52 @@ def Fit_sFIR2(tc,TR,Runs,T,mode):
     hrf = b
     return hrf, e
 
+def wgr_rsHRF_FIR(data,para,temporal_mask):
+    para['temporal_mask'] = temporal_mask
+    N, nvar = data.shape
+    if np.count_nonzero(para['thr'])==1:
+        para['thr'] = np.array([para['thr'],np.inf])
+
+    beta_rshrf = []
+    event_bold = []
+    for i in range(0,nvar):
+        beta_rshrf_out, event_bold_out = wgr_FIR_estimation_HRF(data[:,i],para,N)
+        beta_rshrf.append(beta_rshrf_out)
+        event_bold.append(event_bold_out)
+
+    return np.array(beta_rshrf).T, np.array(event_bold)
+
+def wgr_FIR_estimation_HRF(data,para,N):
+    if para['estimation'] == 'sFIR':
+        firmode = 1
+    else:
+        firmode = 0
+    u = wgr_BOLD_event_vector(N,data,para['thr'],para['temporal_mask'])
+    u = u.toarray().flatten(1).ravel().nonzero()[0]
+
+    lag = para['lag']
+    nlag = np.amax(lag.shape)
+    len_bin = int(np.floor(para['len']/para['TR']))
+
+    hrf = np.zeros((len_bin,nlag))
+    Cov_E = np.zeros((1,nlag))
+    kk = 0
+
+    for i_lag in range(1,nlag+1):
+        RR = u - i_lag
+        RR = RR[RR >= 0]
+        if RR.size != 0:
+            design = np.zeros((N, 1))
+            design[RR] = 1
+            hrf_kk, e3 = Fit_sFIR2(data,para['TR'],design,len_bin,firmode)
+            hrf[:, kk] = np.ravel(hrf_kk)
+            Cov_E[:, kk] = np.cov(np.ravel(e3))
+        else:
+            Cov_E[:, kk] = np.inf
+        kk += 1
+
+    placeholder, ind = knee_pt(np.ravel(Cov_E))
+    rsH = hrf[:,ind+1]
+    return rsH, u
+
+
