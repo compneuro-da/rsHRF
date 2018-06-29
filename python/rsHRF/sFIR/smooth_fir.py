@@ -1,7 +1,7 @@
 import numpy as np
-from knee_pt import *
 from scipy.sparse import lil_matrix
 from scipy import stats
+from ..processing import knee
 
 
 def wgr_BOLD_event_vector(N, matrix, thr, temporal_mask):
@@ -197,6 +197,6 @@ def wgr_FIR_estimation_HRF(data, para, N):
             Cov_E[:, kk] = np.inf
         kk += 1
 
-    placeholder, ind = knee_pt(np.ravel(Cov_E))
+    placeholder, ind = knee.knee_pt(np.ravel(Cov_E))
     rsH = hrf[:, ind + 1]
     return rsH, u
