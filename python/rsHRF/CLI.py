@@ -4,7 +4,7 @@ from bids.grabbids import BIDSLayout
 import numpy as np
 from rsHRF import spm_dep, fourD_rsHRF
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 def get_parser():
     parser = ArgumentParser(description='retrieves the onsets of pseudo-events triggering a '
