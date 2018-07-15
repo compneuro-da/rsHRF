@@ -35,6 +35,119 @@ Towards Python and BIDS-app
 -------------
 Currently we are working to translate the toolbox to Python, and to build a [BIDS-app](https://bids-apps.neuroimaging.io/) out of it.
 
+**The Command Line Interface rsHRF**
+
+A command line interface has been built in python to facilitate easy use of the toolbox.
+
+The CLI can be installed with ``pip install rsHRF`` and requires ``Python>=3.5``.
+
+This standalone command takes care of all the necessary dependencies so that the tool is
+usable straight out of the box.
+
+Once installed, run ``rsHRF --help`` to see the required positional and optional arguments.
+
+In essence, the whole usage of the application can be broken down to 5 major steps:
+
+1. **The input:**
+
+There are 2 ways one can input data to this application.
+
+* A standalone ``.nii / .nii.gz`` file. This option can be accessed using the
+``--input_file`` optional argument followed by the name of the file.
+
+* A ``bids_dir`` positional argument which is the location of the BIDS formatted 
+data-set directory.
+
+Out of the above 2 options, one of them is always required and both cannot be supplied
+at once.
+
+2. **The mask / atlas files:**
+
+There are 2 ways one can supply the corresponding mask / atlas files.
+
+* A standalone ``.nii / .nii.gz`` file. This option can be accessed using the
+``--atlas`` optional argument followed by the name of the file.
+
+* The ``--brainmask`` argument which tells the application that the mask files
+are present within the BIDS formatted data-set directory itself (which was supplied
+as ``bids_dir`` as a positional argument).
+ 
+Out of the above 2 options, one of them is always required and both cannot be supplied
+at once. Also, ``--input_file`` and ``--brainmask`` together are an invalid combination.
+
+The other 3 use-cases are explained below:
+
+* ``--input_file`` and ``--atlas`` : The standalone ``atlas`` and the standalone
+ ``input_file`` are passed to the application for the analysis and the outputs are
+ determined accordingly.
+ 
+* ``bids_dir`` and ``--atlas`` : The standalone ``atlas`` is used with ALL the input
+files present in the ``bids_dir`` directory. Thus, the ``atlas`` serves as a common mask
+for the whole BIDS formatted data-set.
+
+* ``bids_dir`` and ``--brainmask`` : This should be used when for each input file present
+in the BIDS formatted data-set, the corresponding mask file exists within the same data-set.
+The application then pairs the input_files with their corresponding masks provided that
+the 2 files share a common prefix.
+
+3. **The output directory:** 
+
+The output directory ``output_dir`` is the folder under which all the resulting
+``.nii`` files will be stored. The application further makes folders for each of 
+the participants / subjects if the supplied arguments are ``bids_dir`` and ``--brainmask``.
+
+4. **The Analysis Method:** 
+
+The analysis can be carried out using 3 estimation methods.
+
+These are ``canon2dd``, ``sFIR`` and ``FIR``.
+
+One of them needs to be supplied using the ``--estimation`` argument followed by
+one of the above 3 choices.
+
+5. **The input parameters:** 
+
+There are many input parameters that can be supplied to customize the analysis.
+Please see all of them under the ``Parameters`` heading under the documentation
+by running ``rsHRF --help``.
+
+**Few Examples:**
+
+* Running the analysis with a single input file and a single mask file.
+
+``rsHRF --input_file input.nii results --atlas mask.nii --estimation canon2dd``.
+
+In the above example, the input file is ``input.nii``. The ``output_dir`` is ``results``
+directory. The corresponding mask file supplied is ``mask.nii``.
+The estimation method passed is ``canon2dd``.
+
+* Running the analysis with a BIDS formatted data-set and a common mask file
+to be used for all the input files present in the data-set.
+
+Note: All input files in the BIDs directory need to be of the type ``*_preproc.nii`` or 
+``*_preproc.nii.gz``. Also, they must be present in the ``func`` directory under their
+respective subject / session folder.
+
+``rsHRF input_dir results --atlas mask.nii --estimation sFIR``
+
+In the above example, the ``output_dir`` is ``results`` directory. The 
+corresponding mask file supplied is ``mask.nii``. The BIDS formatted data-set
+lies in the ``input_dir`` directory.
+
+* Running the analysis with a BIDS formatted data-set that also includes a
+unique mask file for each of the input file present. 
+
+Note: All input files in the BIDs directory need to be of the type ``*_preproc.nii`` or 
+``*_preproc.nii.gz``. The corresponding mask files in the BIDs directory need to
+be of the type ``*_brainmask.nii`` or ``*_brainmask.nii.gz``. Also, they must be 
+present in the ``func`` directory under their respective subject / session folder.
+Furthermore, two corresponding input and mask files need to have the same prefix.
+
+For example, 2 corresponding input and mask files can be ``input_preproc.nii`` and
+``input_brainmask.nii``. These 2 will then be paired up for analysis.
+
+``rsHRF input_dir results --brainmask --estimation canon2dd``.
+
 Collaborators 
 -------------
 * Guorong Wu
