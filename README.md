@@ -35,7 +35,7 @@ Towards Python and BIDS-app
 -------------
 Currently we are working to translate the toolbox to Python, and to build a [BIDS-app](https://bids-apps.neuroimaging.io/) out of it.
 
-Instructions on HOW TO use this package [here](https://github.com/guorongwu/rsHRF/blob/master/python/README.md).
+Instructions on HOW TO use this package [here](https://github.com/guorongwu/rsHRF/blob/master/python/README.md#towards-python-and-bids-app).
 
 Collaborators 
 -------------
