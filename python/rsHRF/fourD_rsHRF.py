@@ -95,13 +95,13 @@ def demo_4d_rsHRF(input_file, mask_file, output_dir, para, mode='bids'):
         if mode == 'bids' or mode == 'bids w/ atlas':
             try:
                 sub_save_dir = os.path.join(
-                    output_dir, 'subject-' + input_file.subject,
+                    output_dir, 'sub-' + input_file.subject,
                     'session-' + input_file.session,
                     input_file.modality
                 )
             except AttributeError as e:
                 sub_save_dir = os.path.join(
-                    output_dir, 'subject-' + input_file.subject,
+                    output_dir, 'sub-' + input_file.subject,
                     input_file.modality
                 )
         else:
