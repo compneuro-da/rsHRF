@@ -1,5 +1,7 @@
-Code for resting state HRF estimation and deconvolution (Matlab, and coming soon Python)
+Resting state HRF estimation and deconvolution.
 ========
+Please refer to https://github.com/guorongwu/rsHRF/ for MATLAB version
+
 ![BOLD HRF](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
 
