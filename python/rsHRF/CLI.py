@@ -26,7 +26,7 @@ def get_parser():
 
     parser.add_argument('analysis_level', help='Level of the analysis that will be performed. '
                         'Multiple participant level analyses can be run independently '
-                        '(in parallel) using the same output_dir.', choices=['participant', 'group'], nargs='?')
+                        '(in parallel) using the same output_dir.', choices=['participant'], nargs='?')
 
     parser.add_argument('--participant_label',
                         help='The label(s) of the participant(s) that should be analyzed. The label '
@@ -108,7 +108,7 @@ def run_rsHRF():
         parser.error('--brainmask cannot be used with --input_file, use --atlas instead')
 
     if args.bids_dir is not None and not args.analysis_level:
-        parser.error('analysis_level needs to be supplied with bids_dir, choices=[participant, group]')
+        parser.error('analysis_level needs to be supplied with bids_dir, choices=[participant]')
 
     if args.input_file is not None and (not args.input_file.endswith(('.nii', '.nii.gz'))):
         parser.error('--input_file should end with .nii or .nii.gz')
