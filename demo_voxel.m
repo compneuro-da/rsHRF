@@ -9,13 +9,13 @@ clc,clear;warning off all
 %%===========PARAMETERS========================
 % choose the set of basis functions THIS MUST BE AN INPUT
 
-%para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
+para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
 %para.estimation='sFIR'; % this one for smoothed FIR
-para.estimation='FIR'; % this one for unsmoothed FIR
+%para.estimation='FIR'; % this one for unsmoothed FIR
 
 temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 
-TR = 2; % THIS WILL BE READ FROM THE BIDS DATA
+TR = .72; % THIS WILL BE READ FROM THE BIDS DATA
 
 para.TR = TR;
 para.passband=[0.01 0.08]; %bandpass filter lower and upper bound
