@@ -35,6 +35,8 @@ Towards Python and BIDS-app
 -------------
 Currently we are working to translate the toolbox to Python, and to build a [BIDS-app](https://bids-apps.neuroimaging.io/) out of it.
 
+Instructions on HOW TO use this package [here](https://github.com/guorongwu/rsHRF/blob/master/python/README.md#towards-python-and-bids-app).
+
 Collaborators 
 -------------
 * Guorong Wu
@@ -46,7 +48,7 @@ Collaborators
 * Asier Erramuzpe (Python - BIDS)
 
 
-**Citation**
+**References**
 --------
 
 1. Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374. [PDF](https://github.com/guorongwu/rsHRF/raw/master/docs/2013_MIA.pdf)
