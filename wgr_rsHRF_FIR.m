@@ -1,4 +1,4 @@
-function [beta_rshrf,event_bold] = wgr_rsHRF_FIR(data,para,temporal_mask)
+function [beta_rshrf,event_bold] = rsHRF_FIR(data,para,temporal_mask)
 % matlab R2015b
 % temporal_mask: generated from scrubbing.
 % By: Guo-Rong Wu (gronwu@gmail.com).
@@ -23,7 +23,8 @@ return
 
 function [rsH,u] = wgr_FIR_estimation_HRF(data,para,N)
 firmode=double(strcmp(para.estimation,'sFIR'));
-u = wgr_BOLD_event_vector(N,data,para.thr,para.temporal_mask);
+localK = para.localK;
+u = wgr_BOLD_event_vector(N,data,para.thr,localK,para.temporal_mask);
 u = find(full(u(:)));
 lag = para.lag;
 nlag = length(lag);
@@ -47,13 +48,15 @@ end
 rsH = hrf(:,ind+1);
 
 
-function data = wgr_BOLD_event_vector(N,matrix,thr,temporal_mask)
+function data = wgr_BOLD_event_vector(N,matrix,thr,k,temporal_mask)
 %detect BOLD event.  event>thr & event<3.1
 data = sparse(1,N);
+% k=2;
 if isempty(temporal_mask)
     matrix = zscore(matrix);
-    for t  = 3:N-2
-        if matrix(t,1) > thr(1) && matrix(t,1) < thr(2) && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
+    for t  = 1+k:N-k
+        if matrix(t,1) > thr(1) && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
+%         if matrix(t,1) > thr(1) && matrix(t,1) < thr(2) && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
             data(t) = 1 ;
         end
     end
@@ -62,9 +65,9 @@ else
     datstd = std(matrix(temporal_mask));
     datstd(datstd==0) = 1;%in case datstd==0;
     matrix = (matrix-datm)./datstd;
-    for t  = 3:N-2
+    for t  = 1+k:N-k
         if temporal_mask(t)
-            if matrix(t,1) > thr(1) && matrix(t,1) < thr(2) && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
+            if matrix(t,1) > thr(1) && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
                 data(t) = 1 ;
             end
         end

@@ -1,7 +1,7 @@
 function rsHRF(job,flag)
 %% resting state BOLD-fMRI HRF deconvolution
 if nargin>0
-    para_global = rsHRF_global_para;
+    para_global = wgr_rsHRF_global_para;
     switch flag;
         case 'vox'
             flag_delete = para_global.delete_files; % delete temporary files (generated wm/csf/brainmask) 
@@ -177,7 +177,7 @@ if nargin>0
             temporal_mask = ones(Nscans,1);
             if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
                 tic
-                [beta_hrf, bf, event_bold] = rsHRF_estimation_canonhrf2dd_par(data,para, temporal_mask);
+                [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par(data,para, temporal_mask);
                 hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
             elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
                 tic
@@ -187,14 +187,14 @@ if nargin>0
                     para.estimation = 'sFIR';
                 end
                 para.T=1; % this needs to be = 1 for FIR
-                [hrfa,event_bold] = rsHRF_FIR(data,para, temporal_mask);
+                [hrfa,event_bold] = wgr_rsHRF_FIR(data,para, temporal_mask);
             end
             
             nvar = size(hrfa,2);
             PARA = zeros(3,nvar);
             for voxel_id=1:nvar
                 hrf1 = hrfa(:,voxel_id);
-                [PARA(:,voxel_id)] = rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
+                [PARA(:,voxel_id)] = wgr_rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
             end
             fprintf('\nDone HRF estimation %8.2f seconds\n',toc)
             
@@ -633,7 +633,7 @@ para.localK = para_global.localK;
 temporal_mask = ones(Nscans,1);
 if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
     tic
-    [beta_hrf, bf, event_bold] = rsHRF_estimation_canonhrf2dd_par(data,para, temporal_mask);
+    [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par(data,para, temporal_mask);
     hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
     tic
@@ -643,14 +643,14 @@ elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
         para.estimation = 'sFIR';
     end
     para.T=1; % this needs to be = 1 for FIR
-    [hrfa,event_bold] = rsHRF_FIR(data,para, temporal_mask);
+    [hrfa,event_bold] = wgr_rsHRF_FIR(data,para, temporal_mask);
 end
 
 nvar = size(hrfa,2);
 PARA = zeros(3,nvar);
 for voxel_id=1:nvar
     hrf1 = hrfa(:,voxel_id);
-    [PARA(:,voxel_id)] = rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
+    [PARA(:,voxel_id)] = wgr_rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
 end
 fprintf('Done HRF estimation %8.2f seconds\n',toc)
 
