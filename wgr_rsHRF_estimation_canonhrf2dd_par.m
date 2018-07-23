@@ -133,14 +133,23 @@ return
 
 function [beta_hrf, u0]= wgr_hrf_estimation_canon(dat,xBF,len,N,bf,temporal_mask)
 %% estimate HRF
-thr = xBF.thr; localK = xBF.localK;
+thr = xBF.thr;
+if ~isfield(xBF,'localK')
+    if para.TR<=2
+        localK = 1;
+    else
+        localK = 2;
+    end
+else
+    localK = xBF.localK;
+end
 u0 = wgr_BOLD_event_vector(N,dat,thr,localK,temporal_mask);
 u = [    full(u0)  
     zeros(xBF.T-1,N) ];
 u = reshape(u,1,[]);  %(microtime)
 [beta, lag] = wgr_hrf_fit(dat,len,xBF,u,N,bf);
 beta_hrf = beta; beta_hrf(end+1) = lag;
-u0old=u0;
+%u0old=u0;
 u0 = find(full(u0(:))); %this is to uniform the storage of event_bold between canon and FIR
 % save eve u0 u0old
 return
