@@ -33,9 +33,11 @@ The demos allow you to run the analyses on several formats of input data.
 
 Towards Python and BIDS-app 
 -------------
-Currently we are working to translate the toolbox to Python, and to build a [BIDS-app](https://bids-apps.neuroimaging.io/) out of it.
+Currently we are working to translate the toolbox to Python, instructions on HOW TO use this package are [here](https://github.com/guorongwu/rsHRF/blob/master/python/README.md#towards-python-and-bids-app).
 
-Instructions on HOW TO use this package [here](https://github.com/guorongwu/rsHRF/blob/master/python/README.md#towards-python-and-bids-app).
+The code is also available on [pypi](https://pypi.org/project/rsHRF/).
+
+The next step is to build a [BIDS-app](https://bids-apps.neuroimaging.io/) out of it.
 
 Collaborators 
 -------------
