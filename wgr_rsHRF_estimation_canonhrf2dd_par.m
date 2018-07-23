@@ -1,4 +1,4 @@
-function [beta_hrf, bf, event_bold] = rsHRF_estimation_canonhrf2dd_par(data,xBF,temporal_mask);
+function [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par(data,xBF,temporal_mask);
 % function [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
 % xBF.TR = 2;
 % xBF.T = 8;

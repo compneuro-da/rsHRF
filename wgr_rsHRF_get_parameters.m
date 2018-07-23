@@ -1,4 +1,4 @@
-function [param] = wgr_get_parameters(hdrf,dt)
+function [param] = wgr_rsHRF_get_parameters(hdrf,dt)
 
 % Find model parameters
 %
