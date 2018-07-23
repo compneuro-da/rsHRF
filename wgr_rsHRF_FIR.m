@@ -23,7 +23,15 @@ return
 
 function [rsH,u] = wgr_FIR_estimation_HRF(data,para,N)
 firmode=double(strcmp(para.estimation,'sFIR'));
-localK = para.localK;
+if ~isfield(para,'localK')
+    if para.TR<=2
+        localK = 1;
+    else
+        localK = 2;
+    end
+else
+    localK = para.localK;
+end
 u = wgr_BOLD_event_vector(N,data,para.thr,localK,para.temporal_mask);
 u = find(full(u(:)));
 lag = para.lag;
