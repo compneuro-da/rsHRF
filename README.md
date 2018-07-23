@@ -1,6 +1,6 @@
 Code for resting state HRF estimation and deconvolution (Matlab, and coming soon Python)
 ========
-<img src="https://github.com/guorongwu/rsHRF/raw/master/docs/rsHRF_logo.png" width="48">
+<img src="https://github.com/guorongwu/rsHRF/raw/master/docs/rsHRF_logo.png" width="500">
 
 
 The basic idea 
