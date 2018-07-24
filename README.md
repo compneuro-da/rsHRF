@@ -1,6 +1,6 @@
 Code for resting state HRF estimation and deconvolution (Matlab, and coming soon Python)
 ========
-!(https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
+![](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
 
 The basic idea 
