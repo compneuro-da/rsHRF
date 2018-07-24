@@ -2,7 +2,10 @@ import numpy as np
 from scipy.sparse import lil_matrix
 from scipy import stats
 from joblib import Parallel, delayed
-import multiprocessing
+from joblib import load, dump
+import tempfile
+import shutil
+import os
 from ..processing import knee
 
 
@@ -154,24 +157,34 @@ def Fit_sFIR2(tc, TR, Runs, T, mode):
 
 
 def wgr_rsHRF_FIR(data, para, temporal_mask):
-    num_cores = multiprocessing.cpu_count()
     para['temporal_mask'] = temporal_mask
     N, nvar = data.shape
     if np.count_nonzero(para['thr']) == 1:
         para['thr'] = np.array([para['thr'], np.inf])
 
-    results = Parallel(n_jobs=num_cores)(delayed(wgr_FIR_estimation_HRF)(data[:, i], para, N) for i in range(0, nvar))
+    folder = tempfile.mkdtemp()
+    data_folder = os.path.join(folder, 'data')
+    dump(data, data_folder)
+    data = load(data_folder, mmap_mode='r')
+
+    results = Parallel(n_jobs=-1)(delayed(wgr_FIR_estimation_HRF)(data, i, para, N) for i in range(0, nvar))
     beta_rshrf, event_bold = zip(*results)
+
+    try:
+        shutil.rmtree(folder)
+    except:
+        print("Failed to delete: " + folder)
 
     return np.array(beta_rshrf).T, np.array(event_bold)
 
 
-def wgr_FIR_estimation_HRF(data, para, N):
+def wgr_FIR_estimation_HRF(data, i, para, N):
     if para['estimation'] == 'sFIR':
         firmode = 1
     else:
         firmode = 0
-    u = wgr_BOLD_event_vector(N, data, para['thr'], para['temporal_mask'])
+    dat = data[:, i]
+    u = wgr_BOLD_event_vector(N, dat, para['thr'], para['temporal_mask'])
     u = u.toarray().flatten(1).ravel().nonzero()[0]
 
     lag = para['lag']
@@ -188,7 +201,7 @@ def wgr_FIR_estimation_HRF(data, para, N):
         if RR.size != 0:
             design = np.zeros((N, 1))
             design[RR] = 1
-            hrf_kk, e3 = Fit_sFIR2(data, para['TR'], design, len_bin, firmode)
+            hrf_kk, e3 = Fit_sFIR2(dat, para['TR'], design, len_bin, firmode)
             hrf[:, kk] = np.ravel(hrf_kk)
             Cov_E[:, kk] = np.cov(np.ravel(e3))
         else:

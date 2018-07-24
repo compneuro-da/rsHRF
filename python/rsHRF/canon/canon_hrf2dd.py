@@ -2,12 +2,14 @@ import numpy as np
 from scipy.sparse import lil_matrix
 from scipy import stats
 from joblib import Parallel, delayed
-import multiprocessing
+from joblib import load, dump
+import tempfile
+import shutil
+import os
 from ..spm_dep import spm
 
 
 def wgr_rshrf_estimation_canonhrf2dd_par2(data, xBF, temporal_mask):
-    num_cores = multiprocessing.cpu_count()
     N, nvar = data.shape
     bf = wgr_spm_get_canonhrf(xBF)
     bf2 = wgr_spm_Volterra(bf, xBF)
@@ -16,9 +18,21 @@ def wgr_rshrf_estimation_canonhrf2dd_par2(data, xBF, temporal_mask):
 
     length = xBF['len']
 
-    results = Parallel(n_jobs=num_cores)(delayed(wgr_hrf_estimation_canon)(data[:, i], xBF, length,
-                                     N, bf, temporal_mask) for i in range(nvar))
+    folder = tempfile.mkdtemp()
+    data_folder = os.path.join(folder, 'data')
+    dump(data, data_folder)
+    data = load(data_folder, mmap_mode='r')
+
+    results = Parallel(n_jobs=-1)(delayed(wgr_hrf_estimation_canon)(data, i, xBF, length,
+                                  N, bf, temporal_mask) for i in range(nvar))
+
     beta_hrf, event_bold = zip(*results)
+
+    try:
+        shutil.rmtree(folder)
+    except:
+        print("Failed to delete: " + folder)
+
     return np.array(beta_hrf).T, bf, np.array(event_bold)
 
 
@@ -64,10 +78,11 @@ def wgr_spm_get_canonhrf(xBF):
     return bf
 
 
-def wgr_hrf_estimation_canon(dat, xBF, length, N, bf, temporal_mask):
+def wgr_hrf_estimation_canon(data, i, xBF, length, N, bf, temporal_mask):
     """
     Estimate HRF
     """
+    dat = data[:, i]
     thr = xBF['thr']
     u0 = wgr_BOLD_event_vector(N, dat, thr, temporal_mask)
     u = np.append(u0.toarray(), np.zeros((xBF['T'] - 1, N)), axis=0)
