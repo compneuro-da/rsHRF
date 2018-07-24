@@ -177,7 +177,7 @@ if nargin>0
             temporal_mask = ones(Nscans,1);
             if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
                 tic
-                [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par(data,para, temporal_mask);
+                [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
                 hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
             elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
                 tic
@@ -309,7 +309,8 @@ if nargin>0
     end
     return
 else
-       
+    code_path = fileparts(which('rsHRF.m')) ;
+    a = imread(fullfile(code_path,'rsHRF_logo.png'));
     S.fig = figure('Visible','on',...
         'numbertitle','off',...    
         'menubar','none',...         
@@ -633,7 +634,7 @@ para.localK = para_global.localK;
 temporal_mask = ones(Nscans,1);
 if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
     tic
-    [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par(data,para, temporal_mask);
+    [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
     hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
     tic
