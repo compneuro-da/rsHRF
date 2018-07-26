@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function rsHRF(job,flag)
 %% resting state BOLD-fMRI HRF deconvolution
 if nargin>0
@@ -195,7 +194,7 @@ if nargin>0
             PARA = zeros(3,nvar);
             for voxel_id=1:nvar
                 hrf1 = hrfa(:,voxel_id);
-                [PARA(:,voxel_id)] = wgr_rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
+                [PARA(:,voxel_id)] = wgr_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
             end
             fprintf('\nDone HRF estimation %8.2f seconds\n',toc)
             
@@ -652,7 +651,7 @@ nvar = size(hrfa,2);
 PARA = zeros(3,nvar);
 for voxel_id=1:nvar
     hrf1 = hrfa(:,voxel_id);
-    [PARA(:,voxel_id)] = wgr_rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
+    [PARA(:,voxel_id)] = wgr_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
 end
 fprintf('Done HRF estimation %8.2f seconds\n',toc)
 
@@ -918,7 +917,7 @@ if nargin>0
             PARA = zeros(3,nvar);
             for voxel_id=1:nvar
                 hrf1 = hrfa(:,voxel_id);
-                [PARA(:,voxel_id)] = wgr_rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
+                [PARA(:,voxel_id)] = wgr_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
             end
             fprintf('\nDone HRF estimation %8.2f seconds\n',toc)
             
@@ -1375,7 +1374,7 @@ nvar = size(hrfa,2);
 PARA = zeros(3,nvar);
 for voxel_id=1:nvar
     hrf1 = hrfa(:,voxel_id);
-    [PARA(:,voxel_id)] = wgr_rsHRF_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
+    [PARA(:,voxel_id)] = wgr_get_parameters(hrf1,para.TR/para.T);% estimate HRF parameter
 end
 fprintf('Done HRF estimation %8.2f seconds\n',toc)
 
@@ -1436,7 +1435,7 @@ for i=1:length(ROI)
                     if length(tmp4)==1
                         eval(['mat_txt{j,1} = tmp3.',tmp4{1},';']);
                     else
-                        error(['there are more than one variable in mat file, and no variable ''',mat_name,'" in mat file']);
+                        error(['there is more than one variable in mat file, and no variable ''',mat_name,'" in mat file']);
                     end
                 end
                 mat_txt{j,2} = tmp2;
@@ -1444,5 +1443,4 @@ for i=1:length(ROI)
             continue;
         end
     end  
->>>>>>> 9c46ae5c4cc843f01b9a6e057c623af732c071ed
 end

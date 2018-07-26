@@ -1,4 +1,4 @@
-function para = rsHRF_global_para()
+function para = wgr_rsHRF_global_para()
 % denoise
 if 0
     % global regression
