@@ -1,5 +1,4 @@
-function [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
-%% 
+function [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
 % xBF.TR = 2;
 % xBF.T = 8;
 % xBF.T0 = fix(xBF.T/2); (reference time bin, see slice timing)
@@ -8,11 +7,16 @@ function [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data
 % xBF.AR_lag = 1;
 % xBF.thr = 1;
 % xBF.len = 25;
+% xBF.localK = 2;
 % temporal_mask: generated from scrubbing.
 % By: Guo-Rong Wu (gronwu@gmail.com).
 % Faculty of Psychology, Southwest University.
 % History:
 % - 2015-04-17 - Initial version.
+% - 2018-07-18 - fix Warning: Rank deficient, copy code from regress.m
+%                       addd AR_lag=0.
+%                       set paramater for local peak detection.
+
 [N, nvar] = size(data);
 bf = wgr_spm_get_canonhrf(xBF);
 bf2 = wgr_spm_Volterra(bf,xBF);
@@ -26,8 +30,8 @@ bf  = [bf bf2];
 % [xBF] = spm_get_bf(xBF);
 % bf = xBF.bf;
 len= xBF.len;
-warning off
-fprintf('%d ',nvar)
+warning('off','all')
+fprintf('#%d \n',nvar)
 % beta_hrf = sparse(nvar,xBF.TD_DD+3);
 beta_hrf = cell(1,nvar);
 event_bold= cell(1,nvar);
@@ -129,24 +133,35 @@ return
 function [beta_hrf, u0]= wgr_hrf_estimation_canon(dat,xBF,len,N,bf,temporal_mask)
 %% estimate HRF
 thr = xBF.thr;
-u0 = wgr_BOLD_event_vector(N,dat,thr,temporal_mask);
+if ~isfield(xBF,'localK')
+    if xBF.TR<=2
+        localK = 1;
+    else
+        localK = 2;
+    end
+else
+    localK = xBF.localK;
+end
+u0 = wgr_BOLD_event_vector(N,dat,thr,localK,temporal_mask);
 u = [    full(u0)  
     zeros(xBF.T-1,N) ];
 u = reshape(u,1,[]);  %(microtime)
 [beta, lag] = wgr_hrf_fit(dat,len,xBF,u,N,bf);
 beta_hrf = beta; beta_hrf(end+1) = lag;
-u0old=u0;
+%u0old=u0;
 u0 = find(full(u0(:))); %this is to uniform the storage of event_bold between canon and FIR
-save eve u0 u0old
+% save eve u0 u0old
 return
 
-function data = wgr_BOLD_event_vector(N,matrix,thr,temporal_mask)
+function data = wgr_BOLD_event_vector(N,matrix,thr,k,temporal_mask)
 %detect BOLD event.  event>thr & event<3.1
 data = sparse(1,N);
+% k = 2;
 if isempty(temporal_mask)
     matrix = zscore(matrix);
-    for t  = 3:N-2
-        if matrix(t,1) > thr && matrix(t,1) < 3.1 && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
+    for t  = 1+k:N-k
+        if matrix(t,1) > thr && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
+%         if matrix(t,1) > thr && matrix(t,1) < 3.1 && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
             data(t) = 1 ;
         end
     end
@@ -155,9 +170,10 @@ else
     datstd = std(matrix(temporal_mask));
     datstd(datstd==0) = 1;%in case datstd==0;
     matrix = (matrix-datm)./datstd;
-    for t  = 3:N-2
+    for t  = 1+k:N-k
         if temporal_mask(t)
-            if matrix(t,1) > thr && matrix(t,1) < 3.1 && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
+            if matrix(t,1) > thr  && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
+%             if matrix(t,1) > thr && matrix(t,1) < 3.1 && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
                 data(t) = 1 ;
             end
         end
@@ -236,9 +252,13 @@ if nargin < 3;      AR_lag = 1;end
 if nargin < 4;   max_iter = 20;end
 
 [nobs, nvar] = size(X);
-Beta = X\Y;
+% Beta = X\Y;
+Beta = wgr_regress(Y,X);
 resid = Y - X * Beta;
-
+if ~AR_lag
+    res_sum = sum(resid.^2);
+    return
+end
 max_tol = min(1e-6,max(abs(Beta))/1000);
 for r = 1:max_iter    
 %     fprintf('Iteration No. %d\n',r)   
@@ -250,7 +270,8 @@ for r = 1:max_iter
     end
     
     Y_AR = resid(AR_lag+1:nobs-AR_lag);
-    AR_para = X_AR\Y_AR;
+%     AR_para = X_AR\Y_AR;
+    AR_para = wgr_regress(Y_AR,X_AR);
     
     X_main = X(AR_lag+1:nobs,:);
     Y_main = Y(AR_lag+1:nobs);
@@ -259,7 +280,8 @@ for r = 1:max_iter
         Y_main = Y_main-AR_para(m)*Y(AR_lag+1-m:nobs-m);
     end
     
-    Beta = X_main\Y_main;
+%     Beta = X_main\Y_main;
+    Beta = wgr_regress(Y_main,X_main);
     
     resid = Y(AR_lag+1:nobs) - X(AR_lag+1:nobs,:)*Beta;
     if max(abs(Beta-Beta_temp)) < max_tol
@@ -274,3 +296,27 @@ res_sum = sum(resid.^2);
 %    fprintf('Maximum %d iteration reached.\n',max_iter)    
 %end
 return
+
+function b = wgr_regress(y,X)
+% copy from function [b,bint,r,rint,stats] = regress(y,X,alpha)
+[n,ncolX] = size(X);
+% Use the rank-revealing QR to remove dependent columns of X.
+[Q,R,perm] = qr(X,0);
+if isempty(R)
+    p = 0;
+elseif isvector(R)
+    p = double(abs(R(1))>0);
+else
+    p = sum(abs(diag(R)) > max(n,ncolX)*eps(R(1)));
+end
+if p < ncolX
+%     warning(message('stats:regress:RankDefDesignMat'));
+    R = R(1:p,1:p);
+    Q = Q(:,1:p);
+    perm = perm(1:p);
+end
+
+% Compute the LS coefficients, filling in zeros in elements corresponding
+% to rows of X that were thrown out.
+b = zeros(ncolX,1);
+b(perm) = R \ (Q'*y);
