@@ -1,9 +1,4 @@
-<<<<<<< HEAD:wgr_rsHRF_estimation_canonhrf2dd_par.m
-function [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par(data,xBF,temporal_mask);
-% function [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
-=======
 function [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
->>>>>>> 9c46ae5c4cc843f01b9a6e057c623af732c071ed:wgr_rsHRF_estimation_canonhrf2dd_par2.m
 % xBF.TR = 2;
 % xBF.T = 8;
 % xBF.T0 = fix(xBF.T/2); (reference time bin, see slice timing)
@@ -139,7 +134,7 @@ function [beta_hrf, u0]= wgr_hrf_estimation_canon(dat,xBF,len,N,bf,temporal_mask
 %% estimate HRF
 thr = xBF.thr;
 if ~isfield(xBF,'localK')
-    if para.TR<=2
+    if xBF.TR<=2
         localK = 1;
     else
         localK = 2;
