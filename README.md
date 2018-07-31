@@ -1,4 +1,4 @@
-Code for resting state HRF estimation and deconvolution (Matlab, and coming soon Python)
+Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin) and Pyhton
 ========
 ![](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
@@ -15,7 +15,7 @@ Once that the HRF has been retrieved for each voxel, it can be deconvolved from 
 
 ![HRF map](https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png)
 
-How to use the toolbox 
+How to use the toolbox - Matlab standalone
 -------------
 
 The input is voxelwise BOLD signal, already preprocessed according to your favorite recipe. Important thing are:
@@ -30,6 +30,11 @@ The input can be images (3D or 4D), or directly matrices of [observation x voxel
 It is possible to use a temporal mask to exclude some time points (for example after scrubbing).
 
 The demos allow you to run the analyses on several formats of input data.
+
+How to use the toolbox - SPM plugin
+-------------
+
+The script spm_rsHRF.m is the main one, and it calls rsHRF.m. These two files are specific to the SPM plugin.
 
 Towards Python and BIDS-app 
 -------------
