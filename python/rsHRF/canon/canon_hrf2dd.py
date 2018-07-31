@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.sparse import lil_matrix
-from scipy import stats
+from scipy import stats, linalg
 from joblib import Parallel, delayed
 from joblib import load, dump
 import tempfile
@@ -84,7 +84,14 @@ def wgr_hrf_estimation_canon(data, i, xBF, length, N, bf, temporal_mask):
     """
     dat = data[:, i]
     thr = xBF['thr']
-    u0 = wgr_BOLD_event_vector(N, dat, thr, temporal_mask)
+    if 'localK' in xBF:
+        if xBF['TR']<=2:
+            localK = 1
+        else:
+            localK = 2
+    else:
+        localK = xBF['localK']
+    u0 = wgr_BOLD_event_vector(N, dat, thr, localK, temporal_mask)
     u = np.append(u0.toarray(), np.zeros((xBF['T'] - 1, N)), axis=0)
     u = np.reshape(u, (1, - 1), order='F')
     beta, lag = wgr_hrf_fit(dat, length, xBF, u, N, bf)
@@ -93,7 +100,7 @@ def wgr_hrf_estimation_canon(data, i, xBF, length, N, bf, temporal_mask):
     return beta_hrf, u0.toarray()[0].nonzero()[0]
 
 
-def wgr_BOLD_event_vector(N, matrix, thr, temporal_mask):
+def wgr_BOLD_event_vector(N, matrix, thr, k, temporal_mask):
     """
     Detect BOLD event.
     event > thr & event < 3.1
@@ -103,21 +110,21 @@ def wgr_BOLD_event_vector(N, matrix, thr, temporal_mask):
     if 0 in np.array(temporal_mask).shape:
         matrix = stats.zscore(matrix, ddof=1)
         matrix = np.nan_to_num(matrix)
-        for t in range(3, N - 1):
-            if thr < matrix[t - 1, 0] < 3.1 and \
-                    np.all(matrix[t - 3:t - 1, 0] < matrix[t - 1, 0]) and \
-                    np.all(matrix[t - 1, 0] > matrix[t:t + 2, 0]):
+        for t in range(1 + k, N - k + 1):
+            if matrix[t - 1, 0] > thr and \
+                    np.all(matrix[t - k - 1:t - 1, 0] < matrix[t - 1, 0]) and \
+                    np.all(matrix[t - 1, 0] > matrix[t:t + k, 0]):
                 data[0, t - 1] = 1
     else:
         datm = np.mean(matrix[temporal_mask])
         datstd = np.std(matrix[temporal_mask])
         datstd[datstd == 0] = 1
         matrix = np.divide((matrix - datm), datstd)
-        for t in range(3, N - 1):
-            if temporal_mask[t]:
-                if thr < matrix[t - 1, 0] < 3.1 and \
-                        np.all(matrix[t - 3:t - 1, 0] < matrix[t - 1, 0]) and \
-                        np.all(matrix[t - 1, 0] > matrix[t:t + 2, 0]):
+        for t in range(1 + k, N - k + 1):
+            if temporal_mask[t-1]:
+                if matrix[t - 1, 0] > thr and \
+                        np.all(matrix[t - k - 1:t - 1, 0] < matrix[t - 1, 0]) and \
+                        np.all(matrix[t - 1, 0] > matrix[t:t + k, 0]):
                     data[0, t - 1] = 1
     return data
 

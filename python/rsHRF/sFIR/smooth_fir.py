@@ -9,7 +9,7 @@ import os
 from ..processing import knee
 
 
-def wgr_BOLD_event_vector(N, matrix, thr, temporal_mask):
+def wgr_BOLD_event_vector(N, matrix, thr, k, temporal_mask):
     """
     Detect BOLD event.
     event > thr & event < 3.1
@@ -19,21 +19,21 @@ def wgr_BOLD_event_vector(N, matrix, thr, temporal_mask):
     if 0 in np.array(temporal_mask).shape:
         matrix = stats.zscore(matrix, ddof=1)
         matrix = np.nan_to_num(matrix)
-        for t in range(3, N - 1):
-            if thr[0] < matrix[t - 1, 0] < thr[1] and \
-                    np.all(matrix[t - 3:t - 1, 0] < matrix[t - 1, 0]) and \
-                    np.all(matrix[t - 1, 0] > matrix[t:t + 2, 0]):
+        for t in range(1 + k, N - k + 1):
+            if matrix[t - 1, 0] > thr[0] and \
+                    np.all(matrix[t - k - 1:t - 1, 0] < matrix[t - 1, 0]) and \
+                    np.all(matrix[t - 1, 0] > matrix[t:t + k, 0]):
                 data[0, t - 1] = 1
     else:
         datm = np.mean(matrix[temporal_mask])
         datstd = np.std(matrix[temporal_mask])
         datstd[datstd == 0] = 1
         matrix = np.divide((matrix - datm), datstd)
-        for t in range(3, N - 1):
-            if temporal_mask[t]:
-                if thr[0] < matrix[t - 1, 0] < thr[1] and \
-                        np.all(matrix[t - 3:t - 1, 0] < matrix[t - 1, 0]) and \
-                        np.all(matrix[t - 1, 0] > matrix[t:t + 2, 0]):
+        for t in range(1 + k, N - k + 1):
+            if temporal_mask[t-1]:
+                if matrix[t - 1, 0] > thr[0] and \
+                        np.all(matrix[t - k - 1:t - 1, 0] < matrix[t - 1, 0]) and \
+                        np.all(matrix[t - 1, 0] > matrix[t:t + k, 0]):
                     data[0, t - 1] = 1
     return data
 
@@ -184,7 +184,16 @@ def wgr_FIR_estimation_HRF(data, i, para, N):
     else:
         firmode = 0
     dat = data[:, i]
-    u = wgr_BOLD_event_vector(N, dat, para['thr'], para['temporal_mask'])
+
+    if 'localK' in para:
+        if para['TR']<=2:
+            localK = 1
+        else:
+            localK = 2
+    else:
+        localK = para['localK']
+
+    u = wgr_BOLD_event_vector(N, dat, para['thr'], localK, para['temporal_mask'])
     u = u.toarray().flatten(1).ravel().nonzero()[0]
 
     lag = para['lag']
