@@ -6,8 +6,10 @@ from joblib import load, dump
 import tempfile
 import shutil
 import os
+import warnings
 from ..spm_dep import spm
 
+warnings.filterwarnings("ignore")
 
 def wgr_rshrf_estimation_canonhrf2dd_par2(data, xBF, temporal_mask):
     N, nvar = data.shape

@@ -6,8 +6,10 @@ from joblib import load, dump
 import tempfile
 import shutil
 import os
+import warnings
 from ..processing import knee
 
+warnings.filterwarnings("ignore")
 
 def wgr_BOLD_event_vector(N, matrix, thr, k, temporal_mask):
     """

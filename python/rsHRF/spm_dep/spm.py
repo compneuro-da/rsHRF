@@ -1,7 +1,9 @@
 import nibabel as nib
 import numpy as np
 from scipy.special import gammaln
+import warnings
 
+warnings.filterwarnings("ignore")
 
 def spm_vol(input_nii_file):
     """

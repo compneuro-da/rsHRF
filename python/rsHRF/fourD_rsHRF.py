@@ -6,7 +6,10 @@ import matplotlib.pyplot as plt
 from scipy import stats, signal
 from scipy.sparse import lil_matrix
 import scipy.io as sio
+import warnings
 from rsHRF import spm_dep, processing, canon, sFIR, parameters
+
+warnings.filterwarnings("ignore")
 
 
 def demo_4d_rsHRF(input_file, mask_file, output_dir, para, mode='bids'):

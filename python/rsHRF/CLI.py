@@ -5,7 +5,7 @@ import numpy as np
 import warnings
 from rsHRF import spm_dep, fourD_rsHRF
 
-__version__ = "0.1.5"
+__version__ = "0.1.7"
 
 def get_parser():
     parser = ArgumentParser(description='retrieves the onsets of pseudo-events triggering a '
