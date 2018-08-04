@@ -2,6 +2,7 @@ import os.path as op
 from argparse import ArgumentParser
 from bids.grabbids import BIDSLayout
 import numpy as np
+import warnings
 from rsHRF import spm_dep, fourD_rsHRF
 
 __version__ = "0.1.5"
@@ -224,6 +225,7 @@ def run_rsHRF():
 
 
 def main():
+    warnings.filterwarnings("ignore")
     run_rsHRF()
 
 

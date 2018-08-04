@@ -185,7 +185,7 @@ def wgr_FIR_estimation_HRF(data, i, para, N):
         firmode = 0
     dat = data[:, i]
 
-    if 'localK' in para:
+    if 'localK' not in para:
         if para['TR']<=2:
             localK = 1
         else:

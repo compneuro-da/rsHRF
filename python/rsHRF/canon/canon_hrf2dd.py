@@ -84,7 +84,7 @@ def wgr_hrf_estimation_canon(data, i, xBF, length, N, bf, temporal_mask):
     """
     dat = data[:, i]
     thr = xBF['thr']
-    if 'localK' in xBF:
+    if 'localK' not in xBF:
         if xBF['TR']<=2:
             localK = 1
         else:
