@@ -52,7 +52,8 @@ for i_lag=1:nlag
     end
     kk = kk+1;
 end
-[mincov, ind] = knee_pt(Cov_E); % this is a function to find the elbow point of a curve, there should be an equivalent in Python
+[xid, ind] = knee_pt(Cov_E); % this is a function to find the elbow point of a curve, there should be an equivalent in Python
+mincov=Cov_E(xid);
 rsH = hrf(:,ind+1);
 
 
