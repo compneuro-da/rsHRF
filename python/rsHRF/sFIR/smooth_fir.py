@@ -6,8 +6,10 @@ from joblib import load, dump
 import tempfile
 import shutil
 import os
+import warnings
 from ..processing import knee
 
+warnings.filterwarnings("ignore")
 
 def wgr_BOLD_event_vector(N, matrix, thr, k, temporal_mask):
     """
@@ -185,7 +187,7 @@ def wgr_FIR_estimation_HRF(data, i, para, N):
         firmode = 0
     dat = data[:, i]
 
-    if 'localK' in para:
+    if 'localK' not in para:
         if para['TR']<=2:
             localK = 1
         else:

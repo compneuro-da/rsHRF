@@ -1,5 +1,7 @@
 import numpy as np
+import warnings
 
+warnings.filterwarnings("ignore")
 
 def knee_pt(y, x=None):
     x_was_none = False
