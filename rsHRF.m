@@ -177,7 +177,7 @@ if nargin>0
             temporal_mask = ones(Nscans,1);
             if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
                 tic
-                [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
+                [beta_hrf, bf, event_bold, ermin] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
                 hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
             elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
                 tic
@@ -187,7 +187,7 @@ if nargin>0
                     para.estimation = 'sFIR';
                 end
                 para.T=1; % this needs to be = 1 for FIR
-                [hrfa,event_bold] = wgr_rsHRF_FIR(data,para, temporal_mask);
+                [hrfa,event_bold, ermin] = wgr_rsHRF_FIR(data,para, temporal_mask);
             end
             
             nvar = size(hrfa,2);
@@ -210,7 +210,7 @@ if nargin>0
                 hrf=hrfa_TR(:,voxel_id);
                 H=fft([hrf; zeros(Nscans-length(hrf),1)]);
                 M=fft(data(:,voxel_id));
-                data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
+                data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+ermin{voxel_id}));
                 event_number(voxel_id)=length(event_bold{1,voxel_id});
             end
             toc
@@ -634,7 +634,7 @@ para.localK = para_global.localK;
 temporal_mask = ones(Nscans,1);
 if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
     tic
-    [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
+    [beta_hrf, bf, event_bold, ermin] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
     hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
     tic
@@ -644,7 +644,7 @@ elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
         para.estimation = 'sFIR';
     end
     para.T=1; % this needs to be = 1 for FIR
-    [hrfa,event_bold] = wgr_rsHRF_FIR(data,para, temporal_mask);
+    [hrfa,event_bold, ermin] = wgr_rsHRF_FIR(data,para, temporal_mask);
 end
 
 nvar = size(hrfa,2);
@@ -667,7 +667,7 @@ for voxel_id=1:nvar
     hrf=hrfa_TR(:,voxel_id);
     H=fft([hrf; zeros(Nscans-length(hrf),1)]);
     M=fft(data(:,voxel_id));
-    data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
+    data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+ermin{voxel_id}));
     event_number(voxel_id)=length(event_bold{1,voxel_id});
 end
 toc
@@ -900,7 +900,7 @@ if nargin>0
             temporal_mask = ones(Nscans,1);
             if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
                 tic
-                [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
+                [beta_hrf, bf, event_bold, ermin] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
                 hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
             elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
                 tic
@@ -910,7 +910,7 @@ if nargin>0
                     para.estimation = 'sFIR';
                 end
                 para.T=1; % this needs to be = 1 for FIR
-                [hrfa,event_bold] = wgr_rsHRF_FIR(data,para, temporal_mask);
+                [hrfa,event_bold, ermin] = wgr_rsHRF_FIR(data,para, temporal_mask);
             end
             
             nvar = size(hrfa,2);
@@ -933,7 +933,7 @@ if nargin>0
                 hrf=hrfa_TR(:,voxel_id);
                 H=fft([hrf; zeros(Nscans-length(hrf),1)]);
                 M=fft(data(:,voxel_id));
-                data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
+                data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+ermin{voxel_id}));
                 event_number(voxel_id)=length(event_bold{1,voxel_id});
             end
             toc
@@ -1357,7 +1357,7 @@ para.localK = para_global.localK;
 temporal_mask = ones(Nscans,1);
 if job.HRFE.hrfm==1 | job.HRFE.hrfm==3
     tic
-    [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
+    [beta_hrf, bf, event_bold, ermin] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,para, temporal_mask);
     hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
 elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
     tic
@@ -1367,7 +1367,7 @@ elseif job.HRFE.hrfm==2 | job.HRFE.hrfm==4
         para.estimation = 'sFIR';
     end
     para.T=1; % this needs to be = 1 for FIR
-    [hrfa,event_bold] = wgr_rsHRF_FIR(data,para, temporal_mask);
+    [hrfa,event_bold, ermin] = wgr_rsHRF_FIR(data,para, temporal_mask);
 end
 
 nvar = size(hrfa,2);
@@ -1390,7 +1390,7 @@ for voxel_id=1:nvar
     hrf=hrfa_TR(:,voxel_id);
     H=fft([hrf; zeros(Nscans-length(hrf),1)]);
     M=fft(data(:,voxel_id));
-    data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
+    data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+ermin{voxel_id}));
     event_number(voxel_id)=length(event_bold{1,voxel_id});
 end
 toc

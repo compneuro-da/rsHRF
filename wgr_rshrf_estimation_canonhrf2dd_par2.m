@@ -1,4 +1,4 @@
-function [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
+function [beta_hrf, bf, event_bold,ermin] = wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
 % xBF.TR = 2;
 % xBF.T = 8;
 % xBF.T0 = fix(xBF.T/2); (reference time bin, see slice timing)
@@ -37,7 +37,7 @@ beta_hrf = cell(1,nvar);
 event_bold= cell(1,nvar);
 parfor i=1:nvar
 %     fprintf('%d \n',i)
-    [beta_hrf{1,i},  event_bold{i}] =wgr_hrf_estimation_canon(data(:,i),xBF,len,N,bf,temporal_mask);
+    [beta_hrf{1,i},  event_bold{i}, ermin{i}] =wgr_hrf_estimation_canon(data(:,i),xBF,len,N,bf,temporal_mask);
 end
 
 beta_hrf  =cell2mat(beta_hrf);
@@ -130,7 +130,7 @@ bf = spm_orth(bf);
 
 return
 
-function [beta_hrf, u0]= wgr_hrf_estimation_canon(dat,xBF,len,N,bf,temporal_mask)
+function [beta_hrf, u0, ermin]= wgr_hrf_estimation_canon(dat,xBF,len,N,bf,temporal_mask)
 %% estimate HRF
 thr = xBF.thr;
 if ~isfield(xBF,'localK')
@@ -146,7 +146,7 @@ u0 = wgr_BOLD_event_vector(N,dat,thr,localK,temporal_mask);
 u = [    full(u0)  
     zeros(xBF.T-1,N) ];
 u = reshape(u,1,[]);  %(microtime)
-[beta, lag] = wgr_hrf_fit(dat,len,xBF,u,N,bf);
+[beta, lag, ermin] = wgr_hrf_fit(dat,len,xBF,u,N,bf);
 beta_hrf = beta; beta_hrf(end+1) = lag;
 %u0old=u0;
 u0 = find(full(u0(:))); %this is to uniform the storage of event_bold between canon and FIR
@@ -195,10 +195,11 @@ for i=1:nlag
     u_lag = [u(1,lag(i)+1:end) zeros(1,lag(i))]';
     [erm(i), beta(:,i)] = wgr_glm_estimation(dat,u_lag,bf,xBF.T,xBF.T0,AR_lag);
 end
-[ermin, id] = min(erm); 
+[ermin, id] = knee_pt(erm); 
 varargout{1} = beta(:,id);
 if nargout>1
    varargout{2} = lag(id);
+   varargout{3} = ermin;
 end
 % fprintf('iterations!\n')
 return

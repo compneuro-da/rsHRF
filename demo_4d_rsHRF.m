@@ -95,13 +95,13 @@ for isub=1:length(sub)
     disp('Retrieving HRF ...');
     if strfind(para.estimation, 'canon')
         tic
-        [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(bold_sig,para,temporal_mask);
+        [beta_hrf, bf, event_bold, ermin] = wgr_rshrf_estimation_canonhrf2dd_par2(bold_sig,para,temporal_mask);
         hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
         
     elseif strfind(para.estimation, 'FIR')
         tic
         para.T=1; % this needs to be = 1 for FIR
-        [hrfa,event_bold] = wgr_rsHRF_FIR(bold_sig,para, temporal_mask);
+        [hrfa,event_bold, ermin] = wgr_rsHRF_FIR(bold_sig,para, temporal_mask);
         
         
     end
@@ -136,7 +136,7 @@ for isub=1:length(sub)
         hrf=hrfa_TR(:,voxel_id);
         H=fft([hrf; zeros(nobs-length(hrf),1)]);
         M=fft(bold_sig(:,voxel_id));
-        data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
+        data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+ermin{voxel_id}));
         event_number(voxel_id)=length(event_bold{1,voxel_id});
     end
     toc
