@@ -1,4 +1,4 @@
-function [beta_rshrf,event_bold,mincov] = wgr_rsHRF_FIR(data,para,temporal_mask)
+function [beta_rshrf,event_bold] = wgr_rsHRF_FIR(data,para,temporal_mask)
 % matlab R2015b
 % temporal_mask: generated from scrubbing.
 % By: Guo-Rong Wu (gronwu@gmail.com).
@@ -15,13 +15,13 @@ end
 beta_rshrf = cell(1,nvar);
 event_bold= cell(1,nvar);
 parfor i=1:nvar
-    [beta_rshrf{i}, event_bold{i},mincov{i}] = wgr_FIR_estimation_HRF(data(:,i),para,N);
+    [beta_rshrf{i}, event_bold{i}] = wgr_FIR_estimation_HRF(data(:,i),para,N);
 end
 beta_rshrf  =cell2mat(beta_rshrf);
 % warning on
 return
 
-function [rsH,u,mincov] = wgr_FIR_estimation_HRF(data,para,N)
+function [rsH,u] = wgr_FIR_estimation_HRF(data,para,N)
 firmode=double(strcmp(para.estimation,'sFIR'));
 if ~isfield(para,'localK')
     if para.TR<=2
@@ -52,8 +52,7 @@ for i_lag=1:nlag
     end
     kk = kk+1;
 end
-[xid, ind] = knee_pt(Cov_E); % this is a function to find the elbow point of a curve, there should be an equivalent in Python
-mincov=Cov_E(xid);
+[~, ind] = knee_pt(Cov_E); % this is a function to find the elbow point of a curve, there should be an equivalent in Python
 rsH = hrf(:,ind+1);
 
 

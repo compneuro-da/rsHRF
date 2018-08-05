@@ -54,13 +54,13 @@ bold_sig=zscore(bold_sig);
 bold_sig = rest_IdealFilter(bold_sig, para.TR, para.passband);
 if strfind(para.estimation, 'canon')
     tic
-    [beta_hrf, bf, event_bold,ermin] = wgr_rshrf_estimation_canonhrf2dd_par2(bold_sig,para,temporal_mask);
+    [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(bold_sig,para,temporal_mask);
     hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
     
 elseif strfind(para.estimation, 'FIR')
     tic
     para.T=1; % this needs to be = 1 for FIR
-    [hrfa,event_bold,ermin] = wgr_rsHRF_FIR(bold_sig,para, temporal_mask);
+    [hrfa,event_bold] = wgr_rsHRF_FIR(bold_sig,para, temporal_mask);
     
     
 end
@@ -94,7 +94,7 @@ end
 hrf=hrfa_TR;
 H=fft([hrf; zeros(nobs-length(hrf),1)]);
 M=fft(bold_sig(:,1));
-data_deconv = ifft(conj(H).*M./(H.*conj(H)+ermin{1}));
+data_deconv = ifft(conj(H).*M./(H.*conj(H)+.1*mean(H.*conj(H))));
 event_number=length(event_bold{1,1});
 toc
 disp('Done');
