@@ -8,6 +8,7 @@ import shutil
 import os
 import warnings
 from ..spm_dep import spm
+from ..processing import knee
 
 warnings.filterwarnings("ignore")
 
@@ -146,7 +147,7 @@ def wgr_hrf_fit(dat, length, xBF, u, N, bf):
         erm[0, i], beta[:, i] = \
             wgr_glm_estimation(dat, u_lag, bf, xBF['T'], xBF['T0'], AR_lag)
 
-    idx = np.argmin(erm)
+    x, idx = knee.knee_pt(np.ravel(erm))
     return beta[:, idx], lag[idx]
 
 
@@ -158,7 +159,7 @@ def wgr_glm_estimation(dat, u, bf, T, T0, AR_lag):
     x = wgr_onset_design(u, bf, T, T0, nscans)
     X = np.append(x, np.ones((nscans, 1)), axis=1)
     res_sum, Beta = wgr_glsco(X, dat, AR_lag)
-    return res_sum, Beta
+    return np.real(res_sum), Beta
 
 
 def wgr_onset_design(u, bf, T, T0, nscans):
@@ -206,6 +207,10 @@ def wgr_glsco(X, Y, AR_lag=1, max_iter=20):
     Beta = np.linalg.lstsq(X, Y, rcond=None)[0]
     resid = Y - (X.dot(Beta))
 
+    if AR_lag == 0:
+        res_sum = np.cov(resid)
+        return res_sum, Beta
+
     max_tol = min(1e-6, max(np.absolute(Beta)) / 1000)
     for r in range(max_iter):
         Beta_temp = Beta
@@ -230,5 +235,5 @@ def wgr_glsco(X, Y, AR_lag=1, max_iter=20):
         if(max(np.absolute(Beta - Beta_temp)) < max_tol):
             break
 
-    res_sum = np.sum(resid ** 2)
+    res_sum = np.cov(resid)
     return res_sum, Beta

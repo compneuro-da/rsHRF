@@ -92,7 +92,7 @@ def demo_4d_rsHRF(input_file, mask_file, output_dir, para, mode='bids'):
                           np.zeros((nobs - max(hrf.shape), 1))), axis=0)
             M = np.fft.fft(bold_sig[:, voxel_id])
             data_deconv[:, voxel_id] = \
-                np.fft.ifft(H.conj() * M / (H * H.conj() + 2))
+                np.fft.ifft(H.conj() * M / (H * H.conj() + .1*np.mean((H * H.conj()))))
             event_number[:, voxel_id] = np.amax(event_bold[voxel_id].shape)
 
         if mode == 'bids' or mode == 'bids w/ atlas':
