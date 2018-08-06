@@ -136,7 +136,7 @@ for isub=1:length(sub)
         hrf=hrfa_TR(:,voxel_id);
         H=fft([hrf; zeros(nobs-length(hrf),1)]);
         M=fft(bold_sig(:,voxel_id));
-        data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+2));
+        data_deconv(:,voxel_id) = ifft(conj(H).*M./(H.*conj(H)+.1*mean(H.*conj(H))));
         event_number(voxel_id)=length(event_bold{1,voxel_id});
     end
     toc

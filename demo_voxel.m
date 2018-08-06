@@ -9,9 +9,9 @@ clc,clear;warning off all
 %%===========PARAMETERS========================
 % choose the set of basis functions THIS MUST BE AN INPUT
 
-para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
+%para.estimation='canon2dd'; % this one for canonical HRF plus two derivatives
 %para.estimation='sFIR'; % this one for smoothed FIR
-%para.estimation='FIR'; % this one for unsmoothed FIR
+para.estimation='FIR'; % this one for unsmoothed FIR
 
 temporal_mask = []; % without mask, it means temporal_mask = ones(nobs,1); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
 
@@ -93,7 +93,7 @@ end
 hrf=hrfa_TR;
 H=fft([hrf; zeros(nobs-length(hrf),1)]);
 M=fft(bold_sig(:,1));
-data_deconv = ifft(conj(H).*M./(H.*conj(H)+2));
+data_deconv = ifft(conj(H).*M./(H.*conj(H)+.1*mean(H.*conj(H))));
 event_number=length(event_bold{1,1});
 toc
 disp('Done');

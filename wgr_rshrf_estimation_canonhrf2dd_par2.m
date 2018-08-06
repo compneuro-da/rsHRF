@@ -1,4 +1,4 @@
-function [beta_hrf, bf, event_bold] = wgr_rsHRF_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
+function [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,xBF,temporal_mask);
 % xBF.TR = 2;
 % xBF.T = 8;
 % xBF.T0 = fix(xBF.T/2); (reference time bin, see slice timing)
@@ -195,7 +195,7 @@ for i=1:nlag
     u_lag = [u(1,lag(i)+1:end) zeros(1,lag(i))]';
     [erm(i), beta(:,i)] = wgr_glm_estimation(dat,u_lag,bf,xBF.T,xBF.T0,AR_lag);
 end
-[ermin, id] = min(erm); 
+[~, id] = knee_pt(erm);
 varargout{1} = beta(:,id);
 if nargout>1
    varargout{2} = lag(id);
@@ -256,7 +256,8 @@ if nargin < 4;   max_iter = 20;end
 Beta = wgr_regress(Y,X);
 resid = Y - X * Beta;
 if ~AR_lag
-    res_sum = sum(resid.^2);
+    %res_sum = sum(resid.^2);
+    res_sum=cov(resid);
     return
 end
 max_tol = min(1e-6,max(abs(Beta))/1000);
@@ -291,7 +292,8 @@ for r = 1:max_iter
     end    
     
 end
-res_sum = sum(resid.^2);
+% res_sum = sum(resid.^2);
+res_sum = cov(resid);
 %if r == max_iter
 %    fprintf('Maximum %d iteration reached.\n',max_iter)    
 %end

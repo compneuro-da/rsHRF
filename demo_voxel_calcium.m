@@ -94,7 +94,7 @@ end
 hrf=hrfa_TR;
 H=fft([hrf; zeros(nobs-length(hrf),1)]);
 M=fft(bold_sig(:,1));
-data_deconv = ifft(conj(H).*M./(H.*conj(H)+2));
+data_deconv = ifft(conj(H).*M./(H.*conj(H)+.1*mean(H.*conj(H))));
 event_number=length(event_bold{1,1});
 toc
 disp('Done');
