@@ -1,5 +1,6 @@
-Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin) and Pyhton
+Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin)
 ========
+Pleaseo  refer to [https://github.com/BIDS-Apps/rsHRF]https://github.com/BIDS-Apps/rsHRF for Python standalone and BIDS app through Dockers
 ![](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
 
@@ -35,14 +36,6 @@ How to use the toolbox - SPM plugin
 -------------
 
 The script spm_rsHRF.m is the main one, and it calls rsHRF.m. These two files are specific to the SPM plugin.
-
-Towards Python and BIDS-app 
--------------
-Currently we are working to translate the toolbox to Python, instructions on HOW TO use this package are [here](https://github.com/guorongwu/rsHRF/blob/master/python/README.md#towards-python-and-bids-app).
-
-The code is also available on [pypi](https://pypi.org/project/rsHRF/).
-
-The next step is to build a [BIDS-app](https://bids-apps.neuroimaging.io/) out of it.
 
 Collaborators 
 -------------
