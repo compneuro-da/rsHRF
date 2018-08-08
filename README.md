@@ -1,6 +1,7 @@
 Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin)
 ========
-Pleaseo  refer to https://github.com/BIDS-Apps/rsHRF for Python standalone and BIDS app through Dockers
+Please refer to https://github.com/BIDS-Apps/rsHRF for Python standalone and BIDS app through Dockers
+
 ![](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
 
 
