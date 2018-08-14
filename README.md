@@ -20,7 +20,7 @@ Once that the HRF has been retrieved for each voxel, it can be deconvolved from 
 How to use the toolbox - Matlab standalone
 -------------
 
-The input is voxelwise BOLD signal, already preprocessed according to your favorite recipe. Important thing are:
+The input is voxelwise BOLD signal, already preprocessed according to your favorite recipe. Important things are:
 
 * bandpass filter in the 0.01-0.08 Hz interval (or something like that)
 * z-score the voxel BOLD time series
