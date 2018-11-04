@@ -162,6 +162,7 @@ for isub=1:length(sub)
     dat3 = zeros(v1(1).dim);
     for i=1:nobs
         v1(i).fname = fullfile(sub_save_dir,[name,'_deconv',ext]);
+        v1(i).dt = [16,0];
         dat3(voxel_ind) = data_deconv(i,:);
         spm_write_vol(v1(i),dat3);
     end

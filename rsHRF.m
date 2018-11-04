@@ -281,6 +281,7 @@ if nargin>0
                 for i=1:Nscans
                     [fpath,name,ext] = fileparts(v1(i).fname);
                     v1(i).fname = fullfile(outdir,[job.prefix,name,ext]);
+                    v1(i).dt = [16,0]; 
                     dat3(voxel_ind) = data_deconv(i,:);
                     spm_write_vol(v1(i),dat3);
                 end
@@ -290,6 +291,7 @@ if nargin>0
                     for i=1:Nscans
                         [fpath,name,ext] = fileparts(v1(i).fname);
                         v1(i).fname = fullfile(outdir,[job.prefix,name,'_Olrm',ext]);
+                        v1(i).dt = [16,0]; 
                         data_deconv_rm= data_deconv(i,:);
                         data_deconv_rm(id_rm)=nan;
                         dat3(voxel_ind) = data_deconv_rm;
