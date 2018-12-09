@@ -196,9 +196,9 @@ for i=1:nlag
     [erm(i), beta(:,i)] = wgr_glm_estimation(dat,u_lag,bf,xBF.T,xBF.T0,AR_lag);
 end
 [~, id] = knee_pt(erm);
-varargout{1} = beta(:,id);
+varargout{1} = beta(:,id+1);
 if nargout>1
-   varargout{2} = lag(id);
+   varargout{2} = lag(id+1);
 end
 % fprintf('iterations!\n')
 return
