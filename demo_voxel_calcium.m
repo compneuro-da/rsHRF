@@ -5,6 +5,8 @@
 %% A blind deconvolution approach to recover effective connectivity brain networks
 %% from resting state fMRI data. Medical Image Analysis, 2013,17(3):365-374 .
 clc,clear;warning off all
+%% download calcium data
+urlwrite('https://raw.githubusercontent.com/compneuro-da/rsHRF_data/master/calcium.mat','calcium.mat') 
 load calcium
 bold_sig=BOLD_calcium';
 %%===========PARAMETERS========================
