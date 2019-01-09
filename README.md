@@ -37,6 +37,7 @@ How to use the toolbox - SPM plugin
 -------------
 
 The script spm_rsHRF.m is the main one, and it calls rsHRF.m. These two files are specific to the SPM plugin.
+we add connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) in the latest SPM plugin (VersionrsHRF 2.0). (Version 1.0 (2018) can be downloaded [here](https://github.com/compneuro-da/rsHRF_data/raw/master/rsHRF_v1_2018.zip))
 
 Collaborators 
 -------------
