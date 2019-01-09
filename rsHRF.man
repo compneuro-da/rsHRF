@@ -1,16 +1,17 @@
 % __________________________________________________________________________
 % Resting state fMRI HRF deconvolution Toolbox for SPM12
-% Version  1  (rsHRF)  2018-06-20
+% Version  2  (rsHRF)  2019-01-06
 % https://github.com/guorongwu/rsHRF
 % __________________________________________________________________________
-% Copyright (C) 2018 
+% Copyright (C) 2018-2019 
 % 
 % ==========================================================================
 % Description
 % ==========================================================================
 % This toolbox is a an extensions to SPM for 
 % Resting state BOLD fMRI HRF deconvolution,
-% It is available to the scientific community 
-% under the terms of the GNU General Public License.
+% Connectivity analysis (Correlation/Causality). 
+% It is available to the scientific community under
+% the terms of the GNU General Public License.
 % __________________________________________________________________________
 %                                                 2018/06/21

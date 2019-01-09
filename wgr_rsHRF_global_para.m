@@ -1,15 +1,12 @@
 function para = wgr_rsHRF_global_para()
-% denoise
-if 0
-    % global regression
-    para.globa_reg = 1;
-    para.aCompcor = 0;
-else
-    % acompcor
-    para.globa_reg = 0;
-    para.aCompcor = 1;
-    para.aCompcor_numcomps = 5;
-end
+%% miminum fMRI volumes (3D)
+para.volume_threshold = 30;
+
+%% save pvalue for seed based GC map (NIfTI)
+para.flag_pval_pwgc = 1;
+
+%% Combine all input signals for connectivity analysis
+para.combine_ROI = 1; % 1 combine, 0: no
 
 %%  the significance level for determination of outliers
 para.pvalue_rm = 0.05;
