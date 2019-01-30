@@ -112,7 +112,7 @@ else
         'menubar','none',...         
         'units','normalized',...
         'color','w',...
-        'position',[0.4   0.3    0.15    0.38],...[563    98   480   360],...
+        'position',[0.4   0.3    0.20    0.38],...[563    98   480   360],... %0.4   0.3    0.15    0.38
         'name',['rsHRF v2.0(',getenv('USERNAME'),')'],...
         'resize','off');
     
@@ -169,7 +169,7 @@ else
                 set(S.pb(1),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.sig_conn'');'); 
                 set(S.pb(2),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.ROI_conn'');'); 
                 set(S.pb(3),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.vox_conn'');');
-                set(S.pb(:),'foregroundcolor',[0.3 0.6 0])
+                set(S.pb(:),'foregroundcolor',0*[1 1 1]) %0.3 0.6 0
                 text(80,360,'Connectivity Analysis','Color',[0.3 0.6 0],'Fontsize',13,'Fontweight','bold');
             otherwise
                 text(80,360,'Resting State HRF','Color',[1 0.6 0],'Fontsize',13,'Fontweight','bold');

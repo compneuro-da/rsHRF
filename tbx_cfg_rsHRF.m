@@ -574,7 +574,7 @@ ROI_rsHRF.tag     = 'ROI_rsHRF';
 ROI_rsHRF.name    = 'ROI-wise HRF deconvolution';
 ROI_rsHRF.val     = {NIfTI_Data, genericROI, HRFE,Denoising, brainmask, connROI, Outdir, DatasaveROI, prefix};
 ROI_rsHRF.prog = @wgr_vox_ROI_rsHRF_conn;
-ROI_rsHRF.help    = {'ROI-wise HRF deconvolution'};
+ROI_rsHRF.help    = {'NIfTI data'}; %{'ROI-wise HRF deconvolution'};
 
 % ---------------------------------------------------------------------
 % ROI-wise CONN
@@ -594,7 +594,7 @@ vox_rsHRF.tag     = 'vox_rsHRF';
 vox_rsHRF.name    = 'Voxel-wise HRF deconvolution';
 vox_rsHRF.val     = {NIfTI_Data, HRFE, Denoising, rmoutlier,brainmask, cona, Outdir, Datasave, prefix};
 vox_rsHRF.prog = @wgr_vox_ROI_rsHRF_conn;
-vox_rsHRF.help    = {'Voxel-wise HRF deconvolution'};
+vox_rsHRF.help    = {'NIfTI data'}; %{'Voxel-wise HRF deconvolution'};
 
 % ---------------------------------------------------------------------
 % voxel-wise CONN
@@ -615,9 +615,9 @@ sig_rsHRF.name    = 'ROI signal HRF deconvolution';
 sig_rsHRF.val     = {Signal_Data, HRFE, Denoising, connROI, Outdir, DatasaveROI, prefix};
 sig_rsHRF.help    = {'..'};
 sig_rsHRF.prog = @wgr_sig_rsHRF_conn;
-sig_rsHRF.help    = {'ROI-signal HRF deconvolution'
-'Please DO NOT select NIFTI files in Nuisance Covariates !'    
-};
+sig_rsHRF.help    = {'Please DO NOT select NIFTI files in Nuisance Covariates!'}; %{'ROI-signal HRF deconvolution'
+%'Please DO NOT select NIFTI files in Nuisance Covariates!'    
+%};
 
 % ---------------------------------------------------------------------
 % ROI-signal CONN
@@ -628,7 +628,7 @@ sig_conn.name    = 'ROI-signal Connectivity Analysis';
 sig_conn.val     = {Signal_Data, Denoising, connROI2, Outdir,job_save};
 sig_conn.help    = {'..'};
 sig_conn.prog = @wgr_sig_rsHRF_conn;
-sig_conn.help    = {'Please DO NOT select NIFTI files in Nuisance Covariates !'};
+sig_conn.help    = {'Please DO NOT select NIFTI files in Nuisance Covariates!'};
 
 % ---------------------------------------------------------------------
 % rsHRF deconvolution & connectivity analysis
