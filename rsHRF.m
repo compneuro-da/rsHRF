@@ -7,7 +7,9 @@ if nargin==2
         job.para_global = para_global; clear para_global
     end
     switch flag
-        case 'vox'
+        case 'display'
+            rsHRF_viewer(job);
+        case 'volume'
             % delete temporary files (generated wm/csf/brainmask) 
             flag_delete = job.para_global.delete_files; 
             
@@ -95,10 +97,89 @@ if nargin==2
                 data = data(:,voxel_ind);
             end
            
+            flag_nii_gii = 1; %NIfTI
             if isfield(job,'HRFE') % deconvolution
-                wgr_deconv_job(job,data,flag_ROI, outdir, v, voxel_ind)
+                wgr_deconv_job(job,data,flag_ROI, outdir, v, voxel_ind, flag_nii_gii);
             else
-                wgr_conn_job(job,data,flag_ROI, outdir, v, voxel_ind)
+                wgr_conn_job(job,data,flag_ROI, outdir, v, voxel_ind, flag_nii_gii)
+            end
+            
+        case 'mesh'    
+            %input images, cell file
+            gii_file = job.images; 
+            [fpath,raw_outname,~] = fileparts(gii_file{1});
+            job.raw_outname = raw_outname;
+            job.rmoutlier = 0;
+            %out directory
+            outdir = job.outdir{1};
+            if isempty(outdir)
+                outdir = fpath;
+            else
+                if ~exist(outdir,'dir')
+                    mkdir(outdir)
+                end
+            end
+            % GIfTI data 
+            data = wgr_read_GIfTI_job(job);
+            v.dim = [size(data,2), 1];
+            % explicit mask
+            gii_mask = job.mask{1};
+
+            if ~isempty(gii_mask)  %brain mask
+                datam = gifti(gii_mask);
+                datam.cdata(isnan(datam.cdata))=0;
+                vertex_ind = find(datam.cdata~=0); clear datam
+            else % var>0 as mask
+                data_var = nanvar(data,0,1);
+                vertex_ind = find(data_var>0); clear data_var
+            end
+            fprintf('# %d vertexs inside the mask ...\n',length(vertex_ind))
+            %% Denoise
+            data = wgr_Denoising_job(job,data);
+
+            % check ROI information
+            if  isfield(job,'genericROI')    
+                ROI = job.genericROI;
+            else
+                ROI = [];
+            end
+
+            if ~isempty(ROI)
+                flag_ROI = 1;
+                [~,~,~,atlasmeh,gii]= wgr_check_ROI(ROI);                
+                roinfo = [atlasmeh; gii];
+                nvar = size(roinfo,1);
+                Nscans = size(data,1);
+                data_ROI = zeros(Nscans,nvar);
+                for j=1:nvar
+                    data_ROI(:,j) = nanmean(data(:,roinfo{j,1}),2);
+                end
+            else
+                flag_ROI=0;
+            end
+
+            %% data for further analysis            
+            if flag_ROI
+                data = data_ROI;
+
+                if isfield(job,'prefix')
+                    if job.savedata.job_save
+                        save(fullfile(outdir,[job.prefix,raw_outname, '.mat']), 'roinfo','-v7.3');
+                    end
+                else
+                    if job.job_save
+                        save(fullfile(outdir,[raw_outname, '_roinfo.mat']), 'roinfo');
+                    end
+                end
+            else
+                data = data(:,vertex_ind);
+            end
+            
+            flag_nii_gii = 2; %GIfTI
+            if isfield(job,'HRFE') % deconvolution
+                wgr_deconv_job(job,data,flag_ROI, outdir, v, vertex_ind, flag_nii_gii);
+            else
+                wgr_conn_job(job,data,flag_ROI, outdir, v, vertex_ind, flag_nii_gii)
             end
         case 'sig'
             wgr_ROI_sig_job(job)         
@@ -107,23 +188,30 @@ if nargin==2
 else
     code_path = fileparts(which('rsHRF.m')) ;
     a = imread(fullfile(code_path,'rsHRF_logo.png'));
+    pos = [0.4   0.3    0.2    0.3236];
+    if ismac       % Code to run on Mac plaform
+    elseif isunix  % Code to run on Linux plaform
+        pos = [0.4   0.3    0.23    0.35];
+    elseif ispc    % Code to run on Windows platform
+    end
+
     S.fig = figure('Visible','on',...
         'numbertitle','off',...    
         'menubar','none',...         
         'units','normalized',...
         'color','w',...
-        'position',[0.4   0.3    0.15    0.38],...[563    98   480   360],...
-        'name',['rsHRF v2.0(',getenv('USERNAME'),')'],...
+        'position',pos,...[563    98   480   360],... %0.4   0.3    0.15    0.38
+        'name',['rsHRF v2.2(',getenv('USERNAME'),')'],...
         'resize','off');
     
-    axes('parent',S.fig,'units','normalized','position',[0 0.59 1 0.43]);
-    imagesc(a);
+    axes('parent',S.fig,'units','normalized','position',[0.15 0.45 [1 0.7825]*0.76]); %[0 0.59 1 0.43]
+    imagesc(a, 'AlphaData', 0.6);
     axis off; 
     
     %% ROI signal HRF deconvolution
     S.pb(1) = uicontrol('parent',S.fig,...
         'unit','norm',...
-        'pos',[0.1,0.05,0.8,0.15],...
+        'pos',[0.05,0.05,0.4,0.12],...
         'style','pushbutton',...'pushbutton',...
         'string','Signals',...
         'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.sig_rsHRF'');',...
@@ -131,27 +219,41 @@ else
         'foregroundcolor',0*[1 1 1],...     'fontname','Segoe Script',...
         'fontname','Calibri',...'Times New Roman',...
         'fontunits', 'normalized',... 
-        'fontsize', 0.35,... 
+        'fontsize', 0.4,... 
         'fontweight','bold');
 
     %% ROI-wise HRF deconvolution
     S.pb(2) = uicontrol('parent',S.fig,...
         'unit','norm',...
-        'pos',[0.1,0.25,0.8,0.15],...
+        'pos',[0.05,0.2,0.4,0.12],...
         'style','pushbutton',...'pushbutton',...
-        'string','ROIs',...
+        'string','ROIs-volume',...
         'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.ROI_rsHRF'');',...        
         'backgroundc','w',...
         'foregroundcolor',0*[1 1 1],...     'fontname','Segoe Script',...
         'fontname','Calibri',...'Times New Roman',...
         'fontunits', 'normalized',... 
-        'fontsize', 0.35,... 
+        'fontsize', 0.4,... 
+        'fontweight','bold');
+    
+    %% (Surface) ROI-wise HRF deconvolution
+    S.pb(3) = uicontrol('parent',S.fig,...
+        'unit','norm',...
+        'pos',[0.55,0.2,0.4,0.12],...
+        'style','pushbutton',...'pushbutton',...
+        'string','ROIs-surface',...
+        'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.SurfROI_rsHRF'');',...        
+        'backgroundc','w',...
+        'foregroundcolor',0*[1 1 1],...     'fontname','Segoe Script',...
+        'fontname','Calibri',...'Times New Roman',...
+        'fontunits', 'normalized',... 
+        'fontsize', 0.4,... 
         'fontweight','bold');
     
     %% voxelwise HRF deconvolution
-    S.pb(3) = uicontrol('parent',S.fig,...
+    S.pb(4) = uicontrol('parent',S.fig,...
         'unit','norm',...
-        'pos',[0.1,0.45,0.8,0.15],...
+        'pos',[0.05,0.35,0.4,0.12],...
         'style','pushbutton',...'pushbutton',...
         'string','Voxels',...
         'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.vox_rsHRF'');',...        
@@ -159,7 +261,33 @@ else
         'foregroundcolor',0*[1 1 1],...     'fontname','Segoe Script',...
         'fontname','Calibri',...'Times New Roman',...
         'fontunits', 'normalized',... 
-        'fontsize', 0.35,... 
+        'fontsize', 0.4,... 
+        'fontweight','bold');
+    %% vertexwise HRF deconvolution
+    S.pb(5) = uicontrol('parent',S.fig,...
+        'unit','norm',...
+        'pos',[0.55,0.35,0.4,0.12],...
+        'style','pushbutton',...'pushbutton',...
+        'string','Vertices',...
+        'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.mesh_rsHRF'');',...        
+        'backgroundc','w',...
+        'foregroundcolor',0*[1 1 1],...     'fontname','Segoe Script',...
+        'fontname','Calibri',...'Times New Roman',...
+        'fontunits', 'normalized',... 
+        'fontsize', 0.4,... 
+        'fontweight','bold');
+    
+    S.pb(6) = uicontrol('parent',S.fig,...
+        'unit','norm',...
+        'pos',[0.55,0.05,0.4,0.12],...
+        'style','pushbutton',...'pushbutton',...
+        'string','Display',...        
+        'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.display_HRF'');',...        
+        'backgroundc','w',...
+        'foregroundcolor',0*[1 1 1],...     'fontname','Segoe Script',...
+        'fontname','Calibri',...'Times New Roman',...
+        'fontunits', 'normalized',... 
+        'fontsize', 0.4,... 
         'fontweight','bold');
     
     if nargin==1
@@ -167,9 +295,12 @@ else
         switch Modality
             case 'CONN'  
                 set(S.pb(1),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.sig_conn'');'); 
-                set(S.pb(2),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.ROI_conn'');'); 
-                set(S.pb(3),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.vox_conn'');');
-                set(S.pb(:),'foregroundcolor',[0.3 0.6 0])
+                set(S.pb(2),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.ROI_conn'');');
+                set(S.pb(3),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.SurfROI_conn'');');
+                set(S.pb(4),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.vox_conn'');');
+                set(S.pb(5),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.mesh_conn'');');
+                set(S.pb(6),'enable','off')
+                set(S.pb(:),'foregroundcolor',0*[1 1 1]) %0.3 0.6 0
                 text(80,360,'Connectivity Analysis','Color',[0.3 0.6 0],'Fontsize',13,'Fontweight','bold');
             otherwise
                 text(80,360,'Resting State HRF','Color',[1 0.6 0],'Fontsize',13,'Fontweight','bold');
@@ -208,9 +339,29 @@ for i=Nscans:-1:1
     data(i,:) = tmp(:);
 end       
 
-function [mat,atlas,nii]= wgr_check_ROI(ROI, funii, flag_delete)
-mat = {};  atlas = {}; nii  = {};
-k1 =1 ; k2 = 1; k3 = 1;
+function data = wgr_read_GIfTI_job(job)
+%read NIfTI data 
+gii_file = job.images; 
+vol_th = job.para_global.volume_threshold;
+data = [];
+fprintf('Reading GIfTI Data ...\n')
+Nscans = length(gii_file);
+if Nscans<vol_th
+    if Nscans==1
+        [pth0,nam0,ext0] = spm_fileparts(gii_file{1});
+        tmp = fullfile(pth0,[nam0,ext0]);
+        v  = gifti(tmp);
+        data = v.cdata'; %be careful
+        [nobs,nvar] = size(data);
+        fprintf('(Check) input data: %d time points, #%d vertices\n',nobs,nvar) 
+    else
+        error(['More than one file, please check your input data: ',num2str(Nscans)]) 
+    end
+end
+
+function [mat,atlas,nii,atlasmesh,gii]= wgr_check_ROI(ROI, funii, flag_delete)
+mat = {};  atlas = {}; nii = {}; atlasmesh = {}; gii = {};
+k1 =1 ; k2 = 1; k3 = 1; k4 = 1; k5 = 1;
 for i=1:length(ROI)
     tmp  = ROI{i};
     flag = isfield(tmp,'ROI');
@@ -222,6 +373,11 @@ for i=1:length(ROI)
             xY.xyz=tmp2(1:3)';
             xY.spec=tmp2(4);
             [xY, XYZmm, id] = spm_ROI(xY, funii);
+            if isempty(id)
+                error(sprintf('\n\n====(ROI)Error Information====\nno voxel found in sphere with center (%3.1f, %3.1f, %3.1f) and radius %3.1f.\nTry to increase the radius???\n',tmp2));
+            else
+                fprintf('#%d voxels found in sphere with center (%3.1f, %3.1f, %3.1f) and radius %3.1f.\n',length(id),tmp2)
+            end
             mat{k1,1} = id;
             mat{k1,2} = tmp2;
             mat{k1,3} = '';
@@ -273,6 +429,42 @@ for i=1:length(ROI)
                     delete(v.fname)
                 end
                 k3 = k3+1;
+            end
+        end
+        continue;
+    end
+    
+    flag = isfield(tmp,'meshmask');
+    if flag
+        for j=1: length(tmp.meshmask)
+            tmp2 = strcat(tmp.meshmask{j});      
+            if ~isempty(tmp2)
+                gii{k4,1} = tmp2;
+                datam = gifti(tmp2);
+                gii{k4,1} = find(datam.cdata); clear datam
+                gii{k4,2} = tmp2; 
+                gii{k4,3} = ''; 
+                k4 = k4+1;
+            end
+        end
+        continue;
+    end
+    
+    flag = isfield(tmp,'meshatlas');
+    if flag
+        for j=1: length(tmp.meshatlas)
+            tmp2 = strcat(tmp.meshatlas{j});
+            if ~isempty(tmp2)
+                atlasmesh{k5,1} = tmp2;
+                datam = gifti(tmp2);
+                idu = unique(datam.cdata(:)); idu(idu==0)=[]; 
+                for k=1:length(idu)
+                    atlasmesh{k5,1} = find(datam.cdata==idu(k)); 
+                    atlasmesh{k5,2} = tmp2; 
+                    atlasmesh{k5,3} = idu(k); 
+                    k5 = k5+1;
+                end            
+                clear datam
             end
         end
         continue;
@@ -340,7 +532,7 @@ if ~isempty(covariates)
                         end
                         nii2{1,i} = z*pc(:,1:numcomps);
                     else
-                        nii2{1,i} = mean(data(:,id),2);
+                        nii2{1,i} = nanmean(data(:,id),2);
                     end
                 end
             end
@@ -402,7 +594,7 @@ if ~isempty(Bands)
             end
         end
     end       
-    data = wgr_band_filter(data, TR,Bands);
+    data = wgr_band_filter(data,TR,Bands);
 end
 
 if job.Denoising.Despiking
@@ -490,9 +682,25 @@ else
     Bands =[]; TR=nan;
 end
 
-function  x = wgr_band_filter(x, TR,Bands)
-x = conn_filter(TR,Bands,x,'full') +...%mean-center by default
-     repmat(mean(x,1),size(x,1),1);    %mean back in
+function  x = wgr_band_filter(x, TR,Bands,m)
+
+if nargin<4
+    m = 5000; %block size
+end
+nvar = size(x,2);
+nbin = ceil(nvar/m);
+for i=1:nbin
+    if i~=nbin
+        ind_X = (i-1)*m+1:i*m ;   
+    else
+        ind_X = (i-1)*m+1:nvar ;
+    end
+    x1 = x(:,ind_X);
+    x1 = conn_filter(TR,Bands,x1,'full') +...%mean-center by default
+     repmat(mean(x1,1),size(x1,1),1);    %mean back in
+    x(:,ind_X) = x1;
+end
+clear x1;
 
 function [y,fy]=conn_filter(rt,filter,x,option)
 % from conn toolbox
@@ -535,15 +743,16 @@ else % discrete fourier basis
     end
 end
 
-function wgr_deconv_job(job,data,flag_ROI, outdir, v, voxel_ind)
-Nscans = size(data,1);
+function out = wgr_deconv_job(job,data,flag_ROI, outdir, v, smask_ind, flag_nii_gii)
+[Nscans,nvar_data] = size(data);
 name = job.raw_outname;
 flag_pval_pwgc = job.para_global.flag_pval_pwgc;
+flag_save_psc = job.para_global.flag_save_psc;
 
 %% HRF deconvolution
 para.TR = job.HRFE.TR ; 
-%%% the following parameter (upsample grid) can be > 1 only for Canonical.
-%%% Set = 1 for FIR
+%%% the following parameter (upsample grid) can be > 1 only for Canonical/Fourier/Gamma.
+%%% Set = 1 for FIR/sFIR
 para.T  = job.HRFE.fmri_t; % magnification factor of temporal grid with respect to TR. i.e. para.T=1 for no upsampling, para.T=3 for 3x finer grid
 para.T0 = job.HRFE.fmri_t; % position of the reference slice in bins, on the grid defined by para.T. For example, if the reference slice is the middle one, then para.T0=fix(para.T/2)
 if para.T==1
@@ -552,32 +761,44 @@ end
 min_onset_search = min(job.HRFE.mdelay); % minimum delay allowed between event and HRF onset (seconds)
 max_onset_search = max(job.HRFE.mdelay); % maximum delay allowed between event and HRF onset (seconds)
 para.dt  = para.TR/para.T; % fine scale time resolution.
-if job.HRFE.hrfm==1
-    para.TD_DD = 2; % time and dispersion derivative
-elseif job.HRFE.hrfm==3
-    para.TD_DD = 1; % time and dispersion derivative
-end
+para.order = job.HRFE.num_basis;
 para.AR_lag = job.HRFE.cvi; % AR(1) noise autocorrelation.
 para.thr = job.HRFE.thr; % (mean+) para.thr*standard deviation threshold to detect event.
 para.len = job.HRFE.hrflen; % length of HRF, in seconds
 para.lag  = fix(min_onset_search/para.dt):fix(max_onset_search/para.dt);
 para.localK = job.para_global.localK;
-temporal_mask = true(Nscans,1); % temporal mask.
-if job.HRFE.hrfm==1 || job.HRFE.hrfm==3
+if isnan(job.HRFE.tmask(1))
+    temporal_mask = true(Nscans,1); % temporal mask.
+else
+    temporal_mask = logical(job.HRFE.tmask);
+end
+
+
+if job.HRFE.hrfm<6
+    hrfmn = {
+    'Canonical HRF (with time derivative)'
+    'Canonical HRF (with time and dispersion derivatives)'              
+    'Gamma functions'
+    'Fourier set'
+    'Fourier set (Hanning)'}; % 
+    para.name = hrfmn{job.HRFE.hrfm};
     tic
-    [beta_hrf, bf, event_bold] = wgr_rshrf_estimation_canonhrf2dd_par2(data,para, temporal_mask);
+    [beta_hrf, bf, event_bold] = rsHRF_estimation_temporal_basis(data,para, temporal_mask);
     hrfa = bf*beta_hrf(1:size(bf,2),:); %HRF
-elseif job.HRFE.hrfm==2 || job.HRFE.hrfm==4
+    hrf_baseline = beta_hrf(1+size(bf,2),:); %HRF baseline value for PSC calculation.
+else 
     tic
-    if  job.HRFE.hrfm==2
+    if  job.HRFE.hrfm==6
         para.estimation = 'FIR';
-    elseif job.HRFE.hrfm==4
+    elseif job.HRFE.hrfm==7
         para.estimation = 'sFIR';
     end
     para.T=1; % this needs to be = 1 for FIR
-    [hrfa,event_bold] = wgr_rsHRF_FIR(data,para, temporal_mask);
+    [beta_hrf,event_bold] = rsHRF_estimation_FIR(data,para, temporal_mask);
+    hrfa = beta_hrf(1:end-2,:); %HRF
+    hrf_baseline = beta_hrf(end-1,:); %HRF baseline value for PSC calculation.
 end
-
+ 
 nvar = size(hrfa,2);
 PARA = zeros(3,nvar);
 event_number = nan(nvar,1);
@@ -587,13 +808,16 @@ parfor ii=1:nvar
     event_number(ii)=length(event_bold{1,ii});
 end
 fprintf('\nDone HRF estimation %8.2f seconds\n',toc)
-
+ 
 if job.savedata.hrfmat_save
     fprintf('Save HRF parameters....\n');
     %% save HRF parameters
-    save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'para', 'hrfa', 'event_bold', 'event_number','PARA','-v7.3');
+    save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'para', 'beta_hrf', 'hrfa', 'event_bold', 'event_number','PARA','-v7.3');
+    if exist('bf','var')
+        save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'bf','-append')
+    end
 end
-
+ 
  if ~isempty(job.connectivity)
      [connroinfo,conndata_flag] = wgr_conn_check(job);
  else
@@ -618,57 +842,78 @@ if job.savedata.deconv_save  || any(conndata_flag~=1)
         M=fft(data(:,ii));
         data_deconv(:,ii) = ifft(conj(H).*M./(H.*conj(H)+.1*mean(H.*conj(H))));
     end
+    data_deconv = real(data_deconv); %...
     toc
 end
-
-if ~flag_ROI % 3D data
-    v0 = v(1);   v0.dt = [16,0]; v0.n = [1 1];
-    HRF_para_str = {'Height.nii', 'Time2peak.nii','FWHM.nii'};
+ 
+if ~flag_ROI % 3D volume/ 2D surface data
+    if flag_nii_gii==1
+        v0 = v(1);   v0.dt = [16,0]; v0.n = [1 1];
+        ext_nii_gii = '.nii';
+    else
+        v0 = v;
+        ext_nii_gii = '.gii';
+    end
+    HRF_para_str = {'Height', 'Time2peak','FWHM'};
     dat= zeros(v0.dim);
     if job.savedata.hrfnii_save
         %write nifti maps of the three HRF parameters
         for i=1:3
-            v0.fname = fullfile(outdir,[job.prefix,name,'_',HRF_para_str{i}]);
-            dat(voxel_ind)=PARA(i,:);
-            spm_write_vol(v0,dat);
+            fname = fullfile(outdir,[job.prefix,name,'_',HRF_para_str{i},ext_nii_gii]);
+            eval(['out.',HRF_para_str{i},'{1} =','''',fname,''';'])
+            dat(smask_ind)=PARA(i,:);
+            wgr_write_file(fname,dat,flag_nii_gii,v0)
         end
+        
+        % write height PSC
+        fname = fullfile(outdir,[job.prefix,name,'_Height_PSC',ext_nii_gii]);
+        out.Height_PSC{1} = fname;
+        dat(smask_ind)=PARA(1,:)./hrf_baseline;
+        wgr_write_file(fname,dat,flag_nii_gii,v0)
+        
         % write number of events
-        v0.fname = fullfile(outdir,[job.prefix,name,'_event_number.nii']);
-        dat(voxel_ind)=event_number;
-        spm_write_vol(v0,dat);
+        fname = fullfile(outdir,[job.prefix,name,'_event_number',ext_nii_gii]);
+        out.event_number{1} = fname;
+        dat(smask_ind)=event_number;
+        wgr_write_file(fname,dat,flag_nii_gii,v0)
     end
     if job.savedata.hrfmat_save
-        save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'voxel_ind','v0','-append')
+        save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'smask_ind','v0','-append')
     end
     
-    if job.rmoutlier %only for 3D data
+    
+    if job.rmoutlier && flag_nii_gii %only for 3D data
         PARA_rm = PARA;
         pvalue_rm=job.para_global.pvalue_rm;
         Inpainted_method =job.para_global.Inpainted ;
         for i=1:3
-            v0.fname = fullfile(outdir,[job.prefix,name,'_Olrm_',HRF_para_str{i}]);
-            dat(voxel_ind)=PARA(i,:);
+            fname = fullfile(outdir,[job.prefix,name,'_Olrm_',HRF_para_str{i},ext_nii_gii]);
+            eval(['out.Olrm_',HRF_para_str{i},'{1}=','''',fname,''';'])
+            v0.fname = fname;
+            dat(smask_ind)=PARA(i,:);
             if i==1
-                id = (PARA_rm(1,:)<=0);
+                id = (PARA_rm(1,:)<=0); %Be Careful
                 PARA_rm(1,id)=nan;
                 [PARA_rm(1,:),idx,outliers] = deleteoutliers(PARA_rm(1,:),pvalue_rm,1);
                 fprintf('Response height outlier: negative/zeros #%d + extreme #%d, [%3.3f %3.3f];\n',nnz(id),length(idx),min(outliers),max(outliers));
-                dat(voxel_ind)=PARA_rm(1,:);
+                dat(smask_ind)=PARA_rm(1,:);
                 dat=inpaint_nans3(dat,Inpainted_method);
-                PARA_rm(1,:) = dat(voxel_ind);
+                PARA_rm(1,:) = dat(smask_ind);
                 id_rm = union(find(id),idx);
                 dat2 = zeros(v0.dim);
                 PARA_rm0=zeros(1,size(PARA,2));
                 PARA_rm0(1,id_rm)=1;
-                dat2(voxel_ind)=PARA_rm0;
+                dat2(smask_ind)=PARA_rm0;
                 v00 = v0;
-                v00.fname = fullfile(outdir,[job.prefix,name,'_outlier_NAN.nii']);
+                fname = fullfile(outdir,[job.prefix,name,'_outlier_NAN',ext_nii_gii]);
+                out.outlier{1} = fname; 
+                v00.fname = fname; 
                 spm_write_vol(v00,dat2);  clear dat2
             else
                 PARA_rm(i,id_rm)=nan;
-                dat(voxel_ind)=PARA_rm(i,:);
+                dat(smask_ind)=PARA_rm(i,:);
                 dat=inpaint_nans3(dat,Inpainted_method);
-                PARA_rm(i,:) = dat(voxel_ind);
+                PARA_rm(i,:) = dat(smask_ind);
             end
             if job.savedata.hrfnii_save
                 spm_write_vol(v0,dat);
@@ -676,80 +921,116 @@ if ~flag_ROI % 3D data
         end
         if job.savedata.hrfnii_save || job.savedata.hrfmat_save
             % write number of events
-            v0.fname = fullfile(outdir,[job.prefix,name,'_Olrm_event_number.nii']);
-            dat(voxel_ind)=event_number;
+            fname = fullfile(outdir,[job.prefix,name,'_Olrm_event_number',ext_nii_gii]);
+            out.Olrm_event_number{1} = fname;
+            v0.fname = fname;
             event_number_rm  = event_number;
             event_number_rm(id_rm)=nan;
-            dat(voxel_ind)=event_number_rm;
+            dat(smask_ind)=event_number_rm;
             dat=inpaint_nans3(dat,Inpainted_method);
-            event_number_rm = dat(voxel_ind);
+            event_number_rm = dat(smask_ind);
             if job.savedata.hrfnii_save
                 spm_write_vol(v0,dat);
             end
+            
+            if flag_save_psc
+                %write height PSC
+                fname = fullfile(outdir,[job.prefix,name,'_Olrm_Height_PSC',ext_nii_gii]);
+                out.Olrm_Height_PSC{1} = fname;
+                v0.fname = fname;
+                HeightPSC_rm  = PARA_rm(1,:)./hrf_baseline;
+                HeightPSC_rm(HeightPSC_rm<=0)=nan;
+                [HeightPSC_rm,idx,outliers] = deleteoutliers(HeightPSC_rm,pvalue_rm,1);
+                fprintf('Response height (PSC) outlier: negative/zeros #%d + extreme #%d, [%3.3f %3.3f];\n',nnz(id),length(idx),min(outliers),max(outliers));
+                dat(smask_ind)=HeightPSC_rm;
+                dat=inpaint_nans3(dat,Inpainted_method);
+                HeightPSC_rm = dat(smask_ind);
+                if job.savedata.hrfnii_save
+                    spm_write_vol(v0,dat);
+                end
+            end
+            
             if job.savedata.hrfmat_save
-                save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'PARA_rm','event_number_rm','id_rm','-append')
+                if flag_save_psc
+                    save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'PARA_rm','event_number_rm','HeightPSC_rm','id_rm','-append')
+                else
+                    save(fullfile(outdir,[job.prefix,name, '_hrf.mat']), 'PARA_rm','event_number_rm','id_rm','-append')
+                end
             end
         end
     end
     
     if ~isempty(connroinfo) && any(conndata_flag~=2)
         conid = [conndata_flag~=2];
-        data_3D = nan(Nscans, prod(v0.dim)); 
-        data_3D(:,voxel_ind) = data;
-        wgr_conn_run(data_3D, connroinfo(conid,:),v0,name,outdir,flag_pval_pwgc);    
-        clear data_3D data
+        data_nD = nan(Nscans, prod(v0.dim)); 
+        data_nD(:,smask_ind) = data;
+        wgr_conn_run(data_nD, connroinfo(conid,:),v0,name,outdir,flag_pval_pwgc,flag_nii_gii);    
+        clear data_nD data
     end
-
-
+ 
+ 
     if job.savedata.deconv_save || any(conndata_flag~=1)
-        % writing back deconvolved data into nifti file
-        v1 = v; dat3 = zeros(v1(1).dim);
-        for i=1:Nscans
-            v1(i).fname = fullfile(outdir,[job.prefix,name,'.nii']);
-            v1(i).dt = [16,0]; 
-            dat3(voxel_ind) = data_deconv(i,:);
-            if job.savedata.deconv_save
-                spm_write_vol(v1(i),dat3);
+        % writing back deconvolved data into nifti/gifti file
+        fname = fullfile(outdir,[job.prefix,name,ext_nii_gii]);
+        out.deconv_data{1} = fname;
+        if flag_nii_gii==1
+            v1 = v; dat3 = zeros(v1(1).dim);
+            for i=1:Nscans
+                v1(i).fname = fname;
+                v1(i).dt = [16,0]; 
+                dat3(smask_ind) = data_deconv(i,:);
+                if job.savedata.deconv_save
+                    spm_write_vol(v1(i),dat3);
+                end
             end
+        else
+            dat_surf= gifti;
+            dat = zeros(nvar_data,Nscans);
+            dat(smask_ind,:) = data_deconv';
+            dat_surf.cdata = dat;
+            save(dat_surf,fname,'Base64Binary');
         end
-
+            
+ 
         if ~isempty(connroinfo) && any(conndata_flag~=1)
             conid =  [conndata_flag~=1];
             data_deconv3D = nan(Nscans, prod(v0.dim)); 
-            data_deconv3D(:,voxel_ind) = data_deconv;
+            data_deconv3D(:,smask_ind) = data_deconv;
             name2 = [name,'_deconv'];
-            wgr_conn_run(data_deconv3D, connroinfo(conid,:),v0,name2,outdir,flag_pval_pwgc);                            
+            wgr_conn_run(data_deconv3D, connroinfo(conid,:),v0,name2,outdir,flag_pval_pwgc,flag_nii_gii);                            
         end
-
+ 
         if job.rmoutlier && job.para_global.rmoutlier_deconv
             v1 = v; dat3 = zeros(v1(1).dim);
+            fname = fullfile(outdir,[job.prefix,name,'_Olrm',ext_nii_gii]);
+            out.Olrm_deconv_data{1} = fname;
             for i=1:Nscans
-                v1(i).fname = fullfile(outdir,[job.prefix,name,'_Olrm.nii']);
+                v1(i).fname = fname;
                 v1(i).dt = [16,0]; 
                 data_deconv_rm= data_deconv(i,:);
                 data_deconv_rm(id_rm)=nan;
-                dat3(voxel_ind) = data_deconv_rm;
+                dat3(smask_ind) = data_deconv_rm;
                 dat3=inpaint_nans3(dat3,Inpainted_method);
                 data_deconv3D(i,:) = dat3(:);
                 if job.savedata.deconv_save
                     spm_write_vol(v1(i),dat3);
                 end
             end
-
+ 
             if ~isempty(connroinfo)&& any(conndata_flag~=1)
                 conid =  [conndata_flag~=1];
                 name2 = [name,'_deconv_Olrm'];
-                wgr_conn_run(data_deconv3D, connroinfo(conid,:),v0,name2,outdir,flag_pval_pwgc);     
+                wgr_conn_run(data_deconv3D, connroinfo(conid,:),v0,name2,outdir,flag_pval_pwgc,flag_nii_gii);     
                 clear data_deconv3D
             end
-
+ 
             clear data_deconv_rm
         end
         clear data_deconv data
     end
     clear dat
 else %ROI-wise
-
+ 
     if ~isempty(job.connectivity)
         fprintf('Connectivity analysis...\n');
         [connroinfo,conndata_flag] = wgr_conn_check(job);
@@ -772,6 +1053,7 @@ else %ROI-wise
         end
     end
     clear data data_deconv
+    out=[];
 end
 if job.savedata.job_save
     save(fullfile(outdir,[job.prefix,name, '_job.mat']), 'job');  
@@ -816,9 +1098,9 @@ for i=1:nROI
     flag_ROI = 1;
     
     if isfield(job,'HRFE') % deconvolution
-        wgr_deconv_job(job,data,flag_ROI, outdir)
+        wgr_deconv_job(job,data,flag_ROI, outdir);
     else
-        wgr_conn_job(job,data,flag_ROI, outdir)
+        wgr_conn_job(job,data,flag_ROI, outdir);
     end
 end
 
@@ -842,8 +1124,8 @@ for j=1:numBC
         if ~isfield(job,'ref_nii');
             job.ref_nii = job.images{1};
         end
-        [mat,atlas,nii]= wgr_check_ROI(genericROI, job.ref_nii,job.para_global.delete_files);  
-        connroinfo{j,1} = [mat;atlas;nii];
+        [mat,atlas,nii,atlasmeh,gii]= wgr_check_ROI(genericROI, job.ref_nii,job.para_global.delete_files);  
+        connroinfo{j,1} = [mat;atlas;nii;atlasmeh;gii];
         connroinfo{j,2} =conns.Seed_ROI;
     else
         connroinfo{j,1} = [];
@@ -859,21 +1141,25 @@ for j=1:numBC
     connroinfo{j,6} =conns.prefix;
 end
 
-function wgr_conn_job(job,data,flag_ROI, outdir, v, voxel_ind)
+function wgr_conn_job(job,data,flag_ROI, outdir, v, smask_ind, flag_nii_gii)
 Nscans = size(data,1);
 name = job.raw_outname;
 flag_pval_pwgc = job.para_global.flag_pval_pwgc;
-if ~flag_ROI % 3D data
-    v0 = v(1);   v0.dt = [16,0]; v0.n = [1 1];    
+if ~flag_ROI % 2D/3D data
+    if flag_nii_gii==1
+        v0 = v(1);   v0.dt = [16,0]; v0.n = [1 1]; 
+    else
+        v0=v;
+    end
     if ~isempty(job.connectivity)
         fprintf('Connectivity analysis...\n');
         connroinfo = wgr_conn_check(job);
     end
     if ~isempty(connroinfo) 
-        data_3D = nan(Nscans, prod(v0.dim)); 
-        data_3D(:,voxel_ind) = data;
-        wgr_conn_run(data_3D, connroinfo,v0,name,outdir,flag_pval_pwgc);    
-        clear data_3D data
+        data_nD = nan(Nscans, prod(v0.dim)); 
+        data_nD(:,smask_ind) = data;
+        wgr_conn_run(data_nD, connroinfo,v0,name,outdir,flag_pval_pwgc,flag_nii_gii);    
+        clear data_nD data
     else
         warning('Please Configure Parameters for Connectivity Analysis')
     end
@@ -881,7 +1167,7 @@ else %ROI-wise
     if ~isempty(job.connectivity)
         fprintf('Connectivity analysis...\n');
         connroinfo = wgr_conn_check(job);
-        wgr_conn_run(data, connroinfo,[],name,outdir);
+        wgr_conn_run(data, connroinfo,[],name,outdir,1);
         clear data
     else
         warning('Please Configure Parameters for Connectivity Analysis')
@@ -892,10 +1178,12 @@ if job.job_save
     save(fullfile(outdir,[name, '_conn_job.mat']), 'job');  
 end
 
-function wgr_conn_run(data, connroinfo,v0,name,outdir,flag_pval_pwgc)
+function wgr_conn_run(data, connroinfo,v0,name,outdir,flag_pval_pwgc,flag_nii_gii);
 %data: nobs x nvar (3D index)
 fprintf('Connectivity analysis...\n ')
 meastr = {'pwGC','CGC','Pearson','Spearman','PCGC'};
+para_global = wgr_rsHRF_global_para;
+regmode = para_global.regmode; % for GC
 for j=1:size(connroinfo,1)
     roiid = connroinfo{j,1};  nroi = size(roiid,1);
     flag_seedROI  = connroinfo{j,2};
@@ -907,12 +1195,18 @@ for j=1:size(connroinfo,1)
         tmp = nanmean(data(:,roiid{i,1}),2) ;
         ROI(:,i) = tmp;
     end
-    if nroi==0 && isempty(v0)
+    if nroi==0 %&& isempty(v0)
         ROI = data;
     end
     if ~flag_seedROI % seed map
-        voxel_ind = find(var(data)>0);
-        dat.data = data(:,voxel_ind);
+        if flag_nii_gii==1
+            ext_nii_gii = '.nii';
+        else
+            ext_nii_gii = '.gii';
+        end
+            
+        smask_ind = find(var(data)>0);
+        dat.data = data(:,smask_ind);
         dat.ROI = ROI;
         dat3 = zeros(v0.dim);
         if conn_type==1 || conn_type==2  || conn_type==5  
@@ -923,9 +1217,8 @@ for j=1:size(connroinfo,1)
                 conn_type = 1; % pairwise       
                 warning('Change Partially Contioned GC to Pairwise GC')
             end
-            disp('Pairwise GC for seed based connectivity analysis')
-
-            [M] = wgr_CGC_OLS(dat,order,ndinfo,conn_type, flag_pval_pwgc);
+            disp('Pairwise GC for seed based connectivity analysis')            
+            [M] = wgr_GC(dat,order,ndinfo,conn_type,regmode,flag_pval_pwgc);
             ordeinfo = ['_order',num2str(order)];
             for i=1:nroi
                 if nroi>1
@@ -933,30 +1226,39 @@ for j=1:size(connroinfo,1)
                 else
                     tmp = '';
                 end
-                v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_outflow_pwGC',ordeinfo,'.nii']);
+                fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_outflow_pwGC',ordeinfo,ext_nii_gii]);
+                out.outflow_pwGC{i} = fname;
                 gc = M.GC_Matrix_Out(i,:);
-                dat3(voxel_ind) = gc;
-                spm_write_vol(v0,dat3);
-                v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_outflow_N_pwGC',ordeinfo,'.nii']);
-                dat3(voxel_ind) = wgr_pwgc_2normal(gc,M.nobs,order);
-                spm_write_vol(v0,dat3);
+                dat3(smask_ind) = gc;
+                wgr_write_file(fname,dat3,flag_nii_gii,v0)
+                
+                fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_outflow_N_pwGC',ordeinfo,ext_nii_gii]);
+                out.outflow_N_pwGC{i} = fname;
+                dat3(smask_ind) = wgr_pwgc_2normal(gc,M.nobs,order);
+                wgr_write_file(fname,dat3,flag_nii_gii,v0)
+                
                 if flag_pval_pwgc
-                    v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_outflow_pval_pwGC',ordeinfo,'.nii']);
-                    dat3(voxel_ind) = M.pval_GC_Matrix_Out(i,:);
-                    spm_write_vol(v0,dat3);
+                    fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_outflow_pval_pwGC',ordeinfo,ext_nii_gii]);
+                    out.outflow_pval_pwGC{i} = fname;
+                    dat3(smask_ind) = M.pval_GC_Matrix_Out(i,:);
+                    wgr_write_file(fname,dat3,flag_nii_gii,v0)
                 end
                 
-                v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_inflow_pwGC',ordeinfo,'.nii']);
+                fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_inflow_pwGC',ordeinfo,ext_nii_gii]);
+                out.inflow_pwGC{i} = fname;
                 gc = M.GC_Matrix_In(i,:);
-                dat3(voxel_ind) = gc;
-                spm_write_vol(v0,dat3);             
-                v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_inflow_N_pwGC',ordeinfo,'.nii']);
-                dat3(voxel_ind) = wgr_pwgc_2normal(gc,M.nobs,order);
-                spm_write_vol(v0,dat3);
+                dat3(smask_ind) = gc;
+                wgr_write_file(fname,dat3,flag_nii_gii,v0)
+                
+                fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_inflow_N_pwGC',ordeinfo,ext_nii_gii]);
+                out.inflow_N_pwGC{i} = fname;
+                dat3(smask_ind) = wgr_pwgc_2normal(gc,M.nobs,order);
+                wgr_write_file(fname,dat3,flag_nii_gii,v0)
                 if flag_pval_pwgc
-                    v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_inflow_pval_pwGC',ordeinfo,'.nii']);
-                    dat3(voxel_ind) = M.pval_GC_Matrix_In(i,:);
-                    spm_write_vol(v0,dat3);
+                    fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_inflow_pval_pwGC',ordeinfo,ext_nii_gii]);
+                    out.inflow_pval_pwGC{i} = fname;
+                    dat3(smask_ind) = M.pval_GC_Matrix_In(i,:);
+                    wgr_write_file(fname,dat3,flag_nii_gii,v0)
                 end
             end
         else
@@ -967,26 +1269,41 @@ for j=1:size(connroinfo,1)
                 else
                     tmp = '';
                 end
-                v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_corr_',meastr{connroinfo{j,3}},'.nii']);
-                dat3(voxel_ind) = M.Matrix_r(i,:);
-                spm_write_vol(v0,dat3);
-                v0.fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_Z_',meastr{connroinfo{j,3}},'.nii']);
-                dat3(voxel_ind) = M.Matrix_z(i,:);
-                spm_write_vol(v0,dat3);
+                
+                fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_corr_',meastr{connroinfo{j,3}},ext_nii_gii]);
+                out.corr{i} = fname;
+                dat3(smask_ind) = M.Matrix_r(i,:);
+                wgr_write_file(fname,dat3,flag_nii_gii,v0)
+                
+                fname = fullfile(outdir,[connroinfo{j,6},tmp,name,'_Z_',meastr{connroinfo{j,3}},ext_nii_gii]);
+                out.Z{i} = fname;
+                dat3(smask_ind) = M.Matrix_z(i,:);
+                wgr_write_file(fname,dat3,flag_nii_gii,v0)
             end
-        end           
+        end
+        
     else %ROI to ROI
         dat.data = ROI;
         dat.ROI = [];
         if conn_type==1 || conn_type==2 || conn_type==5 % 1:pairwise  2:conditional 5: partically conditioned
-            M = wgr_CGC_OLS(dat,order,ndinfo, conn_type);
+            M = wgr_GC(dat,order,ndinfo, conn_type,regmode, flag_pval_pwgc);
             save(fullfile(outdir,[connroinfo{j,6},name,'_',meastr{connroinfo{j,3}},'.mat']),'M');
         else
             M = wgr_FC(dat,conn_type);
             save(fullfile(outdir,[connroinfo{j,6},name,'_Corr_',meastr{connroinfo{j,3}},'.mat']),'M');
         end
         
-    end
+    end 
+end
+
+function wgr_write_file(fname,dat3,flag_nii_gii,v0)
+if flag_nii_gii==1
+    v0.fname = fname;
+    spm_write_vol(v0,dat3);
+else
+    dat_surf= gifti;
+    dat_surf.cdata = dat3;
+    save(dat_surf,fname,'Base64Binary');
 end
 
 function c = wgr_pwgc_2normal(gc,nobs,order)
@@ -994,7 +1311,7 @@ c = (nobs-order).*gc - (order-1)/3;
 c(c<0)=0;
 c = sqrt(c);
 
-function [M] = wgr_CGC_OLS(dat,order,ndinfo,flag_pw_cgc,flag_pval_pwgc, m);
+function [M] = wgr_GC(dat,order,ndinfo,flag_pw_cgc,regmode,flag_pval_pwgc,m);
 % flag_pw_cgc, 1: pairwise GC,  2: conditional GC,  5: partially conditioned GC.
 gcstr = {'Pairwise GC','Conditional GC','Pearson','Spearman','Partially Conditioned GC'};
 data = dat.data;
@@ -1019,7 +1336,7 @@ if flag_pw_cgc==2 % CGC
     end
 end
 
-if nargin<9
+if nargin<7
     m = 5000; %block size
 end
 
@@ -1065,9 +1382,9 @@ if nROI %ROI to data
             indY{j} = ind_Y; 
             if flag_pval_pwgc
                 [matrix_out{i,j}, matrix_in{i,j}, p_matrix_out{i,j}, p_matrix_in{i,j}] = ...
-                    wgr_seedGC_OLS(ind_X,ind_Y,ROI,data,order,1); 
+                    wgr_seedGC(ind_X,ind_Y,ROI,data,order,1,regmode); 
             else
-                [matrix_out{i,j}, matrix_in{i,j}] = wgr_seedGC_OLS(ind_X,ind_Y,ROI,data,order,0); %only pairwise.
+                [matrix_out{i,j}, matrix_in{i,j}] = wgr_seedGC(ind_X,ind_Y,ROI,data,order,0,regmode); %only pairwise.
             end
         end
     end
@@ -1077,26 +1394,15 @@ else % data to data
         M.information_gain = y_inform_gain;
         M.condition_id = cind;
     end
-    for i=1:nbin
-        if i~=nbin
-            ind_X = (i-1)*m+1:i*m ;   
-        else
-            ind_X = (i-1)*m+1:nvar ;
-        end
-        indX{i} = ind_X; 
-        for j=1:nbin
-            if j~=nbin
-                ind_Y = (j-1)*m+1:j*m ;
-            else
-                ind_Y = (j-1)*m+1:nvar ;
-            end
-            indY{j} = ind_Y; 
-            if flag_pw_cgc~=5 
-                cind=[];
-                nd=[];
-            end
-            [matrix{i,j},p{i,j}] = wgr_CGC_OLS_job(ind_X,ind_Y,data,nvar,order,cind,nd,flag_pw_cgc);
-        end
+    if flag_pw_cgc==1
+        [M.GC_Matrix, M.pval_Matrix] = wgr_PWGC(data,order,regmode,flag_pval_pwgc);
+    end
+    if flag_pw_cgc==2
+        [M.GC_Matrix, M.pval_Matrix] = rsHRF_mvgc(data',order,regmode,0,flag_pval_pwgc);
+    end
+    
+    if flag_pw_cgc==5
+        [M.GC_Matrix, M.pval_Matrix] = wgr_PCGC(data,order,cind,nd,regmode,flag_pval_pwgc);
     end
 end
 
@@ -1113,25 +1419,53 @@ if nROI
             end
         end
     end 
-    M.GC_Matrix_Out(M.GC_Matrix_Out<0)=0;
-    M.GC_Matrix_In(M.GC_Matrix_In<0)=0;
+
 else
-    M.GC_Matrix = nan(nvar,nvar);
-    for i=1:nbin
-        for j=1:nbin
-            M.GC_Matrix(indX{i},indY{j}) =  matrix{i,j};
-            M.pval_Matrix(indX{i},indY{j}) =  p{i,j};
-        end
-    end 
-    M.GC_Matrix(1:nvar+1:end)=0; %remove diag value.
-    M.GC_Matrix(M.GC_Matrix<0)=0;
+    
     if flag_pw_cgc==1
         M.GC_Matrix_N = wgr_pwgc_2normal(M.GC_Matrix,nobs,order);
     end        
 end
 clear matrix* p_* indX indY
 
-function [gc_out, gc_in, p_out, p_in] = wgr_seedGC_OLS(ind_X,ind_Y,ROI,data1,order,flag_pval);
+function [F,pvalue] = wgr_PWGC(data,order,regmode,flag_pval);
+
+[nvar] = size(data,2);
+F = zeros(nvar);
+if flag_pval
+    pvalue = nan(nvar);
+end
+for drive=1:nvar
+    for target=1:nvar
+        if drive~=target
+            dat = data(:,[drive target])';
+            [F0,p0] = rsHRF_mvgc(dat,order,regmode,0,flag_pval);
+            F(drive,target) = F0(1,2);
+            pvalue(drive,target)  = p0(1,2);
+            F(target,drive) = F0(2,1);
+            pvalue(target,drive)  = p0(2,1);
+        end
+    end
+end
+
+function [F,pvalue] = wgr_PCGC(data,order,cind,nd,regmode,flag_pval);
+[nvar] = size(data,2);
+F = zeros(nvar);
+if flag_pval
+    pvalue = nan(nvar);
+end
+for drive=1:nvar
+    for target=1:nvar
+        if drive~=target
+            zid = setdiff(cind(drive,:),target,'stable');
+            dat = data(:,[drive target zid(1:nd)])';
+            [F(drive,target),pvalue(drive,target)] = ...
+                rsHRF_mvgc(dat,order,regmode,1,flag_pval);
+        end
+    end
+end
+
+function [gc_out, gc_in, p_out, p_in] = wgr_seedGC(ind_X,ind_Y,ROI,data1,order,flag_pval,regmode);
 
 [nvar1] = length(ind_X);
 [nvar2] = length(ind_Y);
@@ -1143,81 +1477,16 @@ if flag_pval
 end
 for drive=1:nvar1
     for target=1:nvar2
-        if flag_pval
-            [gc_out(drive,target), p_out(drive,target) ]= wgr_GCA_regress(ROI(:,ind_X(drive)),data1(:,ind_Y(target)), [],order); 
-            [gc_in(drive,target), p_in(drive,target)] = wgr_GCA_regress(data1(:,ind_Y(target)),ROI(:,ind_X(drive)), [],order); %Transpose
-        else
-            gc_out(drive,target) = wgr_GCA_regress(ROI(:,ind_X(drive)),data1(:,ind_Y(target)), [],order); 
-            gc_in(drive,target) = wgr_GCA_regress(data1(:,ind_Y(target)),ROI(:,ind_X(drive)), [],order)'; %Transpose
+        data = [ROI(:,ind_X(drive)) data1(:,ind_Y(target))]';
+        [F,pvalue] = rsHRF_mvgc(data,order,regmode,0,flag_pval);
+        if length(F)>1
+            gc_out(drive,target) = F(1,2); 
+            gc_in(drive,target)  = F(2,1); 
+
+            p_out(drive,target)  = pvalue(1,2);
+            p_in(drive,target)   = pvalue(2,1); 
         end
     end
-end
-
-function [cgc,pval] = wgr_CGC_OLS_job(ind_X,ind_Y,data1,nvar,order,cind, nd, flag_pw_cgc);
-[nvar1]=length(ind_X);
-[nvar2]=length(ind_Y);
-if flag_pw_cgc==2
-    cind = 1:nvar;
-end
-cgc=zeros(nvar1,nvar2);
-pval = nan(nvar1,nvar2);
-for drive=1:nvar1
-    for target=1:nvar2
-        if ind_X(drive) ~= ind_Y(target)
-            if flag_pw_cgc==2
-                idz = setdiff(cind, [ind_X(drive),ind_Y(target)]);
-                conz = data1(:,idz);
-            elseif flag_pw_cgc==5
-                A = cind(ind_X(drive),:);
-                idz = A(~ismembc(A,ind_Y(target)) );
-                conz = data1(:,idz(1:nd));
-            else
-                conz = [];
-            end
-            [cgc(drive,target),pval(drive,target)] = wgr_GCA_regress(data1(:,ind_X(drive)),data1(:,ind_Y(target)), conz,order); 
-        end
-    end
-end
-
-function [Fy2xIz, pvalue] = wgr_GCA_regress(y,x,z,order);
-%% x: N*nx, y: N*ny
-%% Fy2x: y->x;
-[N, ny] = size(y); 
-nz = size(z,2);
-%now
-X = x(order+1:end,:);
-
-%past
-past_ind = repmat([1:order],N-order,1) + repmat([0:N-order-1]',1,order);
-X_past = reshape(x(past_ind,:),N-order,order*size(x,2));
-Y_past = reshape(y(past_ind,:),N-order,order*size(y,2));
-if nz
-    Z_past = reshape(z(past_ind,:),N-order,order*size(z,2));
-else
-    Z_past = [];
-end
-XZ_past = [X_past  Z_past];
-XZY_past = [XZ_past Y_past];
-
-% res_XZ = X - XZ_past*(XZ_past\X);
-res_XZ = wgr_regress_res(X,XZ_past);
-% res_XZY = X - XZY_past*(XZY_past\X);
-res_XZY = wgr_regress_res(X,XZY_past);
-
-%Covariance matrix
-cov_XZY= cov(res_XZY);
-cov_XZ = cov(res_XZ);
-
-R = det(cov_XZ)/det(cov_XZY);
-Fy2xIz = log(R);
-if nargout>1
-    %nx==1
-    m = N-order;      % effective number of observations 
-    d1 = order*ny;          % #{full model parameters} - #{reduced model parameters}
-    d2 = m-order*(1+ny+nz);       % #{observations} - #{full model parameters}
-    mm = d2/d1;
-    F = (R-1)*mm;     % F = (exp(gc)-1)*mm;  (RSS_reduced - RSS_full) / RSS_full
-    pvalue = 1 - fcdf(F,d1,d2);
 end
 
 function [M] = wgr_FC(dat,conn_type,m);
@@ -1321,32 +1590,6 @@ else
     M.Matrix_pval(1:nvar+1:end)=1; %remove diag value.
 end
 clear matrix* indX indY
-
-function resid = wgr_regress_res(y,X)
-% copy from function [b,bint,r,rint,stats] = regress(y,X,alpha)
-[n,ncolX] = size(X);
-% Use the rank-revealing QR to remove dependent columns of X.
-[Q,R,perm] = qr(X,0);
-if isempty(R)
-    p = 0;
-elseif isvector(R)
-    p = double(abs(R(1))>0);
-else
-    p = sum(abs(diag(R)) > max(n,ncolX)*eps(R(1)));
-end
-if p < ncolX
-%     warning(message('stats:regress:RankDefDesignMat'));
-    R = R(1:p,1:p);
-    Q = Q(:,1:p);
-    perm = perm(1:p);
-end
-
-% Compute the LS coefficients, filling in zeros in elements corresponding
-% to rows of X that were thrown out.
-b = zeros(ncolX,1);
-b(perm) = R \ (Q'*y);
-yhat = X*b;                     % Predicted responses at each data point.
-resid = y-yhat;                     % Residuals.
 
 function [y, ind] = wgr_init_partial_conditioning(data,seed_signal,ndmax,order)
 [N,nvar] = size(data);

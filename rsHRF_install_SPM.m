@@ -2,8 +2,11 @@ clc,clear
 rawcode_dir = fileparts(which('rsHRF_install_SPM.m'));
 rsHRF_file = {
 'wgr_get_parameters.m'  
-'wgr_rshrf_estimation_canonhrf2dd_par2.m'
-'wgr_rsHRF_FIR.m'
+'rsHRF_estimation_temporal_basis.m'
+'rsHRF_estimation_FIR.m'
+'rsHRF_estimation_impulseest.m'
+'rsHRF_mvgc.m'
+'rsHRF_viewer.m'
 'wgr_rsHRF_global_para.m'
 'rsHRF.m'
 'rsHRF_install_SPM.m'
@@ -17,6 +20,7 @@ rsHRF_file = {
 'inpaint_nans3.m'
 'knee_pt.m'
 'README.md'
+'update_log.txt'
 'demo_jobs.zip'
 };
 numfile = length(rsHRF_file);

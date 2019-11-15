@@ -10,14 +10,14 @@ end
 % ---------------------------------------------------------------------
 % NIfTI Data
 % ---------------------------------------------------------------------
-NIfTI_Data         = cfg_files;
-NIfTI_Data.tag     = 'images';
-NIfTI_Data.name    = 'Preprocessed Volumes';
-NIfTI_Data.help    = {'Select NIfTI images.'};
-NIfTI_Data.filter  = 'image';
-NIfTI_Data.ufilter = '.*';
-NIfTI_Data.num     = [1 inf];
-NIfTI_Data.help    = {'3D or 4D NIfTI images;'
+GNIfTI_Data         = cfg_files;
+GNIfTI_Data.tag     = 'images';
+GNIfTI_Data.name    = 'Scans';
+GNIfTI_Data.help    = {'Select NIfTI/GIfTI images.'};
+GNIfTI_Data.filter  = {'image','mesh'};
+GNIfTI_Data.ufilter = '.*';
+GNIfTI_Data.num     = [1 inf];
+GNIfTI_Data.help    = {'3D or 4D NIfTI images; 2D GIfTI file (.gii)'
     'or select 1st volume/frame of a 4D NIfTI file,'
     'we will expand all the volumes from this file.'};
 
@@ -38,7 +38,7 @@ Signal_file.help    = { 'Select the *.txt/*.mat file(s) containing your ROI sign
 % ---------------------------------------------------------------------
 name         = cfg_entry;
 name.tag     = 'name';
-name.name    = 'Variable Name in Mat-file';
+name.name    = 'Variable Name in the Mat-file';
 name.help    = {
     'Only for *.mat file'
     'Enter the variable name of your ROI signals in Mat file; eg. ''data'' '};
@@ -182,7 +182,8 @@ mpc.num     = [1 inf];
 WMCSFmasks = cfg_branch;
 WMCSFmasks.tag     = 'imcov';
 WMCSFmasks.name    = 'Image Covariates';
-WMCSFmasks.help    = {'Regressors that may confound the data.'};
+WMCSFmasks.help    = {'Only for NIfTI data'
+    'Image mask to extract Regressors that may confound the data.'};
 WMCSFmasks.val  = {covmasks, mpc};
 
 % ---------------------------------------------------------------------
@@ -227,6 +228,30 @@ Atlas.val     = {{''}};
 Atlas.num     = [1 1];
 
 % ---------------------------------------------------------------------
+% ROI Mesh Atlas
+% ---------------------------------------------------------------------
+Atlasmesh         = cfg_files;
+Atlasmesh.tag     = 'meshatlas';
+Atlasmesh.name    = 'Mesh Atlas';
+Atlasmesh.help    = {'Select a surface based Atlas.'};
+Atlasmesh.filter  = 'mesh';
+Atlasmesh.ufilter = '.*';
+Atlasmesh.val     = {{''}};
+Atlasmesh.num     = [1 1];
+
+% ---------------------------------------------------------------------
+% ROI Mesh
+% ---------------------------------------------------------------------
+maskmesh         = cfg_files;
+maskmesh.tag     = 'meshmask';
+maskmesh.name    = 'Mesh Mask';
+maskmesh.help    = {'Select a surface based mask.'};
+maskmesh.filter  = 'mesh';
+maskmesh.ufilter = '.*';
+maskmesh.val     = {{''}};
+maskmesh.num     = [1 1];
+
+% ---------------------------------------------------------------------
 % ROI All together
 % ---------------------------------------------------------------------
 genericROI         = cfg_repeat;
@@ -239,6 +264,18 @@ genericROI.values  = {ROIs_coordinate ROImasks Atlas};
 genericROI.num     = [1 Inf];
 
 % ---------------------------------------------------------------------
+% SurfROI All together
+% ---------------------------------------------------------------------
+genericSurfROI         = cfg_repeat;
+genericSurfROI.tag     = 'genericROI';
+genericSurfROI.name    = 'ROI (GIfTI)';
+genericSurfROI.help    = {
+                   'Select ROIs (GIfTI)'
+}';
+genericSurfROI.values  = {maskmesh Atlasmesh};
+genericSurfROI.num     = [1 Inf];
+
+% ---------------------------------------------------------------------
 % Denoising 
 % ---------------------------------------------------------------------
 Denoising         = cfg_branch;
@@ -246,6 +283,9 @@ Denoising.tag     = 'Denoising';
 Denoising.name    = 'Denoising';
 Denoising.val     = {covreg, Detrending, Bandfilter, Despiking};
 Denoising.help    = {'Remove possible confounds.'};
+
+Denoising_surf =  Denoising;
+Denoising_surf.val     = {covreg, Detrending, Bandfilter, Despiking};
 
 % ---------------------------------------------------------------------
 % Despiking
@@ -265,7 +305,7 @@ brainmask         = cfg_files;
 brainmask.tag     = 'mask';
 brainmask.name    = 'Explicit Mask';
 brainmask.help    = {'Specify an image for expicity masking the analysis.'};
-brainmask.filter  = 'image';
+brainmask.filter  = {'image','mesh'};
 brainmask.ufilter = '.*';
 brainmask.val     = {{''}};
 brainmask.num = [1 1];
@@ -288,50 +328,80 @@ hrfm         = cfg_menu;
 hrfm.tag     = 'hrfm';
 hrfm.name    = 'HRF Basis Functions';
 hrfm.labels = {
-              'Canon2DD'              
-              'FIR'
-              'CanonTD'
-              'sFIR'}';
-hrfm.values = {1,2,3,4};         
-hrfm.val    = {1};
+              'Canonical HRF (with time derivative)'
+              'Canonical HRF (with time and dispersion derivatives)'              
+              'Gamma Functions'
+              'Fourier Set'
+              'Fourier Set (Hanning)'
+              'Finite Impulse Response (FIR)'
+              'Smooth FIR'
+              }';
+hrfm.values = {1,2,3,4,5,6,7};         
+hrfm.val    = {2};
 hrfm.help    = {
-'Canon2DD: Canonical HRF with Time and Dispersion Derivatives'
-'FIR: Finite Impulse Response'    
-'CanonTD: Canonical HRF with Time Derivative'
+'The canonical HRF combined with time and dispersion derivatives comprise an ''informed'' basis set, as the shape of the canonical response conforms to the hemodynamic response that is commonly observed. The incorporation of the derivate terms allow for variations in subject-to-subject and voxel-to-voxel responses. The time derivative allows the peak response to vary by plus or minus a second and the dispersion derivative allows the width of the response to vary.'
+'The Fourier set consists of a constant and KF sine and KF cosine functions of harmonic periods T, T/2,T/KF seconds(i.e. K = 2KF + 1 basis functions). Linear combinations of the (orthonormal) FIR or Fourier basis functions can capture any shape of response up to a specified frequency (KF /T in the case of the Fourier set).'
+'The HRF is assumed to be bounded at zero for t<0 and t>T , the Fourier basis functions can also be windowed (e.g. by a Hanning window) within this range.'
+'A set of gamma functions of increasing dispersions can be obtained by increasing p (p is an integer phase-delay, the peak delay is given by pd, and the dispersion by pd^2, d is the time-scaling). In SPM, these functions (as with all basis functions) are orthogonalized with respect to one another.'
+'Impulse Response (FIR) set captures any shape of response up to a given frequency limit.'
+'Smooth FIR: add a gaussian prior on the filter parameter alpha - It filtered out some noise of the standard FIR.'
 };
-
 % ---------------------------------------------------------------------
 % length of HRF {seconds} 
 % ---------------------------------------------------------------------
 hrflen         = cfg_entry;
 hrflen.tag     = 'hrflen';
 hrflen.name    = 'Length of HRF (seconds)';
-hrflen.help    = {'Enter the length of HRF {seconds} '};
+hrflen.help    = {'Enter the length/duration of HRF {seconds}, i.e. Post-stimulus window length (in seconds).'};
 hrflen.strtype = 'r';
 hrflen.num     = [Inf 1];
 hrflen.val    = {32};
 
 % ---------------------------------------------------------------------
-% Bands
+% Number of basis functions
+% ---------------------------------------------------------------------
+num_basis         = cfg_entry;
+num_basis.tag     = 'num_basis';
+num_basis.name    = 'Number of basis functions (k)';
+num_basis.help    = {'Only setting for ''Gamma Functions'' (k), ''Fourier Set'' (2k+1), ''Fourier Set (Hanning)'' (2k+1)'};
+num_basis.strtype = 'n';
+num_basis.num     = [1 1];
+num_basis.val    = {nan};
+
+% ---------------------------------------------------------------------
+% Minimum & Maximum delay 
 % ---------------------------------------------------------------------
 mdelay         = cfg_entry;
 mdelay.tag     = 'mdelay';
-mdelay.name    = 'minimum & maximum delay (seconds)';
+mdelay.name    = 'Minimum & Maximum delay (seconds)';
 mdelay.help    = {'4 ~ 8 s'};
 mdelay.strtype = 'e';
 mdelay.val     = {[4, 8]};
 mdelay.num     = [1 2];
 
 % ---------------------------------------------------------------------
-% RT Interscan interval
+% Threshold for event detection
 % ---------------------------------------------------------------------
 thr         = cfg_entry;
 thr.tag     = 'thr';
 thr.name    = 'Threshold (SD) for event detection';
-thr.help    = {'default Threshold = 1, i.e. Threshold*standard deviation threshold to detect event'};
+thr.help    = {'default Threshold = 1, i.e. local peaks and ( amplitude > mean + Threshold*standard deviation threshold) were selected as the candicate events'};
 thr.strtype = 'r';
 thr.val     = {1};
 thr.num     = [1 1];
+
+% ---------------------------------------------------------------------
+% Temporal mask
+% ---------------------------------------------------------------------
+tmask         = cfg_entry;
+tmask.tag     = 'tmask';
+tmask.name    = 'Temporal mask for event detection';
+tmask.help    = {'default no mask for BOLD event detect (using nan). 0(exclude) / 1(include) for point process.'
+    'e.g. [0 1 0 0 1 1 1 1], ssame length with BOLD signal'};
+tmask.strtype = 'r';
+tmask.val     = {nan};
+tmask.num     = [1 inf];
+
 
 % ---------------------------------------------------------------------
 % cvi Serial correlations
@@ -355,7 +425,7 @@ fmri_t         = cfg_entry;
 fmri_t.tag     = 'fmri_t';
 fmri_t.name    = 'Microtime resolution';
 fmri_t.help    = {
-'value >1 works for Canon2DD or CanonTD'    
+'value >1 does not work for FIR or sFIR'    
 ''
                   'The microtime resolution, t, is the number of time-bins per scan used when building regressors. '
                   'If you have performed slice-timing correction, change this parameter to match the number of slices specified there; otherwise, you would typically not need to change this.'
@@ -390,7 +460,7 @@ fmri_t0.val     = {1};
 HRFE         = cfg_branch;
 HRFE.tag     = 'HRFE';
 HRFE.name    = 'HRF estimation';
-HRFE.val     = {hrfm, TR, hrflen,thr, mdelay, cvi, fmri_t, fmri_t0 };
+HRFE.val     = {hrfm, TR, hrflen, num_basis, mdelay, cvi, fmri_t, fmri_t0,thr,tmask };
 HRFE.help    = {'HRF estimation.'};
 
 % ---------------------------------------------------------------------
@@ -409,14 +479,14 @@ deconv_save.help    = {'...'};
 % ---------------------------------------------------------------------
 hrfmat_save         = deconv_save;
 hrfmat_save.tag     = 'hrfmat_save';
-hrfmat_save.name    = 'Save HRF in mat-file';
+hrfmat_save.name    = 'Save HRF mat-file';
 
 % ---------------------------------------------------------------------
 % save HRF in NIfTI-file
 % ---------------------------------------------------------------------
 hrfnii_save         = deconv_save;
 hrfnii_save.tag     = 'hrfnii_save';
-hrfnii_save.name    = 'Save HRF in NIfTI-file';
+hrfnii_save.name    = 'Save HRF NIfTI/GIfTI-file';
 
 % ---------------------------------------------------------------------
 % save Job parameters in mat-file
@@ -522,7 +592,8 @@ FCA.help    = {'Functional connectivity analysis.'};
 
 FCA2 = FCA;
 FCA2.val     = {seedROI, genericROI, FCM, conname};
-
+FCAsurf = FCA;
+FCAsurf.val     = {CONNData,seedROI, genericSurfROI, FCM, conname};
 
 FCAROI = FCA;
 FCAROI.val     = {CONNData, FCM, conname};
@@ -540,6 +611,8 @@ GCA.help    = {'Granger causality analysis.'};
 
 GCA2 = GCA;
 GCA2.val     = {seedROI, genericROI, GCM, Morder, ndinfo, conname};
+GCAsurf = GCA;
+GCAsurf.val     = {CONNData,seedROI, genericSurfROI, GCM, Morder, ndinfo, conname};
 
 
 GCAROI = GCA;
@@ -558,7 +631,8 @@ cona.num     = [0 inf];
 
 cona2 = cona;
 cona2.values  = {FCA2,GCA2};
-
+conaSurf = cona;
+conaSurf.values  = {FCAsurf,GCAsurf};
 
 connROI = cona;
 connROI.values  = {FCAROI, GCAROI};
@@ -572,9 +646,18 @@ connROI2.values  = {FCAROI2, GCAROI2};
 ROI_rsHRF         = cfg_exbranch;
 ROI_rsHRF.tag     = 'ROI_rsHRF';
 ROI_rsHRF.name    = 'ROI-wise HRF deconvolution';
-ROI_rsHRF.val     = {NIfTI_Data, genericROI, HRFE,Denoising, brainmask, connROI, Outdir, DatasaveROI, prefix};
+ROI_rsHRF.val     = {GNIfTI_Data, Denoising, genericROI, HRFE, brainmask, connROI, Outdir, DatasaveROI, prefix};
 ROI_rsHRF.prog = @wgr_vox_ROI_rsHRF_conn;
-ROI_rsHRF.help    = {'ROI-wise HRF deconvolution'};
+ROI_rsHRF.help    = {'NIfTI data'};  
+
+% ---------------------------------------------------------------------
+% (Surface) ROI-wise HRF deconvolution
+% ---------------------------------------------------------------------
+SurfROI_rsHRF = cfg_exbranch;
+SurfROI_rsHRF.tag     = 'SurfROI_rsHRF';
+SurfROI_rsHRF.name    = '(Surface)ROI-wise HRF deconvolution';
+SurfROI_rsHRF.val     = {GNIfTI_Data, Denoising_surf, genericSurfROI, HRFE, brainmask, connROI, Outdir, DatasaveROI, prefix};
+SurfROI_rsHRF.prog = @wgr_vertex_ROI_rsHRF_conn;
 
 % ---------------------------------------------------------------------
 % ROI-wise CONN
@@ -582,9 +665,20 @@ ROI_rsHRF.help    = {'ROI-wise HRF deconvolution'};
 ROI_conn         = cfg_exbranch;
 ROI_conn.tag     = 'ROI_conn';
 ROI_conn.name    = 'ROI-wise Connectivity Analysis';
-ROI_conn.val     = {NIfTI_Data, genericROI, Denoising, brainmask, connROI2, Outdir,job_save};
+ROI_conn.val     = {GNIfTI_Data, Denoising, genericROI,  brainmask, connROI2, Outdir,job_save};
 ROI_conn.prog = @wgr_vox_ROI_rsHRF_conn;
 ROI_conn.help    = {'NIfTI data'};
+
+% ---------------------------------------------------------------------
+% (Surface) ROI-wise CONN
+% ---------------------------------------------------------------------
+SurfROI_conn     = cfg_exbranch;
+SurfROI_conn.tag     = 'SurfROI_conn';
+SurfROI_conn.name    = '(Surface)ROI-wise Connectivity Analysis';
+SurfROI_conn.val     = {GNIfTI_Data, Denoising_surf, genericSurfROI,  brainmask, connROI2, Outdir,job_save};
+SurfROI_conn.prog = @wgr_vertex_ROI_rsHRF_conn;
+SurfROI_conn.help    = {'GIfTI data'};
+
 
 % ---------------------------------------------------------------------
 % voxel-wise HRF deconvolution
@@ -592,9 +686,20 @@ ROI_conn.help    = {'NIfTI data'};
 vox_rsHRF         = cfg_exbranch;
 vox_rsHRF.tag     = 'vox_rsHRF';
 vox_rsHRF.name    = 'Voxel-wise HRF deconvolution';
-vox_rsHRF.val     = {NIfTI_Data, HRFE, Denoising, rmoutlier,brainmask, cona, Outdir, Datasave, prefix};
+vox_rsHRF.val     = {GNIfTI_Data, Denoising, HRFE,  rmoutlier,brainmask, cona, Outdir, Datasave, prefix};
 vox_rsHRF.prog = @wgr_vox_ROI_rsHRF_conn;
-vox_rsHRF.help    = {'Voxel-wise HRF deconvolution'};
+vox_rsHRF.help    = {'NIfTI data'}; %{'Voxel-wise HRF deconvolution'};
+% vox_rsHRF.vout  = @vox_rsHRF_out;
+
+% ---------------------------------------------------------------------
+% vertex-wise HRF deconvolution
+% ---------------------------------------------------------------------
+mesh_rsHRF         = cfg_exbranch;
+mesh_rsHRF.tag     = 'mesh_rsHRF';
+mesh_rsHRF.name    = 'Vertex-wise HRF deconvolution';
+mesh_rsHRF.val     = {GNIfTI_Data, Denoising_surf, HRFE, brainmask, conaSurf, Outdir, Datasave, prefix};
+mesh_rsHRF.prog = @wgr_vertex_ROI_rsHRF_conn;
+mesh_rsHRF.help    = {'GIfTI data'}; %{'Vertex-wise HRF deconvolution'};
 
 % ---------------------------------------------------------------------
 % voxel-wise CONN
@@ -602,9 +707,19 @@ vox_rsHRF.help    = {'Voxel-wise HRF deconvolution'};
 vox_conn         = cfg_exbranch;
 vox_conn.tag     = 'vox_conn';
 vox_conn.name    = 'Voxel-wise Connectivity Analysis';
-vox_conn.val     = {NIfTI_Data, Denoising, brainmask, cona2, Outdir, job_save};
+vox_conn.val     = {GNIfTI_Data, Denoising, brainmask, cona2, Outdir, job_save};
 vox_conn.prog = @wgr_vox_ROI_rsHRF_conn;
 vox_conn.help    = {'NIfTI data'};
+
+% ---------------------------------------------------------------------
+% vertex-wise CONN
+% ---------------------------------------------------------------------
+mesh_conn         = cfg_exbranch;
+mesh_conn.tag     = 'mesh_conn';
+mesh_conn.name    = 'Vertex-wise Connectivity Analysis';
+mesh_conn.val     = {GNIfTI_Data, Denoising_surf, brainmask, conaSurf, Outdir, job_save};
+mesh_conn.prog = @wgr_vertex_ROI_rsHRF_conn;
+mesh_conn.help    = {'NIfTI data'};
 
 % ---------------------------------------------------------------------
 % ROI-signal HRF deconvolution
@@ -612,12 +727,12 @@ vox_conn.help    = {'NIfTI data'};
 sig_rsHRF         = cfg_exbranch;
 sig_rsHRF.tag     = 'sig_rsHRF';
 sig_rsHRF.name    = 'ROI signal HRF deconvolution';
-sig_rsHRF.val     = {Signal_Data, HRFE, Denoising, connROI, Outdir, DatasaveROI, prefix};
+sig_rsHRF.val     = {Signal_Data, Denoising_surf, HRFE,  connROI, Outdir, DatasaveROI, prefix};
 sig_rsHRF.help    = {'..'};
 sig_rsHRF.prog = @wgr_sig_rsHRF_conn;
-sig_rsHRF.help    = {'ROI-signal HRF deconvolution'
-'Please DO NOT select NIFTI files in Nuisance Covariates !'    
-};
+sig_rsHRF.help    = {'Please DO NOT select NIFTI files in Nuisance Covariates!'}; %{'ROI-signal HRF deconvolution'
+%'Please DO NOT select NIFTI files in Nuisance Covariates!'    
+
 
 % ---------------------------------------------------------------------
 % ROI-signal CONN
@@ -628,7 +743,78 @@ sig_conn.name    = 'ROI-signal Connectivity Analysis';
 sig_conn.val     = {Signal_Data, Denoising, connROI2, Outdir,job_save};
 sig_conn.help    = {'..'};
 sig_conn.prog = @wgr_sig_rsHRF_conn;
-sig_conn.help    = {'Please DO NOT select NIFTI files in Nuisance Covariates !'};
+sig_conn.help    = {'Please DO NOT select NIFTI files in Nuisance Covariates!'};
+
+% ---------------------------------------------------------------------
+% HRF Mat-files
+% ---------------------------------------------------------------------
+HRF_mat         = cfg_files;
+HRF_mat.tag     = 'HRF_mat';
+HRF_mat.name    = 'HRF Mat-files';
+HRF_mat.val     = {{''}};
+HRF_mat.help    = {
+                     'Select individual *.mat file(s) containing HRF shapes (generate by rsHRF toolbox). '
+                     'Add a new ''HRF Mat-files'' for different groups (Plot each group HRF shapes seperately)'
+                     }';
+HRF_mat.filter = 'mat';
+HRF_mat.ufilter = '.*';
+HRF_mat.num     = [0 Inf];
+
+% ---------------------------------------------------------------------
+% Statistical NIfTI file
+% ---------------------------------------------------------------------
+snifti         = cfg_files;
+snifti.tag     = 'stat_nii';
+snifti.name    = 'Statistical Image';
+snifti.filter  = {'image'};
+snifti.ufilter = '.*';
+snifti.num     = [1 1];
+snifti.help    = {'Select the statistical image (NIfTI).'
+    'a statistical image for voxel location.'};
+
+% ---------------------------------------------------------------------
+% Statistical NIfTI file
+% ---------------------------------------------------------------------
+unifti         = cfg_files;
+unifti.tag     = 'underlay_nii';
+unifti.name    = 'Underlay Image';
+unifti.filter  = {'image'};
+unifti.ufilter = '.*';
+unifti.num     = [1 1];
+unifti.help    = {'Select the underlay  image (NIfTI).'};
+% default_nii = fullfile(spm('Dir'),'canonical','avg152T1.nii');
+
+% ---------------------------------------------------------------------
+% GroupID
+% ---------------------------------------------------------------------
+GroupID         = cfg_entry;
+GroupID.tag     = 'GroupID';
+GroupID.name    = 'Group ID';
+GroupID.help    = {'Add a Group ID if you include all different group file together in one ''HRF Mat-files'' ,'
+    'e.g. 1 1 2 2 3 3'};
+GroupID.strtype = 'e';
+GroupID.val     = {[]};
+GroupID.num     = [1 inf];
+
+% ---------------------------------------------------------------------
+% Group HRF files
+% ---------------------------------------------------------------------
+HRF_mats         = cfg_repeat;
+HRF_mats.tag     = 'display_mat';
+HRF_mats.name    = 'HRF mat-files';
+HRF_mats.help    = {'Select individual Mat-files for HRF shape plotting.'};
+HRF_mats.values  = {HRF_mat};
+HRF_mats.num     = [0 Inf];
+% ---------------------------------------------------------------------
+% Display HRF file
+% ---------------------------------------------------------------------
+HRF_Display         = cfg_exbranch;
+HRF_Display.tag     = 'display_HRF';
+HRF_Display.name    = 'HRF Viewer';
+HRF_Display.val     = {unifti, snifti, HRF_mats};
+HRF_Display.prog = @wgr_vox_rsHRF_display;
+HRF_Display.help    = {'Select the NIfTI files and HRF Mat-files(grouped according to the statistical maps)'};
+
 
 % ---------------------------------------------------------------------
 % rsHRF deconvolution & connectivity analysis
@@ -637,11 +823,68 @@ HRFrs         = cfg_choice;
 HRFrs.tag     = 'rsHRF';
 HRFrs.name    = 'rsHRF';
 HRFrs.help    = {'resting state HRF deconvolution and connectivity analysis.'};
-HRFrs.values  = {vox_rsHRF, ROI_rsHRF, sig_rsHRF, vox_conn, ROI_conn, sig_conn};
+HRFrs.values  = {vox_rsHRF, mesh_rsHRF, ROI_rsHRF, SurfROI_rsHRF, sig_rsHRF, vox_conn, mesh_conn, ROI_conn, SurfROI_conn, sig_conn, HRF_Display};
 
 %======================================================================
 function wgr_vox_ROI_rsHRF_conn(job)
-rsHRF(job,'vox')
+rsHRF(job,'volume');
+
+%======================================================================
+function wgr_vertex_ROI_rsHRF_conn(job)
+rsHRF(job,'mesh')
+
 %======================================================================
 function wgr_sig_rsHRF_conn(job)
 rsHRF(job,'sig')
+
+%======================================================================
+function wgr_vox_rsHRF_display(job)
+rsHRF(job,'display')
+
+%==========================================================================
+function dep = vox_rsHRF_out(job)
+% Output file names will be saved in a struct with field .files
+if job.savedata.hrfnii_save
+    ddep(1)            = cfg_dep;
+    ddep(1).sname      = 'HRF Deconvolved Images';
+    ddep(1).src_output = substruct('.','deconv_data');
+    ddep(1).tgt_spec   = cfg_findspec({{'filter','image','strtype','e'}});
+
+    if job.rmoutlier
+        ddep(2)            = cfg_dep;
+        ddep(2).sname      = 'HRF Deconvolved Images (Outlier removed)';
+        ddep(2).src_output = substruct('.','Olrm_deconv_data');
+        ddep(2).tgt_spec   = cfg_findspec({{'filter','image','strtype','e'}});
+    end
+    dep = [ddep];
+end
+
+paraf = {'Height', 'Time2peak','FWHM','event_number'};
+para_name = {'Response Height', 'Time to peak','FWHM','number of BOLD events'};
+if job.savedata.deconv_save
+    for i=1:length(paraf)
+        para_dep(i)            = cfg_dep;
+        para_dep(i).sname      = sprintf('HRF Parameters: %s',para_name{i});
+        para_dep(i).src_output = substruct('.',paraf);
+        para_dep(i).tgt_spec   = cfg_findspec({{'filter','image','strtype','e'}});
+    
+        if job.rmoutlier
+            Olrm_para_dep(i)            = cfg_dep;
+            Olrm_para_dep(i).sname      = sprintf('HRF Parameters (Outlier removed): %s',para_name{i});
+            Olrm_para_dep(i).src_output = substruct('.',['Olrm_',paraf]);
+            Olrm_para_dep(i).tgt_spec   = cfg_findspec({{'filter','image','strtype','e'}});
+
+            if i==length(paraf)
+                Olrm_para_dep(end+1)            = cfg_dep;
+                Olrm_para_dep(end).sname      = 'HRF Outlier';
+                Olrm_para_dep(end).src_output = substruct('.',['Olrm_',paraf]);
+                Olrm_para_dep(end).tgt_spec   = cfg_findspec({{'filter','image','strtype','e'}});
+            end
+        end
+    end
+    dep = [dep para_dep];
+    if job.rmoutlier
+        dep=[dep Olrm_para_dep];
+    end
+end
+
