@@ -19,6 +19,7 @@ Once that the HRF has been retrieved for each voxel, it can be deconvolved from 
 
 How to use the toolbox - Matlab standalone
 -------------
+N.B. it is still necessary to have SPM in the path, since some of the functions there are used.
 
 The input is voxelwise BOLD signal, already preprocessed according to your favorite recipe. Important things are:
 

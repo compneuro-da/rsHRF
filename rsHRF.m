@@ -200,8 +200,13 @@ else
         'menubar','none',...         
         'units','normalized',...
         'color','w',...
+<<<<<<< HEAD
         'position',pos,...[563    98   480   360],... %0.4   0.3    0.15    0.38
         'name',['rsHRF v2.2(',getenv('USERNAME'),')'],...
+=======
+        'position',[0.4   0.3    0.20    0.38],...[563    98   480   360],... %0.4   0.3    0.15    0.38
+        'name',['rsHRF v2.0(',getenv('USERNAME'),')'],...
+>>>>>>> origin/master
         'resize','off');
     
     axes('parent',S.fig,'units','normalized','position',[0.15 0.45 [1 0.7825]*0.76]); %[0 0.59 1 0.43]
@@ -295,11 +300,16 @@ else
         switch Modality
             case 'CONN'  
                 set(S.pb(1),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.sig_conn'');'); 
+<<<<<<< HEAD
                 set(S.pb(2),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.ROI_conn'');');
                 set(S.pb(3),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.SurfROI_conn'');');
                 set(S.pb(4),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.vox_conn'');');
                 set(S.pb(5),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.mesh_conn'');');
                 set(S.pb(6),'enable','off')
+=======
+                set(S.pb(2),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.ROI_conn'');'); 
+                set(S.pb(3),'CallBack','spm_jobman(''interactive'','''',''spm.tools.rsHRF.vox_conn'');');
+>>>>>>> origin/master
                 set(S.pb(:),'foregroundcolor',0*[1 1 1]) %0.3 0.6 0
                 text(80,360,'Connectivity Analysis','Color',[0.3 0.6 0],'Fontsize',13,'Fontweight','bold');
             otherwise
