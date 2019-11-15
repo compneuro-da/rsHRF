@@ -27,7 +27,7 @@ The input is voxelwise/vertexwise BOLD signal, already preprocessed according to
 * bandpass filter in the 0.01-0.08 Hz interval
 * despike
 
-These denoising steps are also provided in the code.
+(These denoising steps are also provided in the SPM plugin.)
 
 The input can be images (3D or 4D), mesh (2D), or directly matrices of [observation x voxels(vertices)].
 
@@ -43,7 +43,7 @@ The script spm_rsHRF.m is the main one, and it calls rsHRF.m. These two files ar
 See [rsHRF_toolbox.pptx](https://github.com/guorongwu/rsHRF/raw/master/rsHRF_toolbox.pptx) for more details (Installation/Usage/Outputs).
 ![rsHRF GUI](https://github.com/guorongwu/rsHRF_data/raw/master/rsHRF_GUI.png)
 
-The connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) are only provided in the rsHRF SPM plugin. 
+The connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) is only provided in the rsHRF SPM plugin. 
 
 (Version 1.0 (2018) can be downloaded [here](https://github.com/compneuro-da/rsHRF_data/raw/master/rsHRF_v1_2018.zip))
 
@@ -61,7 +61,7 @@ Collaborators
 **References**
 --------
 
-1. Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo*. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2013_MIA.pdf)
+1. Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2013_MIA.pdf)
 
 2. Guo-Rong Wu, Daniele Marinazzo. "Sensitivity of the resting state hemodynamic response function estimation to autonomic nervous system fluctuations." Philosophical Transactions of the Royal Society A, 2016, 374: 20150190. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2016_PTA.pdf)
 

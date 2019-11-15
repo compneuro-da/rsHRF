@@ -4,5 +4,5 @@ rev = '$Rev: 01 $';
 
 spm('FnBanner',mfilename,rev);
 [~,Fgraph,~] = spm('FnUIsetup','rsHRF toolbox');
-spm_help('!Disp','rsHRF.man','',Fgraph,'Resting state BOLD fMRI HRF deconvolution toolbox for SPM12');
+spm_help('!Disp','rsHRF.man','',Fgraph,'Resting state BOLD fMRI HRF deconvolution toolbox for SPM');
 rsHRF
