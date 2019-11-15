@@ -2,8 +2,16 @@ function para = wgr_rsHRF_global_para()
 %% miminum fMRI volumes (3D)
 para.volume_threshold = 30;
 
-%% save pvalue for seed based GC map (NIfTI)
+%% Number of basis functions (k),Only setting for ''Gamma Functions'' (k), ''Fourier Set'' (2k+1), ''Fourier Set (Hanning)'' (2k+1)';
+para.num_basis = 4;
+
+%% save pvalue for seed based GC map (NIfTI/GIfTI)
 para.flag_pval_pwgc = 1;
+
+para.regmode = 'LWR';  % VAR model estimation regression mode ('OLS', 'LWR')
+
+%% save response height PSC (percent signal change) maps (NIfTI/GIfTI)
+para.flag_save_psc = 1;
 
 %% Combine all input signals for connectivity analysis
 para.combine_ROI = 1; % 1 combine, 0: no
