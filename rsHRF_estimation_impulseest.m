@@ -1,4 +1,4 @@
-function [hrfa,para] = rsHRF_estimation_impulseest(data,para);
+function [hrfa,event_bold] = rsHRF_estimation_impulseest(data,para);
 % Nonparametric impulse response estimation.
 % System Identification Toolbox is required.
 %
@@ -41,13 +41,15 @@ if ~isfield(para,'temporal_mask') % temporal_mask: generated from scrubbing.
 end
 
 hrfa = cell(1,nvar);
+event_bold= cell(1,nvar);
+
 parfor i=1:nvar
-    hrfa{i} = wgr_impulseest_HRF(data(:,i),para);
+    [hrfa{i},event_bold{i}] = wgr_impulseest_HRF(data(:,i),para);
 end
 hrfa  =cell2mat(hrfa);
 return
 
-function [rsH] = wgr_impulseest_HRF(data,para)
+function [rsH,u] = wgr_impulseest_HRF(data,para)
 nscans = size(data,1);
 if ~isfield(para,'options')
     opt = [];
@@ -89,6 +91,7 @@ end
 toc
 [~,id] = min(bic);
 rsH = HR(:,id);
+u = find(full(u)); 
 
 function data = wgr_BOLD_event_vector(N,matrix,thr,k,temporal_mask)
 %detect BOLD event.  
