@@ -46,8 +46,8 @@ function [bf] = wgr_spm_get_bf(xBF)
 % xBF.name    - description of basis functions specified
 %               'Canonical HRF (with time derivative)'
 %               'Canonical HRF (with time and dispersion derivatives)'              
-%               'Gamma Functions'
-%               'Fourier Set'
+%               'Gamma functions'
+%               'Fourier set'
 %               'Fourier Set (Hanning)'
 % xBF.T       - microtime resolution (for 'Canonical HRF*')
 

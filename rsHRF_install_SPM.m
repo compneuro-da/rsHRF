@@ -25,12 +25,7 @@ rsHRF_file = {
 };
 numfile = length(rsHRF_file);
 toolbox_dir = fullfile(spm('Dir'),'toolbox','rsHRF');
-try
-    if all(toolbox_dir==rawcode_dir)
-        disp('you had installed rsHRF.')
-        return
-    end
-end
+
 if ~exist(toolbox_dir,'dir')
     mkdir(toolbox_dir);
 else
