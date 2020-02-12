@@ -2,13 +2,11 @@
 
 # rsHRF: A Toolbox for Resting State HRF Deconvolution and Connectivity Analysis (MATLAB)
 
-* <p align="justify">:heavy_check_mark: The current GitHub repository contains the MATLAB code for <abbr title="resting-state hemodynamic response function">rsHRF</abbr> deconvolution and connectivity analysis, both for the Standalone and the SPM plugin (<b>v2.2</b>).</p>
-* <p align="justify">:pencil2: For more information concerning the Python Standalone, along with the BIDS-App through Dockers, head over to https://github.com/BIDS-Apps/rsHRF!</p>
+<p align="justify">:heavy_check_mark: <b>MATLAB.</b> The current GitHub repository contains the MATLAB code for <abbr title="resting-state hemodynamic response function">rsHRF</abbr> deconvolution and connectivity analysis, both for the MATLAB Standalone as well as its SPM plugin (<b>v2.2</b>).</p>
+<p align="justify">:pencil2: <b>Python.</b> For information concerning the Python Standalone, along with its BIDS-App through Dockers, head over to https://github.com/BIDS-Apps/rsHRF!</p>
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END 
-
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Team 
 
@@ -32,3 +30,7 @@
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## License
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+- **[BSD-3-Clause license](https://github.com/compneuro-da/rsHRF/blob/update/LICENSE)**
