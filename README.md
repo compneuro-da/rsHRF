@@ -1,3 +1,7 @@
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin)
 ========
 Please refer to https://github.com/BIDS-Apps/rsHRF for Python standalone and BIDS app through Dockers
@@ -57,6 +61,18 @@ Collaborators
 * Madhur Tandon (Python - BIDS)
 * Asier Erramuzpe (Python - BIDS)
 
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars3.githubusercontent.com/u/6961185?v=4" width="100px;" alt=""/><br /><sub><b>Remi Gau</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 **References**
 --------
