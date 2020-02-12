@@ -5,8 +5,8 @@
 <br>
 
 <a href="https://github.com/compneuro-da/rsHRF"><img align="left" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_logo.png" alt="rsHRF" width="200"></a>
-<p align="justify">:heavy_check_mark: <abbr title="latest version of the rsHRF toolbox (v2.2)"><b>MATLAB.</b></abbr> The current GitHub repository contains the MATLAB code for <abbr title="resting-state hemodynamic response function">rsHRF</abbr> deconvolution and connectivity analysis, both for the MATLAB Standalone as well as its SPM plugin (<b>v2.2</b>).</p>
-<p align="justify">:pencil2: <abbr title="Work In Progress"><b>Python.</b></abbr> For information concerning the Python Standalone, along with its BIDS-App through Dockers, head over to https://github.com/BIDS-Apps/rsHRF!</p>
+<p align="justify">:heavy_check_mark: <abbr title="latest version of the rsHRF toolbox (v2.2)"><b>MATLAB</b></abbr><b>.</b> The current GitHub repository contains the MATLAB code for <abbr title="resting-state hemodynamic response function">rsHRF</abbr> deconvolution and connectivity analysis, both for the MATLAB Standalone as well as its SPM plugin (<b>v2.2</b>).</p>
+<p align="justify">:pencil2: <abbr title="Work In Progress"><b>Python</b></abbr><b>.</b> For information concerning the Python Standalone, along with its BIDS-App through Dockers, head over to https://github.com/BIDS-Apps/rsHRF!</p>
 
 <br>
   
