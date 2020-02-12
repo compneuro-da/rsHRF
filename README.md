@@ -1,15 +1,17 @@
+<a href="https://github.com/compneuro-da/rsHRF"><img src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_logo.png" alt="rsHRF" width="300"></a>
+
+# rsHRF: A Toolbox for Resting State HRF Deconvolution and Connectivity Analysis (MATLAB)
+
+* <p align="justify">[CHECK] The current GitHub repository contains the MATLAB code for <abbr title="resting-state hemodynamic response function">rsHRF</abbr> deconvolution and connectivity analysis, both for the Standalone and the SPM plugin (<b>v2.2</b>).</p>
+* <p align="justify">[<abbr title="Work In Progress"><i>WIP</i></abbr>] For more information concerning the Python Standalone, along with the BIDS-App through Dockers, head to https://github.com/BIDS-Apps/rsHRF!</p>
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+<!-- ALL-CONTRIBUTORS-BADGE:END 
 
-Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin)
-========
-Please refer to https://github.com/BIDS-Apps/rsHRF for Python standalone and BIDS app through Dockers
 
-![](https://github.com/guorongwu/rsHRF/raw/master/docs/BOLD_HRF.png)
+## Team 
 
-Collaborators 
--------------
 * Guorong Wu
 * Nigel Colenbier
 * Sofie Van Den Bossche
