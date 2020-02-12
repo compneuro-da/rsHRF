@@ -42,6 +42,15 @@ Flowcharts & videos!
 
 (Version 1.0 (2018) can be downloaded [here](https://github.com/compneuro-da/rsHRF_data/raw/master/rsHRF_v1_2018.zip))
 
+### add DEMOs (for each option)
+
+#### Start resting state hrf (in set-up) linked there!!
+
+which data to use? 
+
+1. input format: voxels, rois, signals
+2. 
+
 **References**
 --------
 
