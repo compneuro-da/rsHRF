@@ -2,14 +2,22 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-<a href="https://github.com/compneuro-da/rsHRF"><img src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_logo.png" alt="rsHRF" width="300"></a>
+<br>
+
+<a href="https://github.com/compneuro-da/rsHRF"><img align="left" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_logo.png" alt="rsHRF" width="200"></a>
 <p align="justify">:heavy_check_mark: <abbr title="latest version of the rsHRF toolbox (v2.2)"><b>MATLAB.</b></abbr> The current GitHub repository contains the MATLAB code for <abbr title="resting-state hemodynamic response function">rsHRF</abbr> deconvolution and connectivity analysis, both for the MATLAB Standalone as well as its SPM plugin (<b>v2.2</b>).</p>
 <p align="justify">:pencil2: <abbr title="Work In Progress"><b>Python.</b></abbr> For information concerning the Python Standalone, along with its BIDS-App through Dockers, head over to https://github.com/BIDS-Apps/rsHRF!</p>
 
+<br>
+  
 ## Table of Contents
 - 
 - 
-- 
+-
+- FAQs: feel free to adapt!
+
+## Contributing
+refer to GitHub workshop!!
 
 ## Team 
 
@@ -33,6 +41,9 @@
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Support
+- NTCR, Issue page, neurostars?
 
 ## License
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
