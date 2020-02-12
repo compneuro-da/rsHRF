@@ -66,7 +66,7 @@ Collaborators
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars3.githubusercontent.com/u/6961185?v=4" width="100px;" alt=""/><br /><sub><b>Remi Gau</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/sofievdbos"><img src="" width="100px;" alt=""/><br /><sub><b>Sofie Van Den Bossche</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
   </tr>
 </table>
 
