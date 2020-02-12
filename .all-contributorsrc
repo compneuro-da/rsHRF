@@ -1,0 +1,49 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "guorongwu",
+      "name": "Guo-Rong Wu",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6961185?v=4https://avatars0.githubusercontent.com/u/20551551?s=460&v=4",
+      "profile": "https://github.com/guorongwu",
+      "contributions": [
+      ]
+    },
+    {
+      "login": "sofievdbos",
+      "name": "Sofie Van Den Bossche",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/23309041?v=4",
+      "profile": "https://github.com/sofievdbos",
+      "contributions": [
+        "bug",
+        "content",
+        "doc",
+        "design",
+        "example",
+        "ideas",
+        "maintenance"
+        "test",
+        "tutorial",
+        "talk",
+      ]
+    },
+     {
+      "login": "danielemarinazzo",
+      "name": "Daniele Marinazzo",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5311102?s=460&v=4",
+      "profile": "https://github.com/danielemarinazzo",
+      "contributions": [
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "rsHRF_MATLAB",
+  "projectOwner": "guorongwu", "sofievdbos"
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
