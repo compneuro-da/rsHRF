@@ -47,3 +47,4 @@
 
 ## License
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+<br>Distributed under the BSD-3-Clause License. See  <a href="https://github.com/compneuro-da/rsHRF/blob/update/LICENSE">`LICENSE`</a> for more information.
