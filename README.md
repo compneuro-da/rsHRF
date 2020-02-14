@@ -3,7 +3,8 @@
 [![Latest Release](https://img.shields.io/github/release/compneuro-da/rsHRF.svg)]()
 [![GitHub Releases](https://img.shields.io/github/downloads/compneuro-da/rsHRF/v2.0/total)]()
 [![Dependencies](https://img.shields.io/badge/dependencies-SPM-green)]() <!-- https://shields.io/ self-created-->
-![GitHub issues](https://img.shields.io/github/issues-raw/compneuro-da/rsHRF)
+[![GitHub issues](https://img.shields.io/github/issues-raw/compneuro-da/rsHRF)]()
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/compneuro-da/rsHRF)]()
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
