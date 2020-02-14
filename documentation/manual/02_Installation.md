@@ -1,9 +1,16 @@
 <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> <br>
 
 ⚙️ Installation
----
+----
 
-### Download
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. OS X & Linux; WIndows - to test whether same for all!!
+
+# Prerequisites
+What things you need to install the software and how to install them -- what you need for the software to work
+badge - spm; 
+N.B. it is still necessary to have SPM in the path, since some of the functions there are used (wgich ones; give examples; link to code!!). - code in markdown
+
+# Clone or download
 
 <p align="justify">Click on the appropriate <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> to download the corresponding <abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository as a <i>.zip</i> folder in <code>Downloads</code>. For each release version, the main modifications are listed, along with the <a title="version history">📅</a>. The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).</p> 
 
@@ -54,7 +61,8 @@ Two types of connectivity analyses have been added to the processing pipeline:
 
 </details>
 
-### Install as an SPM toolbox
+### Set up: Install as an SPM toolbox
+### standalone: use separet functions (for cluster usage); connectivity only available as part of SPM plugin 
 
 1. <p align="justify"> <b>Extract the <i>.zip</i> folder and move it to <code>./SPM/toolbox/rsHRF</code></b>: After downloading a specific <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> as a <i>.zip</i> folder in <code>Downloads</code>, you first have to extract the <i>.zip</i> folder and move the extracted folder, along with its content to <code>./SPM/toolbox/rsHRF</code>. <br><br> 💡 You can do this by running <a href="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> in the Command Window opened within the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder. 
 
