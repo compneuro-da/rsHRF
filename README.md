@@ -26,7 +26,7 @@
 ## Community Guidelines
 ### Code of Conduct
 ### Contributing
-refer to GitHub workshop!!
+
 
 ## Team 
 
