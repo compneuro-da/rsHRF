@@ -15,6 +15,7 @@
 <br>
 
 <a name="table-of-contents">
+   
 ## Table of Contents
 -  Documentation:
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/01_History%26Development.md"> History and Development</a>
