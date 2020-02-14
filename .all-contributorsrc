@@ -2,14 +2,22 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 250,
   "commit": false,
   "contributors": [
     {
       "login": "guorongwu",
-      "name": "Guo-Rong Wu",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/6961185?v=4https://avatars0.githubusercontent.com/u/20551551?s=460&v=4",
-      "profile": "https://github.com/guorongwu",
+      "name": "Guorong Wu",
+      "avatar_url": "",
+      "profile": "",
+      "contributions": [
+      ]
+    },
+     {
+      "login": "",
+      "name": "Nigel Colenbier",
+      "avatar_url": "",
+      "profile": "",
       "contributions": [
       ]
     },
@@ -19,28 +27,48 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/23309041?v=4",
       "profile": "https://github.com/sofievdbos",
       "contributions": [
+        "code",
         "bug",
-        "content",
-        "doc",
-        "design",
-        "example",
-        "ideas",
-        "maintenance"
         "test",
+        "userTesting",
+        "doc",
+        "content",
+        "question"
+        "example",
         "tutorial",
+        "video",
         "talk",
+        "ideas",
+        "maintenance",
+        "design",
       ]
     },
      {
       "login": "danielemarinazzo",
       "name": "Daniele Marinazzo",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/5311102?s=460&v=4",
-      "profile": "https://github.com/danielemarinazzo",
+      "avatar_url": "",
+      "profile": "",
+      "contributions": [
+      ]
+    },
+    {
+      "login": "madhur-tandon",
+      "name": "Madhur Tandon",
+      "avatar_url": "",
+      "profile": "",
+      "contributions": [
+      ]
+    },
+    {
+      "login": "erramuzpe",
+      "name": "Asier Erramuzpe",
+      "avatar_url": "",
+      "profile": "",
       "contributions": [
       ]
     }
   ],
-  "contributorsPerLine": 7,
+  "contributorsPerLine": 3,
   "projectName": "rsHRF_MATLAB",
   "projectOwner": "guorongwu", "sofievdbos"
   "repoType": "github",
