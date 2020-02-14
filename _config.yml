@@ -4,3 +4,14 @@ include:
   - CONTRIBUTING.md
   - README.md
   - LICENSE.md
+  
+paginate: 5
+paginate_path: "/page:num"
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-seo-tag
+  - kramdown
+  - rouge
