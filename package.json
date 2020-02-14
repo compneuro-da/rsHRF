@@ -13,7 +13,7 @@
     "url": "git+https://github.com/compneuro-da/rsHRF.git"
   },
   "dependencies" : { 
-    { "SPM" : "https://www.fil.ion.ucl.ac.uk/spm/software/download/"
+    "SPM" : "https://www.fil.ion.ucl.ac.uk/spm/software/download/"
     }
   },
   "keywords": [],
