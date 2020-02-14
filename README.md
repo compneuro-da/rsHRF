@@ -16,9 +16,9 @@
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/Overview%26Usage.md">Overview and Usage</a>
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#contributing">Contributing</a>
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#team>Team</a>
-- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#FAQ">FAQ</a>
-- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#Support">Support</a>
-- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#License">License</a>
+- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#faq">FAQ</a>
+- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#lupport">Support</a>
+- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#license">License</a>
 
 ## Contributing
 refer to GitHub workshop!!
