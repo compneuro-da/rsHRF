@@ -14,22 +14,10 @@ N.B. it is still necessary to have SPM in the path, since some of the functions 
 
 <p align="justify">Click on the appropriate <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> to download the corresponding <abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository as a <i>.zip</i> folder in <code>Downloads</code>. For each release version, the main modifications are listed, along with the <a title="version history">📅</a>. The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).</p> 
 
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/download_01.png" alt="Download" width="250"/>
+
+
 <b>Release version</b>: 
-
-<details><summary><i>rsHRF v1.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v1.0.zip">🏷</a> <a href="https://github.com/sofievdbos/rsHRF/wiki/01.-History-and-Development:-MATLAB-(standalone-and-SPM-plugin)#v1.0">📅</a></summary>
-<br>
-
-```diff
-!  Main modifications (M):  
-``` 
-
-* <p align="justify"><b>outlier removal</b>: outliers based on the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="response height">RH</abbr> can be deleted and interpolated accordingly by respectively using <a href="https://github.com/compneuro-da/rsHRF/blob/master/deleteoutliers.m"><code>deleteoutliers.m</code></a> and <a href="https://github.com/compneuro-da/rsHRF/blob/master/inpaint_nans3.m"><code>inpaint_nans3.m</code></a>; the output files will then contain the <abbr title="OutLier ReMoval"><i>Olrm</i></abbr> abbreviation. Outlier removal is only legit when conducting a whole-brain analysis.</p>
-* <p align="justify"><b>local peak detection</b>: the parameter used for local peak detection (<code>localK</code>) has been modified with its value depending on the <abbr title="repetition time">TR</abbr>.</p>
-* <p align="justify"><b>global parameter modification</b>: some global parameters such as the interpolation method for outlier removal, can be adapted in <a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_global_para.m"><code>wgr_rsHRF_global_para.m</code></a>.</p>
-* <p align="justify"><b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method can be set to either <a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><abbr title="canonical HRF with its delay and dispersion derivatives"><i>canon2dd</i></abbr></a> or <a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><abbr title="smoothed Finite Impulse Response basis functions"><i>(s)FIR</i></abbr></a>.</p>
-<br>
-
-</details>
 
 <details><summary><i>rsHRF v2.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v2.0.zip">🏷</a> <a href="https://github.com/sofievdbos/rsHRF/wiki/01.-History-and-Development:-MATLAB-(standalone-and-SPM-plugin)#v2.0">📅</a></summary>
 <br>
@@ -57,6 +45,21 @@ Two types of connectivity analyses have been added to the processing pipeline:
 <!--
 * <p align="justify"><b>sFIR</b>: </p>
 * <p align="justify"><b>regularization</b>: </p> -->
+<br>
+
+</details>
+
+<details><summary><i>rsHRF v1.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v1.0.zip">🏷</a> <a href="https://github.com/sofievdbos/rsHRF/wiki/01.-History-and-Development:-MATLAB-(standalone-and-SPM-plugin)#v1.0">📅</a></summary>
+<br>
+
+```diff
+!  Main modifications (M):  
+``` 
+
+* <p align="justify"><b>outlier removal</b>: outliers based on the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="response height">RH</abbr> can be deleted and interpolated accordingly by respectively using <a href="https://github.com/compneuro-da/rsHRF/blob/master/deleteoutliers.m"><code>deleteoutliers.m</code></a> and <a href="https://github.com/compneuro-da/rsHRF/blob/master/inpaint_nans3.m"><code>inpaint_nans3.m</code></a>; the output files will then contain the <abbr title="OutLier ReMoval"><i>Olrm</i></abbr> abbreviation. Outlier removal is only legit when conducting a whole-brain analysis.</p>
+* <p align="justify"><b>local peak detection</b>: the parameter used for local peak detection (<code>localK</code>) has been modified with its value depending on the <abbr title="repetition time">TR</abbr>.</p>
+* <p align="justify"><b>global parameter modification</b>: some global parameters such as the interpolation method for outlier removal, can be adapted in <a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_global_para.m"><code>wgr_rsHRF_global_para.m</code></a>.</p>
+* <p align="justify"><b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method can be set to either <a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><abbr title="canonical HRF with its delay and dispersion derivatives"><i>canon2dd</i></abbr></a> or <a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><abbr title="smoothed Finite Impulse Response basis functions"><i>(s)FIR</i></abbr></a>.</p>
 <br>
 
 </details>
