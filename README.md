@@ -27,14 +27,14 @@
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="100px;" alt=""/><br /><sub><b>Guorong Wu</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="100px;" alt=""/><br /><sub><b>Nigel Colenbier</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="100px;" alt=""/><br /><sub><b>Sofie Van Den Bossche</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
+    <td align="left"><a href=""><img src="" width="250px;" alt="Guorong Wu"/></a><br><b>Guorong Wu</b><br></td> 
+    <td align="left"><a href=""><img src="" width="250px;" alt="Nigel Colenbier"/></a><br><b>Nigel Colenbier</b><br></td> 
+    <td align="left"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="250px;" alt="Sofie Van Den Bossche"/></a><br><b>Sofie Van Den Bossche</b><br><br><ul><li> Code:<br> <a href="" title="Code">💻</a><a href="" title="Bug reports">🐛</a><a href="" title="Tests">⚠️</a><a href="" title="User Testing">📓</a></li><li> Documentation:<br> <a href="" title="Documentation">📖</a><a href="" title="Content">🖋</a><a href="" title="Examples">💡</a><a href="" title="Videos">📹</a><a href="" title="Tutorials">✅</a><a href="" title="Talks">📢</a><a href="" title="Answering Questions">💬</a></li><li>Et al.:<br> <a href="" title="Ideas & Planning">🤔</a><a href="" title="Maintenance">🚧</a><a href="" title="Design">🎨</a></li></ul></td> 
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="100px;" alt=""/><br /><sub><b>Daniele Marinazzo</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="100px;" alt=""/><br /><sub><b>Madhur Tandon</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Python - BIDS">💻</a></td>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="100px;" alt=""/><br /><sub><b>Asier Erramuzpe</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Python - BIDS">💻</a></td>
+    <td align="left"><a href=""><img src="" width="250px;" alt="Daniele Marinazzo"/></a><br><b>Daniele Marinazzo</b><br></td> 
+    <td align="left"><a href=""><img src="" width="250px;" alt="Madhur Tandon"/></a><br><b>Madhur Tandon</b><br></td> 
+    <td align="left"><a href=""><img src="" width="250px;" alt="Asier Erramuzpe"/></a><br><b>Asier Erramuzpe</b><br></td> 
     </td>
 </table>
 
