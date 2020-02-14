@@ -15,7 +15,7 @@
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/01_History%26Development.md"> History and Development</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/02_Installation.md">Installation</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/03_Overview%26Usage.md">Overview and Usage</a>
-   - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#faq">04_FAQ</a>
+   - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/04_FAQ.md">FAQ</a>
 - Community Guidelines: 
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#code-of-conduct">Code of Conduct</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#contributing">Contributing</a>
