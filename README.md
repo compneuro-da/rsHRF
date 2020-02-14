@@ -1,6 +1,8 @@
 # rsHRF: A Toolbox for Resting State HRF Deconvolution and Connectivity Analysis (MATLAB)
+[![GitHub repo size](https://img.shields.io/github/repo-size/compneuro-da/rsHRF)]()
 [![Latest Release](https://img.shields.io/github/release/compneuro-da/rsHRF.svg)]()
-[![Dependencies](https://img.shields.io/badge/dependencies-SPM-green)]() <!-- https://shields.io/ -->
+[![Dependencies](https://img.shields.io/badge/dependencies-SPM-green)]() <!-- https://shields.io/ self-created-->
+![GitHub issues](https://img.shields.io/github/issues-raw/compneuro-da/rsHRF)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
