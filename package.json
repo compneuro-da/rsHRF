@@ -1,0 +1,26 @@
+#https://docs.npmjs.com/creating-a-package-json-file
+#https://docs.npmjs.com/files/package.json
+
+{
+  "name": "rsHRF",
+  "version": "2.2.0",
+  "description": "rsHRF: A Toolbox for Resting State HRF Deconvolution and Connectivity Analysis (MATLAB)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/compneuro-da/rsHRF.git"
+  },
+  "dependencies" : { 
+    "SPM" : "https://www.fil.ion.ucl.ac.uk/spm/software/download/"
+    }
+  },
+  "keywords": [],
+  "author": "Guorong Wu",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/compneuro-da/rsHRF/issues"
+  },
+  "homepage": "https://github.com/compneuro-da/rsHRF#readme"
+}
