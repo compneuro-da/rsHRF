@@ -1,9 +1,0 @@
-# frozen_string_literal: true
-
-source 'https://rubygems.org'
-gemspec
-
-gem "jekyll-theme-dinky"
-group :jekyll_plugins do
-  gem "jekyll-paginate"
-end
