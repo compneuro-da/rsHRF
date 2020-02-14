@@ -14,8 +14,8 @@
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/History%26Development.md"> History and Development</a>
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/Installation.md">Installation</a>
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/Overview%26Usage.md">Overview and Usage</a>
-- <a href"#Contributing">Contributing</a>
-- <a href="#Team>Team</a>
+- <a href"https://github.com/compneuro-da/rsHRF/blob/update/README.md#contributing">Contributing</a>
+- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#team>Team</a>
 - <a href="#FAQ">FAQ</a>
 - <a href="#Support">Support</a>
 - <a href="#License">License</a>
