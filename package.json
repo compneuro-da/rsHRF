@@ -14,8 +14,8 @@
   },
   { "dependencies" :
     { "SPM" : "https://www.fil.ion.ucl.ac.uk/spm/software/download/"
-    },
-  }
+    }
+  },
   "keywords": [],
   "author": "Guorong Wu",
   "license": "BSD-3-Clause",
