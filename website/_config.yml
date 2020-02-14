@@ -1,9 +1,0 @@
-locale: en-us
-title: rsHRF
-description: A Toolbox for Resting State HRF Deconvolution and Connectivity Analysis (MATLAB)
-baseurl: ""
-url: ""
-theme: jekyll-theme-dinky
-
-paginate: 10  # amount of posts to show per page
-paginate_path: /page:num/
