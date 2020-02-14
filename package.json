@@ -16,7 +16,7 @@
     "SPM" : "https://www.fil.ion.ucl.ac.uk/spm/software/download/"
     }
   },
-  "keywords": [],
+  "keywords": ["resting-state-fmri", "hemodynamic-response-function", "deconvolution", "data-analysis", "spm-plugin", "toolbox"],
   "author": "Guorong Wu",
   "license": "BSD-3-Clause",
   "bugs": {
