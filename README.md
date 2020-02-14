@@ -11,7 +11,7 @@
 <br>
   
 ## Table of Contents
--  rsHRF: A Toolbox for Resting State HRF Deconvolution and Connectivity Analysis (MATLAB)
+-  Documentation
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/01_History%26Development.md"> History and Development</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/02_Installation.md">Installation</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/03_Overview%26Usage.md">Overview and Usage</a>
@@ -23,8 +23,13 @@
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#team">Team</a>
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#license">License</a>
 
-## Contributing
+## Community Guidelines
+### Code of Conduct
+### Contributing
 refer to GitHub workshop!!
+### Support
+- issues and problems
+- support (platforms): NTCR, Issue page, neurostars?
 
 ## Team 
 
@@ -48,11 +53,6 @@ refer to GitHub workshop!!
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-## FAQ
-
-## Support
-- NTCR, Issue page, neurostars?
 
 ## License
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
