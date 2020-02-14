@@ -18,7 +18,8 @@ spm_vol(; spm_read_vols = basis functions
 <p align="justify">Click on the appropriate <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> to download the corresponding <abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository as a <i>.zip</i> folder in <code>Downloads</code>. For each release version, the main modifications are listed, along with the <a title="version history">📅</a>. The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).</p> 
 
 <img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/download_01.png" alt="Download" width="250"/>
-
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_01.png" alt="Download" width="250"/>
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
 
 <b>Release version</b>: 
 
