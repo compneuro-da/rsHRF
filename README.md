@@ -24,8 +24,8 @@
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#code-of-conduct">Code of Conduct</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#contributing">Contributing</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#lupport">Support</a>
-- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#team">Team</a>
-- <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#license">License</a>
+- <a href="#team">Team</a>
+- <a href="#license">License</a>
 
 ## Team 
 
