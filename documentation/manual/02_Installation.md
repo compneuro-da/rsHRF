@@ -19,6 +19,20 @@ N.B. it is still necessary to have SPM in the path, since some of the functions 
 
 <b>Release version</b>: 
 
+<details><summary><i>rsHRF v2.2</i> <a href="">🏷</a> <a href="">📅</a></summary>
+<br>
+
+```diff
+!  Main modifications (M):  
+``` 
+
+<!--
+* <p align="justify"><b>sFIR</b>: </p>
+* <p align="justify"><b>regularization</b>: </p> -->
+<br>
+
+</details>
+
 <details><summary><i>rsHRF v2.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v2.0.zip">🏷</a> <a href="https://github.com/sofievdbos/rsHRF/wiki/01.-History-and-Development:-MATLAB-(standalone-and-SPM-plugin)#v2.0">📅</a></summary>
 <br>
 
@@ -31,20 +45,6 @@ Two types of connectivity analyses have been added to the processing pipeline:
 
 * <p align="justify"><b>functional connectivity</b>: functional connectivity analyses have been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
 * <p align="justify"><b>effective connectivity</b>: effective connectivity analyses have been added to the processing pipeline; more specifically the Pairwise/Conditional/Partially Conditioned Granger causality methods.</p> -->
-<br>
-
-</details>
-
-<details><summary><i>rsHRF v2.2</i> <a href="">🏷</a> <a href="">📅</a></summary>
-<br>
-
-```diff
-!  Main modifications (M):  
-``` 
-
-<!--
-* <p align="justify"><b>sFIR</b>: </p>
-* <p align="justify"><b>regularization</b>: </p> -->
 <br>
 
 </details>
