@@ -27,9 +27,6 @@
 ### Code of Conduct
 ### Contributing
 refer to GitHub workshop!!
-### Support
-- issues and problems
-- support (platforms): NTCR, Issue page, neurostars?
 
 ## Team 
 
