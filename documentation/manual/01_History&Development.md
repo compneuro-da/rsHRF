@@ -1,6 +1,6 @@
 <a name="top">
 
-📅 GitHub Commit History: MATLAB (standalone + <abbr title="Statistical Parametric Mapping">SPM</abbr> plugin)  
+📅 GitHub Commit History: MATLAB (standalone + <abbr title="Statistical Parametric Mapping">SPM</abbr> plugin) <a href="#table-of-contents">:leftwards_arrow_with_hook:</a>
 ---- 
 __IMPORTANT__: Please use Google Chrome to browse the _History and Development_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
