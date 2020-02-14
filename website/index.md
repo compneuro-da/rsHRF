@@ -1,7 +1,7 @@
 ---
 title: Home
 subtitle: ""
-layout: home
+layout: page
 paginate: true
 ---
 
