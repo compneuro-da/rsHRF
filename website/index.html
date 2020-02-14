@@ -1,2 +1,0 @@
-layout: home
-paginate: true
