@@ -7,6 +7,9 @@
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/compneuro-da/rsHRF)]()
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![GitHub forks](https://img.shields.io/github/forks/compneuro-da/rsHRF?style=social)]()
+[![GitHub stars](https://img.shields.io/github/stars/compneuro-da/rsHRF?style=social)]()
+[![GitHub watchers](https://img.shields.io/github/watchers/compneuro-da/rsHRF?style=social)]()
 
 <br>
 
