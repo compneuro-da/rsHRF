@@ -17,7 +17,7 @@
 <a name="table-of-contents">
    
 ## Table of Contents 
-Note: click on <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> to go back to the Table of Contents.
+*Note*: click on <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> to go back to the Table of Contents.
 -  Documentation:
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/01_History%26Development.md"> History and Development</a>
    - <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/02_Installation.md">Installation</a>
