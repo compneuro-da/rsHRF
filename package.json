@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/compneuro-da/rsHRF.git"
   },
-  { "dependencies" :
+  "dependencies" : { 
     { "SPM" : "https://www.fil.ion.ucl.ac.uk/spm/software/download/"
     }
   },
