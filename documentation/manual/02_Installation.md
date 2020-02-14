@@ -2,13 +2,16 @@
 
 ⚙️ Installation
 ----
-
+> insert ppt frames
+The current GitHub repository contains the MATLAB code for rsHRF deconvolution and connectivity analysis, both for 1) the MATLAB Standalone as well as 2) the SPM plugin (v2.2).
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. OS X & Linux; WIndows - to test whether same for all!!
 
 # Prerequisites
+In order for the code to woe
 What things you need to install the software and how to install them -- what you need for the software to work
 badge - spm; 
 N.B. it is still necessary to have SPM in the path, since some of the functions there are used (wgich ones; give examples; link to code!!). - code in markdown
+spm_vol(; spm_read_vols = basis functions
 
 # Clone or download
 
