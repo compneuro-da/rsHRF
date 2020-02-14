@@ -1,5 +1,5 @@
 <a name="top">
-<a href="#table-of-contents">:leftwards_arrow_with_hook:</a> <br>
+<a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> <br>
 
 📅 GitHub Commit History: MATLAB (standalone + <abbr title="Statistical Parametric Mapping">SPM</abbr> plugin) 
 ---- 
