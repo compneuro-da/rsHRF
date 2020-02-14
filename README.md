@@ -23,11 +23,6 @@
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#team">Team</a>
 - <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#license">License</a>
 
-## Community Guidelines
-### Code of Conduct
-### Contributing
-
-
 ## Team 
 
 * Guorong Wu
