@@ -3,9 +3,9 @@
 
 @charset "utf-8";
 
-@import "so-simple/functions";
-@import "so-simple/variables";
-@import "so-simple/notices";
+@import "_sass/so-simple/_functions";
+@import "_sass/so-simple/_variables";
+@import "_sass/so-simple/_notices";
 
 /* Colors */
 $base-color: #eaeaea !default;
