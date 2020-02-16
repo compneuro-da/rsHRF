@@ -5,7 +5,7 @@
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. OS X & Linux; WIndows - to test whether same for all!!
 
 # Dependencies
-<p align="justify">In order to successfully run the MATLAB code for <i>rsHRF deconvolution and connectivity analysis</i>, both for the MATLAB Standalone as well as the <abbr title="Statistical Parametric Mapping">SPM</abbr> plugin, <a href="https://nl.mathworks.com/help/install/"><b>MATLAB</b></a> and <a href="https://www.fil.ion.ucl.ac.uk/spm/software/spm12/"><abbr title="Statistical Parametric Mapping"><b>SPM</b></abbr></a> should be installed. Since the MATLAB code uses some SPM basis functions (e.g. <code>spm_vol.m</code> and <code>spm_read_vols.m</code>), <abbr title="Statistical Parametric Mapping">SPM</abbr> should be added to to the MATLAB search path (<code>addpath.m</code>).</p>
+<p align="justify">In order to successfully run the MATLAB code for <i>rsHRF deconvolution and connectivity analysis</i>, both for the MATLAB Standalone as well as the <abbr title="Statistical Parametric Mapping">SPM</abbr> plugin, <a href="https://nl.mathworks.com/help/install/"><b>MATLAB</b></a> and <a href="https://www.fil.ion.ucl.ac.uk/spm/software/spm12/"><abbr title="Statistical Parametric Mapping"><b>SPM</b></abbr></a> should be installed. Since the MATLAB code uses some of the <abbr title="Statistical Parametric Mapping">SPM</abbr> basis functions (e.g. <code>spm_vol.m</code>, <code>spm_read_vols.m</code>...), <abbr title="Statistical Parametric Mapping">SPM</abbr> add the SPM directory to the MATLAB search path (<code>addpath.m</code>).</p>
 
 # Clone or download
 
