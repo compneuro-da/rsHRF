@@ -2,31 +2,37 @@
 
 ⚙️ Installation
 ----
+__IMPORTANT__: Please use Google Chrome to browse the _Installation_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
 # Dependencies
-<p align="justify">In order to successfully run the MATLAB code for <i>rsHRF deconvolution and connectivity analysis</i>, <a href="https://nl.mathworks.com/help/install/"><b>MATLAB</b></a> and <a href="https://www.fil.ion.ucl.ac.uk/spm/software/download/"><abbr title="Statistical Parametric Mapping"><b>SPM</b></abbr></a> should be installed. <abbr title="Statistical Parametric Mapping">SPM</abbr> is still necessary because the MATLAB code uses some of its basis functions (e.g. <code>spm_vol.m</code>, <code>spm_read_vols.m</code>...). After completing the installation, open MATLAB and add the <abbr title="Statistical Parametric Mapping">SPM</abbr> directory to the MATLAB search path (<code>addpath.m</code>).</p>
+<p align="justify">To successfully run the MATLAB code for <i>rsHRF deconvolution and connectivity analysis</i>, <a href="https://nl.mathworks.com/help/install/"><b>MATLAB</b></a> and <a href="https://www.fil.ion.ucl.ac.uk/spm/software/download/"><abbr title="Statistical Parametric Mapping"><b>SPM</b></abbr></a> should be installed. <abbr title="Statistical Parametric Mapping">SPM</abbr> is still necessary because the MATLAB code uses some of its basis functions (e.g. <code>spm_vol.m</code>, <code>spm_read_vols.m</code>...). After completing the installation, open MATLAB and add the <abbr title="Statistical Parametric Mapping">SPM</abbr> directory including all its folders and subfolders to the MATLAB search path:</p>
+	
+``` matlab
+spmdir = '/full/path/to/spm12/';
+addpath(genpath(spmdir));
+ ```
 
 # Download the release version of your choice
-<p align="justify">Click on the corresponding 🏷 to download one of the release versions (i.e. <a href="#v1.0">v1.0</a>, <a href="#v2.0">v2.0</a>, and <a href="#v2.2">v2.2</a>) of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="statistical parametric mapping">SPM</abbr> plugin as a <i>.zip</i> folder in <code>Downloads</code>. For each release version, the main modifications are listed. For more information, head over to the HISTORY PAGE! <!-- The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).--></p> 
+<p align="justify">To download the release version of your choice (i.e. either <a href="#v1.0">v1.0</a>, <a href="#v2.0">v2.0</a>, or <a href="#v2.2">v2.2</a>) as a <i>.zip</i> folder in your <code>Downloads</code> folder, click on the corresponding 🏷 here below. For each release version, the main modifications are listed; open the collapsibles to have a closer look. For more information, head over to the HISTORY PAGE!</p> <!-- The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).--> 
 
 <b>Release version</b>: 
 
-<details><summary><i>rsHRF v2.2</i> <a href="">🏷</a> <a href="">📅</a></summary>
+<details><summary><i>rsHRF v2.2</i> <a href="">🏷</a> </summary>
 <br>
 
 ```diff
 !  Main modifications (M):  
 ``` 
 
-* <p align="justify"><b>surface-based analysis</b>: a surface-based analysis module has been added to the processing pipeline.</p>
-* <p align="justify"><b>rsHRF_viewer.m</b>: the HRF shapes can be easily visualized by clicking on the <code>Display</code> button in the GUI panel. XXX </p>
-* <b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions are updated; a Gamma/Fourier basis function was added and the (s)FIR model has been updated. Nonparametric impulse response estimation was added as well, but only as code, not incorporated in the GUI. 
+* <p align="justify"><b>surface-based analysis</b>: a surface-based analysis module has been added to the processing pipeline which you can select by clicking on either the <code>vertices</code> (whole-brain analysis) or <code>ROI-surface</code> (ROI analyis) panel in the GUI.</p>
+* <p align="justify"><b>visualization of <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shapes</b>: the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shapes can be visualized by clicking on the <code>Display</code> panel in the GUI. The underlying script (<code>rsHRF_viewer.m</code> has been added to the <code>code</code> folder.</p>
+* <b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions have been updated, i.e. a Gamma/Fourier basis function (<code>rsHRF_estimation_temporal_basis.m</code>) and a m-file (<code>rsHRF_estimation_impulseest.m</code>) for non-parametric impulse response estimation (which is not included in the rsHRF GUI) have been added, along with an an update of the (s)FIR model (<code>rsHRF_estimation_FIR.m</code>). 
 * <b>connectivity analysis</b>: multivariate Granger causality analysis  has been added to the processing pipeline.</p>
 <br>
 
 </details>
 
-<details><summary><i>rsHRF v2.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v2.0.zip">🏷</a> <a href="https://github.com/sofievdbos/rsHRF/wiki/01.-History-and-Development:-MATLAB-(standalone-and-SPM-plugin)#v2.0">📅</a></summary>
+<details><summary><i>rsHRF v2.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v2.0.zip">🏷</a></summary>
 <br>
 
 ```diff
@@ -41,7 +47,7 @@ Two types of connectivity analyses have been added to the processing pipeline:
 
 </details>
 
-<details><summary><i>rsHRF v1.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v1.0.zip">🏷</a> <a href="https://github.com/sofievdbos/rsHRF/wiki/01.-History-and-Development:-MATLAB-(standalone-and-SPM-plugin)#v1.0">📅</a></summary>
+<details><summary><i>rsHRF v1.0</i> <a href="https://github.com/compneuro-da/rsHRF/archive/v1.0.zip">🏷</a></summary>
 <br>
 
 ```diff
