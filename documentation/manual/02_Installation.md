@@ -76,7 +76,7 @@ addpath(genpath(spmdir));
 ## Open the rsHRF GUI
 <img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_GUI_overview.png" alt="GUI_overview" width="350"/>
 
-<p align="justify"> The <abbr title="statistical parametric mapping">SPM</abbr> plugin entails two separate <abbr title="graphical user interfaces">GUIs</abbr> (see Figure): </p>
+<p align="justify"> The <abbr title="statistical parametric mapping">SPM</abbr> plugin entails two separate <abbr title="graphical user interfaces">GUIs</abbr> (see Figure; slide 2 of <a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/rsHRF_toolbox.pptx">rsHRF_toolbox.pptx</a>): </p>
 <ol>
 	<li> the <i>rsHRF retrieval and deconvolution</i> <abbr title="graphical user interface">GUI</abbr></li>
 	<li> the <i>rsHRF connectivity analysis</i> <abbr title="graphical user interface">GUI</abbr></li>
