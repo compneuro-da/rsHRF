@@ -19,8 +19,9 @@
 ``` 
 
 * <p align="justify"><b>surface-based analysis</b>: a surface-based analysis module has been added to the processing pipeline.</p>
-* <p align="justify"><b>rsHRF_viewer.m</b>: the HRF shapes can be easily visualized by clicking on the view button in the GUI panel. XXX </p>
-<b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions are updated; a Gamma/Fourier basis function was added and the (s)FIR model has been updated. Nonparametric impulse response estimation was added as well, but only as code, not incorporated in the GUI. 
+* <p align="justify"><b>rsHRF_viewer.m</b>: the HRF shapes can be easily visualized by clicking on the <code>Display</code> button in the GUI panel. XXX </p>
+* <b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions are updated; a Gamma/Fourier basis function was added and the (s)FIR model has been updated. Nonparametric impulse response estimation was added as well, but only as code, not incorporated in the GUI. 
+* <b>connectivity analysis</b>: multivariate Granger causality analysis  has been added to the processing pipeline.</p>
 <br>
 
 </details>
