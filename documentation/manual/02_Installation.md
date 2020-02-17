@@ -9,12 +9,6 @@
 # Download the release version of your choice
 <p align="justify">Click on the corresponding 🏷 to download one of the release versions (i.e. <a href="#v1.0">v1.0</a>, <a href="#v2.0">v2.0</a>, and <a href="#v2.2">v2.2</a>) of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="statistical parametric mapping">SPM</abbr> plugin as a <i>.zip</i> folder in <code>Downloads</code>. For each release version, the main modifications are listed. For more information, head over to the HISTORY PAGE! <!-- The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).--></p> 
 
-> insert ppt frames
-
-<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/download_01.png" alt="Download" width="250"/>
-<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_01.png" alt="Download" width="250"/>
-<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
-
 <b>Release version</b>: 
 
 <details><summary><i>rsHRF v2.2</i> <a href="">🏷</a> <a href="">📅</a></summary>
@@ -61,6 +55,10 @@ Two types of connectivity analyses have been added to the processing pipeline:
 <br>
 
 </details>
+
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/download_01.png" alt="Download" width="250"/>
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_01.png" alt="Download" width="250"/>
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
 
 ### Set up: Install as an SPM toolbox
 ### standalone: use separet functions (for cluster usage); connectivity only available as part of SPM plugin 
