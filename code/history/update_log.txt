@@ -1,3 +1,5 @@
+code:
+
 ------ v2.2, 201909 ----------- 
 Change the GUI (add surface analysis panel and Display).
 Add rsHRF_viewer.m for HRF shapes visualization.
@@ -9,4 +11,9 @@ Add a m-file (rsHRF_estimation_impulseest.m, see code for help) for Nonparametri
 
 ------ v2.1, 201908 ----------- 
 Add suface-based analysis module. 
+-----------------------
+
+------ v2.0, 201901 ----------- 
+Add functional (Pearson/Spearman correlation) and effective (Pairwise/Conditional/Partially Conditioned Granger causality) connectivity analysis module.
+Add rsHRF_install_SPM.m to facilitate the installation of the SPM plugin.
 -----------------------
