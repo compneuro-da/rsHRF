@@ -64,35 +64,33 @@ Ater downloading the release version of your choice, you can either use the scri
 
 1. <p align="justify"> <b>Extract the <i>.zip</i> folder and move it to <code>./SPM/toolbox/rsHRF</code></b>: After downloading a specific <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> as a <i>.zip</i> folder in <code>Downloads</code>, you first have to extract the <i>.zip</i> folder and move the extracted folder, along with its content to <code>./SPM/toolbox/rsHRF</code>. You can do this by running <a href="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> in the Command Window opened within the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder. 
 
-2. 
+2. <p align="justify"> There are two separate GUIs: one for <i>rsHRF retrieval and deconvolution</i> and one for <i>rsHRF connectivity analysis</i>. In order to open them, type respectively <code>rsHRF</code> and <code>rsHRF conn</code> in the terminal.  
+	
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_GUI_v2.2.png?raw=true" alt="Download" width="250"/>
+	
 <!--
 1. Extract all
 2. to spm tooloxes
 3. open matlab
 4. in command line
--->
-
-.
-
 which spm version?? 
     * Run code in Command Window (within <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder)
       >> rsHRF_install_SPM
-       --> SPM should be installed
-       --> Codes will be copied to ./SPM/toolbox/rsHRF -- link to folder?? 
+       -- SPM should be installed
+       -- Codes will be copied to ./SPM/toolbox/rsHRF -- link to folder?? 
 			             = spm('Dir')
     * Or add it into ./SPM/toolbox/
-
 3. Start <abbr title="resting-state hemodynamic response function">rsHRF</abbr>
-
 4. Start connectivity analysis
+-->
 
-
+<!--
 ```matlab
 rsHRF_install_SPM %haha
 ```
-
 ```xml
 <myxml>
    <someElement />  
 </myxml>
 ```
+-->
