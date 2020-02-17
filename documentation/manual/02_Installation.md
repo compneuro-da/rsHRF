@@ -63,7 +63,7 @@ addpath(genpath(spmdir));
 
 # Setup
 ## Install the SPM toolbox
-<p align="justify">After downloading the release version of your choice, you can either use the scripts in the <code>rsHRF/code/</code> folder as a MATLAB Standalone or install the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox as an <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
+<p align="justify">After downloading the release version of your choice, you can either choose to use the scripts in the <code>rsHRF/code/</code> folder as a MATLAB Standalone or to install the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox as an <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
 
 <b>MATLAB Standalone.</b> The MATLAB Standalone is currently only available for voxel-wise <abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation and deconvolution as well as parameter retrieval (<abbr title="response height">RH</abbr>, <abbr title="time to peak">TTP</abbr>, and <abbr title="full width at half maximum">FWHM</abbr>). Demo scripts to use the functions in the <code>rsHRF/code/</code> folder can be found in the <code>rsHRF/documentation/demo/</code> folder. The demo scripts can easly be adapted into a function for usage on your High Performance Computer. [<abbr title="Work In Progress"><i>WIP</i></abbr>] [EXAMPLE] 
 	
