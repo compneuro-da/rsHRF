@@ -13,7 +13,7 @@ addpath(genpath(spmdir));
  ```
 
 # Download the release version of your choice
-<p align="justify">To download the release version of your choice (i.e. either <a href="#v1.0">v1.0</a>, <a href="#v2.0">v2.0</a>, or <a href="#v2.2">v2.2</a>) as a <i>.zip</i> folder in your <code>Downloads</code> folder, click on the corresponding 🏷 here below. For each release version, the main code modifications are listed; open the collapsibles to have a closer look. For more information, head over to the HISTORY PAGE!</p> <!-- The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).--> 
+<p align="justify">To download the release version of your choice (i.e. either <a href="#v1.0">v1.0</a>, <a href="#v2.0">v2.0</a>, or <a href="#v2.2">v2.2</a>) as a <i>.zip</i> folder in your <code>Downloads</code> folder, click on the corresponding 🏷 here below. For each release version, the main <i>code</i> modifications are listed; open the collapsibles to have a closer look. For more information, head over to the HISTORY PAGE!</p> <!-- The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).--> 
 
 <b>Release version</b>: 
 
