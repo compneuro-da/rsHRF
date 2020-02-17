@@ -66,7 +66,7 @@ Ater downloading the release version of your choice, you can either use the scri
 
 2. <p align="justify"> There are two separate GUIs: one for <i>rsHRF retrieval and deconvolution</i> and one for <i>rsHRF connectivity analysis</i>. In order to open them, type respectively <code>rsHRF</code> and <code>rsHRF conn</code> in the terminal.  
 	
-<img align="left" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_GUI_v2.2.png?raw=true" alt="Download" width="250"/>
+<img align="center" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_GUI_v2.2.png?raw=true" alt="Download" width="600"/>
 	
 <!--
 1. Extract all
