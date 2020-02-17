@@ -13,7 +13,7 @@ addpath(genpath(spmdir));
  ```
 
 # Download the release version of your choice
-<p align="justify">To download the release version of your choice (i.e. either <a href="#v1.0">v1.0</a>, <a href="#v2.0">v2.0</a>, or <a href="#v2.2">v2.2</a>) as a <i>.zip</i> folder in your <code>Downloads</code> folder, click on the corresponding 🏷 here below. For each release version, the main modifications are listed; open the collapsibles to have a closer look. For more information, head over to the HISTORY PAGE!</p> <!-- The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).--> 
+<p align="justify">To download the release version of your choice (i.e. either <a href="#v1.0">v1.0</a>, <a href="#v2.0">v2.0</a>, or <a href="#v2.2">v2.2</a>) as a <i>.zip</i> folder in your <code>Downloads</code> folder, click on the corresponding 🏷 here below. For each release version, the main code modifications are listed; open the collapsibles to have a closer look. For more information, head over to the HISTORY PAGE!</p> <!-- The <a href="https://github.com/compneuro-da/rsHRF"><abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository</a> will always contain the latest version of the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<i>Jan 9, 2019</i>: <b>v2.0</b>).--> 
 
 <b>Release version</b>: 
 
@@ -39,10 +39,9 @@ addpath(genpath(spmdir));
 !  Main modifications (M):  
 ``` 
 
-Two types of connectivity analyses have been added to the processing pipeline: 
-
-* <p align="justify"><b>functional connectivity</b>: functional connectivity analyses have been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
-* <p align="justify"><b>effective connectivity</b>: effective connectivity analyses have been added to the processing pipeline; more specifically the Pairwise/Conditional/Partially Conditioned Granger causality methods.</p> -->
+* <p align="justify"><b>functional connectivity</b>: a functional connectivity analysis module has been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
+* <p align="justify"><b>effective connectivity</b>: an effective connectivity analysis module has been added to the processing pipeline, including the Pairwise/Conditional/Partially Conditioned Granger causality methods.</p>
+* <p align="justify"><b>rsHRF_install_SPM.m</b>: <code>rsHRF_install_SPM.m</code> has been added to the <code>code</code> folder to facilitate the installation of the SPM plugin.</p>
 <br>
 
 </details>
