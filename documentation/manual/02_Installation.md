@@ -18,9 +18,9 @@
 !  Main modifications (M):  
 ``` 
 
-<!--
-* <p align="justify"><b>sFIR</b>: </p>
-* <p align="justify"><b>regularization</b>: </p> -->
+* <p align="justify"><b>surface-based analysis</b>: a surface-based analysis module has been added to the processing pipeline.</p>
+* <p align="justify"><b>rsHRF_viewer.m</b>: the HRF shapes can be easily visualized by clicking on the view button in the GUI panel. XXX </p>
+<b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions are updated; a Gamma/Fourier basis function was added and the (s)FIR model has been updated. Nonparametric impulse response estimation was added as well, but only as code, not incorporated in the GUI. 
 <br>
 
 </details>
@@ -32,7 +32,6 @@
 !  Main modifications (M):  
 ``` 
 
-<!--
 Two types of connectivity analyses have been added to the processing pipeline: 
 
 * <p align="justify"><b>functional connectivity</b>: functional connectivity analyses have been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
