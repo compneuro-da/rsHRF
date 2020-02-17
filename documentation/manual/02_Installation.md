@@ -100,3 +100,5 @@ rsHRF_install_SPM %haha
 </myxml>
 ```
 -->
+
+[![alt text](https://github.com/compneuro-da/rsHRF/blob/update/img/example_hrf.png)](https://github.com/compneuro-da/rsHRF/blob/update/img/installation/rsHRF01_install_SPM_plugin_200217.mp4 "title")
