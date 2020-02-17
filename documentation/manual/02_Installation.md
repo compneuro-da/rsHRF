@@ -56,12 +56,11 @@ Two types of connectivity analyses have been added to the processing pipeline:
 
 </details>
 
-<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/download_01.png" alt="Download" width="250"/>
-<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_01.png" alt="Download" width="250"/>
-<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
+# Toolbox setup: install as an SPM toolbox
 
-### Set up: Install as an SPM toolbox
-### standalone: use separet functions (for cluster usage); connectivity only available as part of SPM plugin 
+Ater downloading the release version of your choice, you can either use the scripts in ´code´ as a standalone, in combination with a demo script you will find in ´documentation/demo´. The demo script can also be tranformed for usage on the cluster (see: XXX). However, for now, the connectivity scripts are not yet available as a standalone as they are incorporated in the SPM script. <!-- use separet functions (for cluster usage); connectivity only available as part of SPM plugin -->
+
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
 
 1. <p align="justify"> <b>Extract the <i>.zip</i> folder and move it to <code>./SPM/toolbox/rsHRF</code></b>: After downloading a specific <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> as a <i>.zip</i> folder in <code>Downloads</code>, you first have to extract the <i>.zip</i> folder and move the extracted folder, along with its content to <code>./SPM/toolbox/rsHRF</code>. <br><br> 💡 You can do this by running <a href="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> in the Command Window opened within the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder. 
 
