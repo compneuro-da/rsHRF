@@ -1,6 +1,6 @@
 <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> <br>
 
-⚙️ Installation
+⚙️ Installation <!-- LINK VIDEO -->
 ----
 __IMPORTANT__: Please use Google Chrome to browse the _Installation_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
