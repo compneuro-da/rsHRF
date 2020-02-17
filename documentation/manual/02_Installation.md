@@ -26,8 +26,8 @@ addpath(genpath(spmdir));
 
 * <p align="justify"><b>surface-based analysis</b>: a surface-based analysis module has been added to the processing pipeline which you can select by clicking on either the <code>vertices</code> (whole-brain analysis) or <code>ROI-surface</code> (ROI analyis) panel in the GUI.</p>
 * <p align="justify"><b>visualization of <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shapes</b>: the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shapes can be visualized by clicking on the <code>Display</code> panel in the GUI. The underlying script (<code>rsHRF_viewer.m</code> has been added to the <code>code</code> folder.</p>
-* <b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions have been updated, i.e. a Gamma/Fourier basis function (<code>rsHRF_estimation_temporal_basis.m</code>) and a m-file (<code>rsHRF_estimation_impulseest.m</code>) for non-parametric impulse response estimation (which is not included in the rsHRF GUI) have been added, along with an an update of the (s)FIR model (<code>rsHRF_estimation_FIR.m</code>). 
-* <b>connectivity analysis</b>: multivariate Granger causality analysis  has been added to the processing pipeline.</p>
+* <b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions have been updated, i.e. a Gamma/Fourier basis function (<code>rsHRF_estimation_temporal_basis.m</code>) and a m-file (<code>rsHRF_estimation_impulseest.m</code>) for non-parametric impulse response estimation (which is not included in the rsHRF GUI) have been added, along with an an update of the (s)FIR model (<code>rsHRF_estimation_FIR.m</code>).</p> 
+* <b>connectivity analysis</b>: a m-file (<code>rsHRF_mvgc.m</code>) for multivariate Granger causality analysis  has been added to the processing pipeline.</p>
 <br>
 
 </details>
