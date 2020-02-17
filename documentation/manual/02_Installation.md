@@ -78,12 +78,11 @@ addpath(genpath(spmdir));
 
 <p align="justify"> <b>Open the rsHRF GUI.</b> <br> There are two separate GUIs: one for <i>rsHRF retrieval and deconvolution</i> and one for <i>rsHRF connectivity analysis</i>. In order to open them, type respectively <code>rsHRF</code> and <code>rsHRF conn</code> in the MATLAB Command Window. You can also open them using the SPM GUI. To do so, go to the SPM folder and type spm fmri in the MATLAB Command Window. Once the SPM GUI has appeared, you go to the drop-down toolbox option under the display button where you select the rsHRF toolbox. By doing so, the rsHRF GUI will open.
 	
-
+<!--
 <div style="width:100%; padding-bottom:56.25%; position:relative;">
-
   <iframe src="https://github.com/compneuro-da/rsHRF/blob/update/img/installation/tutorial.html" style="position:absolute; top:0px; left:0px; width:100%; height:100%; border: none; overflow: hidden;"></iframe>
-
 </div>
+-->
 
 <!--
 1. Extract all
