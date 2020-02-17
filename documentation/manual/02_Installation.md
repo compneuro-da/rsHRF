@@ -41,7 +41,7 @@ addpath(genpath(spmdir));
 
 * <p align="justify"><b>functional connectivity</b>: a functional connectivity analysis module has been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
 * <p align="justify"><b>effective connectivity</b>: an effective connectivity analysis module has been added to the processing pipeline, including the Pairwise/Conditional/Partially Conditioned Granger causality methods.</p>
-* <p align="justify"><b>rsHRF_install_SPM.m</b>: <a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> has been added to the <code>code</code> folder to facilitate the installation of the SPM plugin.</p>
+* <p align="justify"><b>rsHRF_install_SPM.m</b>: <a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> has been added to the <code>code</code> folder to facilitate the installation of the <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
 <br>
 
 </details>
@@ -61,9 +61,12 @@ addpath(genpath(spmdir));
 
 </details>
 
-# Setup: install and open as an SPM toolbox
-
-Ater downloading the release version of your choice, you can either use the scripts in ´code´ as a standalone, in combination with a demo script you will find in ´documentation/demo´ or as an SPM plugin with the GUI. The demo script can also be tranformed for usage on the cluster (see: XXX). However, for now, the connectivity scripts are not yet available as a standalone as they are incorporated in the SPM script. <!-- use separet functions (for cluster usage); connectivity only available as part of SPM plugin --> Follow the instructions. For more information, look at the ppt or watch the narrated video!
+# Setup
+## Install the SPM toolbox
+<p align="justify">After downloading the release version of your choice, you can either use the scripts in the <code>code</code> folder as a MATLAB Standalone or install the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox as an <abbr title="statistical parametric mapping">SPM</abbr> plugin. The MATLAB Standalone version is currently only available for voxel-wise <abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation and deconvolution<sup><a href="https://github.com/compneuro-da/rsHRF/commits/master/wgr_rshrf_estimation_canonhrf2dd_par2.m" title="wgr_rshrf_estimation_canonhrf2dd_par2.m">1</a></sup> as well as parameter retrieval<sup><a href="https://github.com/compneuro-da/rsHRF/commits/master/wgr_get_parameters.m" title="wgr_get_parameters.m">2</a></sup> (<abbr title="response height">RH</abbr>, <abbr title="time to peak">TTP</abbr>, and <abbr title="full width at half maximum">FWHM</abbr>). Demo scripts to use the functions in the <code>rsHRF/code/</code> folder can be found in the <code>rsHRF/documentation/demo/>/code> folder; the demo scripts can easly be adapted into a function for usage on a High Performance Computer. [<abbr title="Work In Progress"><i>WIP</i></abbr>] [EXAMPLE] 
+	
+	
+	The demo script can also be tranformed for usage on the cluster (see: XXX). However, for now, the connectivity scripts are not yet available as a standalone as they are incorporated in the SPM script. <!-- use separet functions (for cluster usage); connectivity only available as part of SPM plugin --> Follow the instructions. For more information, look at the ppt or watch the narrated video!
 
 <img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
 
