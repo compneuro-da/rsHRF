@@ -62,9 +62,9 @@ Ater downloading the release version of your choice, you can either use the scri
 
 <img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
 
-1. <p align="justify"> <b>Extract the <i>.zip</i> folder and move it to <code>./SPM/toolbox/rsHRF</code></b>: After downloading a specific <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> as a <i>.zip</i> folder in <code>Downloads</code>, you first have to extract the <i>.zip</i> folder and move the extracted folder, along with its content to <code>./SPM/toolbox/rsHRF</code>. You can do this by running <a href="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> in the Command Window opened within the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder. 
+1. <p align="justify"> <b>Extract the <i>.zip</i> folder and move it to <code>./SPM/toolbox/rsHRF</code>.</b> <br> After downloading a specific <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> as a <i>.zip</i> folder in <code>Downloads</code>, you first have to extract the <i>.zip</i> folder and move the extracted folder, along with its content to <code>./SPM/toolbox/rsHRF</code>. You can do this by running <a href="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> in the Command Window opened within the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder. 
 
-2. <p align="justify"> There are two separate GUIs: one for <i>rsHRF retrieval and deconvolution</i> and one for <i>rsHRF connectivity analysis</i>. In order to open them, type respectively <code>rsHRF</code> and <code>rsHRF conn</code> in the MATLAB Command Window.  
+2. <p align="justify"> <b>Open the rsHRF GUI.</b> <br> There are two separate GUIs: one for <i>rsHRF retrieval and deconvolution</i> and one for <i>rsHRF connectivity analysis</i>. In order to open them, type respectively <code>rsHRF</code> and <code>rsHRF conn</code> in the MATLAB Command Window.  
 	
 <img align="center" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_GUI_v2.2.png?raw=true" alt="Download" width="600"/>
 	
