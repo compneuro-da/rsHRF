@@ -64,10 +64,10 @@ Ater downloading the release version of your choice, you can either use the scri
 
 1. <p align="justify"> <b>Extract the <i>.zip</i> folder and move it to <code>./SPM/toolbox/rsHRF</code>.</b> <br> After downloading a specific <abbr title="statistical parametric mapping">SPM</abbr> plugin <a title="release version">🏷</a> as a <i>.zip</i> folder in <code>Downloads</code>, you first have to extract the <i>.zip</i> folder and move the extracted folder, along with its content to <code>./SPM/toolbox/rsHRF</code>. You can do this by running <a href="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> in the Command Window opened within the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder. 
 
-2. <p align="justify"> <b>Open the rsHRF GUI.</b> <br> There are two separate GUIs: one for <i>rsHRF retrieval and deconvolution</i> and one for <i>rsHRF connectivity analysis</i>. In order to open them, type respectively <code>rsHRF</code> and <code>rsHRF conn</code> in the MATLAB Command Window.  
+2. <p align="justify"> <b>Open the rsHRF GUI.</b> <br> There are two separate GUIs: one for <i>rsHRF retrieval and deconvolution</i> and one for <i>rsHRF connectivity analysis</i>. In order to open them, type respectively <code>rsHRF</code> and <code>rsHRF conn</code> in the MATLAB Command Window. You can also open them using the SPM GUI. To do so, go to the SPM folder and type spm fmri in the Command Window. Once the SPM GUI has appeared, you go to the drop-down toolbox option under the display button where you select the rsHRF toolbox. By doing so, the rsHRF GUI will open.
 	
 <img align="center" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_GUI_v2.2.png?raw=true" alt="Download" width="600"/>
-	
+
 <!--
 1. Extract all
 2. to spm tooloxes
