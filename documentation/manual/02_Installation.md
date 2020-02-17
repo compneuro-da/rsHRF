@@ -69,10 +69,10 @@ addpath(genpath(spmdir));
 	
 <!-- The demo script can also be tranformed for usage on the cluster (see: XXX). However, for now, the connectivity scripts are not yet available as a standalone as they are incorporated in the SPM script.  use separet functions (for cluster usage); connectivity only available as part of SPM plugin  Follow the instructions. For more information, look at the ppt or watch the narrated video! -->
 
+<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="250"/>
+
 2. If you want to install the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox as an <b><abbr title="statistical parametric mapping">SPM</abbr> plugin</b>, extract the <i>.zip</i> folder in your <code>Downloads</code> folder and move the extracted folder to <code>./SPM/toolbox/rsHRF</code>. To do this, open the the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> folder and run the <a href="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> script in the Command Window. All codes within the downloaded <abbr title="resting-state hemodynamic response function">rsHRF</abbr> 
 folder will be copied to a folder named <abbr title="resting-state hemodynamic response function">rsHRF</abbr> located in the <abbr title="statistical parametric mapping">SPM</abbr>toolbox folder.  
-
-<img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/install_02.png" alt="Download" width="400"/>
 
 ## Open the rsHRF GUI
 
