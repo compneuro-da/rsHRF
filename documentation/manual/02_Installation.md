@@ -68,6 +68,12 @@ Ater downloading the release version of your choice, you can either use the scri
 	
 <img align="center" src="https://github.com/compneuro-da/rsHRF/blob/update/img/rsHRF_GUI_v2.2.png?raw=true" alt="Download" width="600"/>
 
+<div style="width:100%; padding-bottom:56.25%; position:relative;">
+
+  <iframe src="https://github.com/compneuro-da/rsHRF/blob/update/img/installation/tutorial.html" style="position:absolute; top:0px; left:0px; width:100%; height:100%; border: none; overflow: hidden;"></iframe>
+
+</div>
+
 <!--
 1. Extract all
 2. to spm tooloxes
