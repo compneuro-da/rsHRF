@@ -56,7 +56,7 @@ Two types of connectivity analyses have been added to the processing pipeline:
 
 </details>
 
-# Toolbox setup: install as an SPM toolbox
+# Setup: install as an SPM toolbox
 
 Ater downloading the release version of your choice, you can either use the scripts in ´code´ as a standalone, in combination with a demo script you will find in ´documentation/demo´. The demo script can also be tranformed for usage on the cluster (see: XXX). However, for now, the connectivity scripts are not yet available as a standalone as they are incorporated in the SPM script. <!-- use separet functions (for cluster usage); connectivity only available as part of SPM plugin -->
 
