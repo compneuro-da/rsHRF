@@ -1,7 +1,7 @@
 <a name="top">
 <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> <br>
 
-⚙️ Installation <!-- LINK VIDEO --> 
+⚙️ Installation 
 ----
 __IMPORTANT__: Please use Google Chrome to browse the _Installation_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
@@ -62,7 +62,7 @@ addpath(genpath(spmdir));
 
 </details>
 
-# Setup – :video_camera:
+# Setup – :video_camera: <!-- LINK TUTORIAL VIDEO --> 
 ## Install the SPM toolbox
 <p align="justify">After downloading the release version of your choice, you can either choose to use the scripts in the <code>rsHRF/code/</code> folder as a MATLAB Standalone or to install the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox as an <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
 
