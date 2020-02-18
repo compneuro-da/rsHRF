@@ -5,15 +5,15 @@
 __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
 # Overview: The basic idea 
-<img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="450"/> 
+<img align="left" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> 
 <!-- <img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="800"/> -->
 
-<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from voxel-wise (or vertex-wise) resting-state fMRI BOLD signal. It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape, using one of the <abbr title="hemodynamic response function">HRF</abbr> basis functions, namely: <ol>
+<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from voxel-wise (or vertex-wise) resting-state fMRI BOLD signal. It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape, using one of the <abbr title="hemodynamic response function">HRF</abbr> basis functions, namely: <ul>
   <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><abbr title="canonical HRF with its delay and dispersion derivatives"><i>canon2dd</i></abbr></a></li>
   <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><abbr title="(smoothed) Finite Impulse Response basis functions"><i>(s)FIR</i></abbr></li>
     <li>update of the (s)FIR model (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>)</li>
   <li>a Gamma/Fourier basis function (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a></li>
-  <li>(<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) for non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>)</li>
+  <li>(<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) for non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>)</li></ul>
   
   the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response.
 
