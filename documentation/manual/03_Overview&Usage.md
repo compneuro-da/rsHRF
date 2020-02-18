@@ -17,19 +17,34 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 </ul></ol></p>
 
 # Usage 
-<p align="justify">Once that the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> has been retrieved for each voxel/vertex in the brain, one can: <ol><li> <i>deconvolve the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> from the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series</i> (for example to improve lag-based connectivity estimates);</li> <li><i>map the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shape parameters</i> everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator [[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)].</li></ol></p>
+<p align="justify">Once that the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> has been retrieved for each voxel/vertex in the brain, you can use it to:
+ 
+ <ol><li><i>deconvolve the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> from the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series</i> (for example to improve lag-based connectivity estimates);</li> 
+ 
+ <li><i>map the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shape </i> onto the brain surface (including white matter), and use it as a pathophysiological indicator.<!--[[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]--> <!--The  shape of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> can be characterized by three parameters, namely <abbr title="response height">RH</abbr>, <abbr title="time to peak">TTP</abbr>, and <abbr title="full width at half maximum">FWHM</abbr>)--></li></ol>
 
+<!--
+<b>rsHRF deconvolution.</b> Improve lag-based connectivity estimates.
+<b>rsHRF retrieval.</b> The rsHRF shape as a pathophysiological indicator. -->
+<!-- <details><summary><b></b></summary>
+</details> -->
 <!--rsHRF different for each voxel in the brain [REF].-->
 
+<!--
 <p align="justify"><b>use shape as a biomarker</b>to retrieve the shape of the HRF concretized by three HRF parameters (see Figure 4); thee then use them in multivariate model; or look at some of them sepatetely
 , or one can map the shape parameters everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator [[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]. </p>
-<!-- <img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="800"/> --> 
+-->
 <!-- collapsible -->
+<!--
 <p align="justify"><b>eliminate time-lag confounds.</b> Once that the HRF has been retrieved for each voxel/vertex, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates)
   to deconvolve the resting-state signal and ilimante timing confounds (as the HRF shape is different for each voxel in the brain, the time to peak is different as well; therefore even as two voxels would have a pseudo-event at the same time, the timing of the corresponding neuronal events might not coincide (see FIgure 3 as an example). As functional connectivity analysis is built on associating BOLD events on two different spatial locations but at the same time; elliminating such time confounds is of essence [REF].</p>
+-->
 
-
-  the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response.
+<!--
+  the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response. -->
+  
+  <!--
+  [[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)] -->
 
 # References
 
