@@ -19,17 +19,19 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 # Usage 
 <p align="justify">Once that the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> has been retrieved for each voxel/vertex in the brain, you can:
  
-<details><summary><i>deconvolve the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> from the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series</i> (for example to improve lag-based connectivity estimates);</summary>
- 
-</details>
- 
-<details><summary><i>use the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> as a pathophysiological indicator</i> (by mapping the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shape onto the brain surface and looking at the inter-subject variability).<!--[[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]--></summary><br>
+<details><summary><i>use the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> as a pathophysiological indicator</i> (by mapping the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shape onto the brain surface and looking at the inter-subject variability);<!--[[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]--></summary><br>
 
 <img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="350"/>
 <p align="justify">The shape of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> can be characterized by <b>three parameters</b>, namely response height (<abbr title="response height"><i>RH</i></abbr>), time to peak (<abbr title="time to peak"><i>TTP</i></abbr>), and Full Width at Half Maximum (<abbr title="Full Width at Half Maximum"><i>FWHM</i></abbr>). Each of these parameters can be mapped onto the brain surface (see Figure for an example: full brain map of the response height estimated using the Finite Impulse Response basis functions). Note that the full brain map covers the full brain surface, including white matter and <abbr title="cerebrospinal fluid">CSF</abbr>.</p>
  
 <!-- , including white matter,-->
 
+</details>
+
+<details><summary><i>deconvolve the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> from the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series</i> (for example to improve lag-based connectivity estimates);</summary>
+ 
+<p align="justify">The shape of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr>, and thus the time to peak (<abbr title="time to peak"><i>TTP</i></abbr>), differs for each voxel/vertex in the brain. As a result, two different voxels/vertices might have a pseudo-event at the same time, but linked to disparate neuronal <abbr title="resting-state hemodynamic response function">rsHRF</abbr> onsets (for an schematic example, see Figure). As functional connectivity analysis is built on associating BOLD events on two different spatial locations but at the same time; elliminating such time confounds is of essence [REF].
+ 
 </details>
 
 <!--
