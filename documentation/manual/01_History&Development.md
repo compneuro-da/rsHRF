@@ -309,7 +309,7 @@ Files with:
 </details></td></tr></tbody>
 </table>
 
-### References: 
+# References: 
 
 * <a name="ref1">Lindquist, M. A., Waugh, C., & Wager, T. D. (2007). Modeling state-related fMRI activity using change-point theory. <i>NeuroImage</i>, <i>34</i>(3), 1125-1141. <https://doi.org/10.1016/j.neuroimage.2007.01.004> 
 * <a name="ref3">Song, X. W., Dong, Z. Y., Long, X. Y., Li, S. F., Zuo, X. N., Zhu, C. Z., ... & Zang, Y. F. (2011). REST: A toolkit for resting-state functional magnetic resonance imaging data processing. <i>PloS one</i>, <i>6</i>(9), e25031. <https://doi.org/10.1371/journal.pone.0025031> 
