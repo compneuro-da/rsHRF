@@ -4,20 +4,37 @@
 ----
 __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
-# Overview: The basic idea 
+# Overview 
 <img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> <!-- find other image to illustrate pseudo-point process + code to produce it -->
 <!-- <img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="800"/> -->
-
+<!-- add text here -->
 <p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from voxel-wise (or vertex-wise) resting-state fMRI BOLD signal. It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape, using one of the <abbr title="hemodynamic response function">HRF</abbr> basis functions, namely: <ul>
   <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><abbr title="canonical HRF with its delay and dispersion derivatives"><i>canon2dd</i></abbr></a></li>
   <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><abbr title="(smoothed) Finite Impulse Response basis functions"><i>(s)FIR</i></abbr></li>
     <li>update of the (s)FIR model (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>)</li>
   <li>a Gamma/Fourier basis function (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a></li>
   <li>(<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) for non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>)</li></ul>
-  
+ 
+ <!-- OHBM uitleg-->
+<p align="justify">In the Figure (for code see ...), NORMALIZED resting-state BOLD signal is illustrated; whenever the normalized signal exceeds a predefined treshold (i.e. SD = 1), that point in time is being marked as pseudo-event, indicated by SYMBOL. Therefafeter, the question remains how far the pseudo-event lags after the neuronal event.  A model WHICH ONE is used to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape. </p>
+
+# Usage 
+<p align="justify">Then we can use it for two purposes:</p>
+
+## eliminate time-lag confounds 
+<p align="justify">Once that the HRF has been retrieved for each voxel/vertex, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates)
+  to deconvolve the resting-state signal and ilimante timing confounds (as the HRF shape is different for each voxel in the brain, the time to peak is different as well; therefore even as two voxels would have a pseudo-event at the same time, the timing of the corresponding neuronal events might not coincide (see FIgure 3 as an example). As functional connectivity analysis is built on associating BOLD events on two different spatial locations but at the same time; elliminating such time confounds is of essence [REF].</p>
+
+# use shape as a biomarker
+<p align="justify">to retrieve the shape of the HRF concretized by three HRF parameters (see Figure 4); thee then use them in multivariate model; or look at some of them sepatetely
+, or one can map the shape parameters everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator [[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]. </p>
+--> 
+--> can be visualized: how? 
+
+
   the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response.
 
-Once that the HRF has been retrieved for each voxel/vertex, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates), or one can map the shape parameters everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator [[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)].
+
 
 Usage: How to use the toolbox -
 -------------
