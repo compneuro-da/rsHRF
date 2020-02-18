@@ -1,4 +1,4 @@
-code:
+code SPM plugin - additions and modifications to v1.0:
 
 ------ v2.2, 201909 ----------- 
 Change the GUI (add surface analysis panel and Display).
