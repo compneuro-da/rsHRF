@@ -17,36 +17,45 @@ __IMPORTANT__: Please use Google Chrome to browse the _Workflow_ Page! If you do
 
 </details>
 
+<details><summary>Should the input data already be standardized (i.e. z-scored)?</summary> <!-- FAQ -->
 
- Outlier removal is only legit when conducting a whole-brain analysis. Whole-brain vs. ROI? 
+<!-- to check; already included [?] -->
 
+</details>
 
-<!-- collapsibles -->
-### File format
+<details><summary>Should the input data already be denoised?</summary> <!-- FAQ -->
 
-### z-scoring <!-- to check; already included [?] -->
-### Denoising
-The input is voxelwise/vertexwise BOLD signal, already preprocessed according to your favorite recipe. something like: <!-- cf. e-mail OHBM - what to add? -->
+The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe, which could include: <!-- cf. e-mail OHBM - what to add? -->
 * nuisance variable regression 
 * bandpass filter in the 0.01-0.08 Hz interval
-* despike
-(These denoising steps are also provided in the SPM plugin.)
-It is possible to use a temporal mask to exclude some time points (for example after scrubbing).
-temporal_mask: generated from scrubbing.
+* despiking
+
+These denoising steps are also provided in the SPM plugin.
+It is also possible to use a <code>temporal mask</code> to exclude some time points (for example after scrubbing).
+<!-- temporal_mask: generated from scrubbing. -->
+
+</details>
+
+# Analysis:
+<details><summary>Whole-brain or ROI analysis?</summary> <!-- FAQ -->
+
+Both analyses are supported. However, outlier removal is only legit when conducting a whole-brain analysis.
+
+</details>
 
 ## rsHRF retrieval and deconvolution
---> standalone: script demo 
---> SPM plugin:
- SPM plugin
--------------
 
+<!--
+-- standalone: script demo 
+-- SPM plugin:
+SPM plugin
 The script spm_rsHRF.m is the main one, and it calls rsHRF.m. These two files are specific to the SPM plugin. 
-
 See [rsHRF_toolbox.pptx](https://github.com/guorongwu/rsHRF/raw/master/rsHRF_toolbox.pptx) for more details (Installation/Usage/Outputs).
 ![rsHRF GUI](https://github.com/guorongwu/rsHRF_data/raw/master/rsHRF_GUI.png)
-    --> two videos
-    --> can be visualized: how? one video; plus image batch
-    --> batch demo (in .zip)
-    
+    -- two videos
+    -- can be visualized: how? one video; plus image batch
+    -- batch demo (in .zip)
+--> 
+
 ## Connectivity analysis
 The connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) is only provided in the rsHRF SPM plugin. 
