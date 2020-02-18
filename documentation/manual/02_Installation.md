@@ -26,8 +26,8 @@ addpath(genpath(spmdir));
 ``` 
 
 * <p align="justify"><b>surface-based analysis</b>: a surface-based analysis module has been added to the processing pipeline which you can select by clicking on either the <code>vertices</code> (whole-brain analysis) or <code>ROI-surface</code> (ROI analyis) panel in the <abbr title="graphical user interface">GUI</abbr>.</p>
+* <b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions have been updated, i.e. a Gamma/Fourier basis function (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>) and a m-file (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) for non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>) have been added, along with an an update of the (s)FIR model (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>).</p>
 * <p align="justify"><b>visualization of <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shapes</b>: the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shapes can be visualized by clicking on the <code>Display</code> panel in the <abbr title="graphical user interface">GUI</abbr>. The underlying script (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_viewer.m"><code>rsHRF_viewer.m</code></a>) has been added to the <code>code</code> folder.</p>
-* <b><abbr title="resting-state hemodynamic response function">rsHRF</abbr> estimation method</b>: the HRF basis functions have been updated, i.e. a Gamma/Fourier basis function (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>) and a m-file (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) for non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>) have been added, along with an an update of the (s)FIR model (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>).</p> 
 * <b>connectivity analysis</b>: a m-file (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_mvgc.m"><code>rsHRF_mvgc.m</code></a>) for multivariate Granger causality analysis  has been added to the processing pipeline.</p>
 <br>
 
@@ -40,10 +40,10 @@ addpath(genpath(spmdir));
 !  Main modifications (M):  
 ``` 
 
-* <p align="justify"><b>functional connectivity</b>: a functional connectivity analysis module has been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
-* <p align="justify"><b>effective connectivity</b>: an effective connectivity analysis module has been added to the processing pipeline, including the Pairwise/Conditional/Partially Conditioned Granger causality methods.</p>
 * <p align="justify"><b>rsHRF_install_SPM.m</b>: <a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> has been added to the <code>code</code> folder to facilitate the installation of the <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
 <br>
+* <p align="justify"><b>functional connectivity</b>: a functional connectivity analysis module has been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
+* <p align="justify"><b>effective connectivity</b>: an effective connectivity analysis module has been added to the processing pipeline, including the Pairwise/Conditional/Partially Conditioned Granger causality methods.</p>
 
 </details>
 
