@@ -11,11 +11,11 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
  <li>the <i>shape of the estimated <abbr title="hemodynamic response function">HRF</abbr></i> which will depend on the by-the-toolbox predefined <abbr title="hemodynamic response function">HRF</abbr> basis function. Users of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<a href=""><b>v2.2</b></a>) can choose one of five options:</li><br> 
 
 <ul>
-<li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><code>wgr_rshrf_estimation_canonhrf2dd_par2.m</code></a>: a canonical HRF with its delay and dispersion derivatives – <i>canon2dd</i>;
-<li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><code>wgr_rsHRF_FIR.m</code></a>: (smoothed) Finite Impulse Response basis functions – <i>(s)FIR</i></li>;
-<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>: an update of the (smoothed) Finite Impulse Response basis functions – <i>updated (s)FIR</i></li>;
-<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>: a Gamma/Fourier basis function</li>;
-<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>: non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>)</li>.
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><code>wgr_rshrf_estimation_canonhrf2dd_par2.m</code></a>: a canonical HRF with its delay and dispersion derivatives – <i>canon2dd</i>;</li>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><code>wgr_rsHRF_FIR.m</code></a>: (smoothed) Finite Impulse Response basis functions – <i>(s)FIR</i>;</li>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>: an update of the (smoothed) Finite Impulse Response basis functions – <i>updated (s)FIR</i>;</li>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>: a Gamma/Fourier basis function;</li>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>: non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>).</li>
 </ul>
 
 # Usage 
