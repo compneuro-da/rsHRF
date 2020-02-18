@@ -19,63 +19,18 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 <p align="justify">In the Figure (for code see ...), NORMALIZED resting-state BOLD signal is illustrated; whenever the normalized signal exceeds a predefined treshold (i.e. SD = 1), that point in time is being marked as pseudo-event, indicated by SYMBOL. Therefafeter, the question remains how far the pseudo-event lags after the neuronal event.  A model WHICH ONE is used to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape. </p>
 
 # Usage 
-<p align="justify">Then we can use it for two purposes:</p>
-
-<p align="justify"><b>eliminate time-lag confounds.</b> Once that the HRF has been retrieved for each voxel/vertex, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates)
-  to deconvolve the resting-state signal and ilimante timing confounds (as the HRF shape is different for each voxel in the brain, the time to peak is different as well; therefore even as two voxels would have a pseudo-event at the same time, the timing of the corresponding neuronal events might not coincide (see FIgure 3 as an example). As functional connectivity analysis is built on associating BOLD events on two different spatial locations but at the same time; elliminating such time confounds is of essence [REF].</p>
+## Objectives
+<p align="justify">HRF different for each voxel in the brain [REF] Then we can use it for two purposes:</p>
 
 <p align="justify"><b>use shape as a biomarker</b>to retrieve the shape of the HRF concretized by three HRF parameters (see Figure 4); thee then use them in multivariate model; or look at some of them sepatetely
 , or one can map the shape parameters everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator [[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]. </p>
---> 
---> can be visualized: how? 
+
+<!-- collapsible -->
+<p align="justify"><b>eliminate time-lag confounds.</b> Once that the HRF has been retrieved for each voxel/vertex, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates)
+  to deconvolve the resting-state signal and ilimante timing confounds (as the HRF shape is different for each voxel in the brain, the time to peak is different as well; therefore even as two voxels would have a pseudo-event at the same time, the timing of the corresponding neuronal events might not coincide (see FIgure 3 as an example). As functional connectivity analysis is built on associating BOLD events on two different spatial locations but at the same time; elliminating such time confounds is of essence [REF].</p>
 
 
   the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response.
-
-
-
-Usage: How to use the toolbox -
--------------
-STandalone: 
-Cf. as metiooned demo and code
-AFter downloading and installing the release version of your choice (i.e. either v1.0, v2.0, or v2.2) , we can start  
-Matlab standalone
-
-OPTIONS:
-
-N.B. it is still necessary to have SPM in the path, since some of the functions there are used.
-
-The input is voxelwise/vertexwise BOLD signal, already preprocessed according to your favorite recipe. something like: <!-- LINK TUTORIAL VIDEO --> 
-
-* nuisance variable regression 
-* bandpass filter in the 0.01-0.08 Hz interval
-* despike
-
-(These denoising steps are also provided in the SPM plugin.)
-
-The input can be images (3D or 4D), mesh (2D), or directly matrices of [observation x voxels(vertices)].
-It is possible to use a temporal mask to exclude some time points (for example after scrubbing).
-
-The demos allow you to run the analyses on several formats of input data.
-
-How to use the toolbox - SPM plugin
--------------
-
-The script spm_rsHRF.m is the main one, and it calls rsHRF.m. These two files are specific to the SPM plugin. 
-
-See [rsHRF_toolbox.pptx](https://github.com/guorongwu/rsHRF/raw/master/rsHRF_toolbox.pptx) for more details (Installation/Usage/Outputs).
-![rsHRF GUI](https://github.com/guorongwu/rsHRF_data/raw/master/rsHRF_GUI.png)
-
-The connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) is only provided in the rsHRF SPM plugin. 
-
-Flowcharts & videos!
-
-(Version 1.0 (2018) can be downloaded [here](https://github.com/compneuro-da/rsHRF_data/raw/master/rsHRF_v1_2018.zip))
-
-### add DEMOs (for each option) <!-- LINK TUTORIAL VIDEO + DEMO OPTIONS -->
-
-#### Start resting state hrf (in set-up) linked there!!
-
 
 **References**
 --------
