@@ -1,3 +1,4 @@
+<a name="top">
 <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> <br>
 
 📖  Overview and Usage
@@ -65,3 +66,5 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 * <a name="ref2">Wu, G. R., & Marinazzo, D. (2016). Sensitivity of the resting-state haemodynamic response function estimation to autonomic nervous system fluctuations. <i>Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences</i>, <i>374</i>(2067), 20150190. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2016_PTA.pdf)
 * <a name="ref3">Wu, G. R., & Marinazzo, D. (2015). <i>Retrieving the Hemodynamic Response Function in resting state fMRI: Methodology and applications</i> (No. e1621). PeerJ PrePrints. [Poster2016](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/poster_OHBM2016_HRF.pdf), [Poster2018](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/rs_HRF_OHBM2018_Daniele.pdf)
 * <a name="ref4">Wu, G. R., Di Perri, C., Charland-Verville, V., Martial, C., Carrière, M., Vanhaudenhuyse, A., ... & Marinazzo, D. (2019). Modulation of the spontaneous hemodynamic response function across levels of consciousness. <i>NeuroImage</i>, <i>200</i>, 450-459. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf) 
+
+<a href="#top">🔝</a>
