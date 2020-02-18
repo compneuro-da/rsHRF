@@ -1,25 +1,36 @@
 <a href="https://github.com/compneuro-da/rsHRF/blob/update/README.md#table-of-contents">:leftwards_arrow_with_hook:</a> <br>
 
 📖  Overview and Usage
--------------
+----
+__IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
-The basic idea 
--------------
+# Overview: The basic idea 
+<img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="450"/> 
+<!-- <img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="800"/> -->
 
-This toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from resting state fMRI BOLD voxel-wise (vertex-wise) signal.
-It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the HRF onset, as well as the HRF shape, using either the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response.
-
-![BOLD HRF](https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png)
+<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from voxel-wise (or vertex-wise) resting-state fMRI BOLD signal. It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape, using one of the <abbr title="hemodynamic response function">HRF</abbr> basis functions, namely: <ol>
+  <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><abbr title="canonical HRF with its delay and dispersion derivatives"><i>canon2dd</i></abbr></a></li>
+  <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><abbr title="(smoothed) Finite Impulse Response basis functions"><i>(s)FIR</i></abbr></li>
+    <li>update of the (s)FIR model (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>)</li>
+  <li>a Gamma/Fourier basis function (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a></li>
+  <li>(<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) for non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>)</li>
+  
+  the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response.
 
 Once that the HRF has been retrieved for each voxel/vertex, it can be deconvolved from the time series (for example to improve lag-based connectivity estimates), or one can map the shape parameters everywhere in the brain (including white matter), and use the shape as a pathophysiological indicator [[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)].
 
-![HRF map](https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png)
-
-How to use the toolbox - Matlab standalone
+Usage: How to use the toolbox -
 -------------
+STandalone: 
+Cf. as metiooned demo and code
+AFter downloading and installing the release version of your choice (i.e. either v1.0, v2.0, or v2.2) , we can start  
+Matlab standalone
+
+OPTIONS:
+
 N.B. it is still necessary to have SPM in the path, since some of the functions there are used.
 
-The input is voxelwise/vertexwise BOLD signal, already preprocessed according to your favorite recipe. something like:
+The input is voxelwise/vertexwise BOLD signal, already preprocessed according to your favorite recipe. something like: <!-- LINK TUTORIAL VIDEO --> 
 
 * nuisance variable regression 
 * bandpass filter in the 0.01-0.08 Hz interval
@@ -28,7 +39,6 @@ The input is voxelwise/vertexwise BOLD signal, already preprocessed according to
 (These denoising steps are also provided in the SPM plugin.)
 
 The input can be images (3D or 4D), mesh (2D), or directly matrices of [observation x voxels(vertices)].
-
 It is possible to use a temporal mask to exclude some time points (for example after scrubbing).
 
 The demos allow you to run the analyses on several formats of input data.
@@ -47,14 +57,10 @@ Flowcharts & videos!
 
 (Version 1.0 (2018) can be downloaded [here](https://github.com/compneuro-da/rsHRF_data/raw/master/rsHRF_v1_2018.zip))
 
-### add DEMOs (for each option)
+### add DEMOs (for each option) <!-- LINK TUTORIAL VIDEO + DEMO OPTIONS -->
 
 #### Start resting state hrf (in set-up) linked there!!
 
-which data to use? 
-
-1. input format: voxels, rois, signals
-2. 
 
 **References**
 --------
