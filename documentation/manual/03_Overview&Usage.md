@@ -8,12 +8,15 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 <img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> <!-- find other image to illustrate pseudo-point process + code to produce it -->
 <!-- <img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="800"/> -->
 <!-- add text here -->
-<p align="justify"><b>The basic idea.</b> The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from voxel-wise (or vertex-wise) resting-state <abbre title="functional Magnetic Resconance Imaging">fMRI</abbr> <abbre title="Blood Oxygen Level Dependant">BOLD</abbr> signal. It is based on point process theory [REF], and fits a model to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape, using one of the <abbr title="hemodynamic response function">HRF</abbr> basis functions, namely: <ul>
-  <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><abbr title="canonical HRF with its delay and dispersion derivatives"><i>canon2dd</i></abbr></a></li>
-  <li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><abbr title="(smoothed) Finite Impulse Response basis functions"><i>(s)FIR</i></abbr></li>
-    <li>update of the (s)FIR model (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>)</li>
-  <li>a Gamma/Fourier basis function (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a></li>
-  <li>(<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) for non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>)</li></ul>
+<p align="justify"><b>The basic idea.</b> According to the point process theory discrete BOLD events (i.e. pseudo-events in the absence of an external stimulus) govern the brain dynamics at rest (e.g. Tagliazucchi et al. 2012). The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the neuronal onsets of these pseudo-events with no explicit stimulus and timing for the <abbr title="hemodynamic response function">HRF</abbr> onset. To this end, the toolbox first identifies the pseudo-events, i.e. when the <i>standardized</i> resting-state BOLD signal crosses a given threshold (1 SD). Thereafter, a model is fitted to retrieve 1) the <b>optimal lag</b> between the pseudo-events and the neuronal (<abbr title="hemodynamic response function">HRF</abbr>) onset, as well as 2) the <b><abbr title="hemodynamic response function">HRF</abbr> shape</b>. The shape of the estimated <abbr title="hemodynamic response function">HRF</abbr> will depend on the by-the-toolbox predefined <abbr title="hemodynamic response function">HRF</abbr> basis function. Users of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (v2.2) can choose one of the 5 options defined here below: 
+
+<ul>
+<li> <a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rshrf_estimation_canonhrf2dd_par2.m"><code>wgr_rshrf_estimation_canonhrf2dd_par2.m</code></a>: a canonical HRF with its delay and dispersion derivatives (<i>canon2dd</i>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/master/wgr_rsHRF_FIR.m"><code>wgr_rsHRF_FIR.m</code></a>: (smoothed) Finite Impulse Response basis functions (<i>(s)FIR</i>)</li>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>: an update of the (smoothed) Finite Impulse Response basis functions (<i>updated (s)FIR</i>)</li>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>: a Gamma/Fourier basis function</li>
+<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>: non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>)</li>
+</ul>
  
  <!-- OHBM uitleg-->
 <p align="justify">In the Figure (for code see ...), NORMALIZED resting-state BOLD signal is illustrated; whenever the normalized signal exceeds a predefined treshold (i.e. SD = 1), that point in time is being marked as pseudo-event, indicated by SYMBOL. Therefafeter, the question remains how far the pseudo-event lags after the neuronal event.  A model WHICH ONE is used to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape. </p>
@@ -32,8 +35,7 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 
   the canonical shape with two derivatives, Gamma functions, Fourier set (Hanning), or a (smooth) Finite Impulse Response.
 
-**References**
---------
+# References
 
 1. Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo. "A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data." Medical Image Analysis, 2013, 17:365-374. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2013_MIA.pdf)
 
