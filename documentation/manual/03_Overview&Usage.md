@@ -5,10 +5,13 @@
 __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
 # Overview 
-<img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> <!-- find other image to illustrate pseudo-point process + code to produce it -->
+<figure>
+ <img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> <!-- find other image to illustrate pseudo-point process + code to produce it -->
+ <figcaption align="right">Fig.1 - Trulli, Puglia, Italy.</figcaption>
+</figure>
 <!-- <img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="800"/> -->
 <!-- add text here -->
-<p align="justify"><b>The basic idea.</b> According to the point process theory discrete BOLD events (i.e. pseudo-events in the absence of an external stimulus) govern the brain dynamics at rest (e.g. Tagliazucchi et al. 2012). The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the neuronal onsets of these pseudo-events with no explicit stimulus and timing for the <abbr title="hemodynamic response function">HRF</abbr> onset. To this end, the toolbox first identifies the pseudo-events, i.e. when the <i>standardized</i> resting-state BOLD signal crosses a given threshold (1 SD). Thereafter, a model is fitted to retrieve: <ol>
+<p align="justify"><b>The basic idea.</b> According to the point process theory discrete BOLD events (i.e. pseudo-events in the absence of an external stimulus) govern the brain dynamics at rest (e.g. Tagliazucchi et al. 2012). The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the neuronal onsets of these pseudo-events with no explicit stimulus and timing for the <abbr title="hemodynamic response function">HRF</abbr> onset. To this end, the toolbox first identifies the pseudo-events, i.e. when the <i>standardized</i> resting-state BOLD signal crosses a given threshold (1 SD; see Figure 1). Thereafter, a model is fitted to retrieve: <ol>
 <li>the <i>optimal lag</i> between the pseudo-events and the neuronal (<abbr title="hemodynamic response function">HRF</abbr>) onset; </li>
  <li>the <i>shape of the estimated <abbr title="hemodynamic response function">HRF</abbr></i> which will depend on the by-the-toolbox predefined <abbr title="hemodynamic response function">HRF</abbr> basis function. Users of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (v2.2) can choose one of 5 options:</li><br> 
 
