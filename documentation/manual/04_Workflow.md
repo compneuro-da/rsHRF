@@ -8,18 +8,16 @@ __IMPORTANT__: Please use Google Chrome to browse the _Workflow_ Page! If you do
 # Preprocessing 
 ## Input:
 
-<details><summary>What is the prefered data format?</summary> <!-- FAQ -->
+<details><summary>What is the prefered input data format?</summary> <!-- FAQ -->
 <br> <!-- insert image: batch: scans -->
-The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox allows you to run the analyses on several formats of input data: <ul>
- <li>4D NIfTI</li>
- <li>3D NIfTI</li>
- <li>extracted signals – [observation x voxels/vertices] (.mat)</li>
- <li>2D surface-based (.gii)</li></ul>
+<!-- <img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/input_01.png" alt="Input_Format" width="200"/> -->
+<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox allows you to run the analyses on several formats of input data: <ul><li>3D NIfTI;</li> <li>4D NIfTI;</li> <li>extracted signals (.mat) – [observation x voxels/vertices];</li> <li>2D surface-based (.gii) files.</li></p>
  
-<!-- The input can be images (3D or 4D), mesh (2D), or directly matrices of [observation x voxels/vertices]. The demos allow you to run the analyses on several formats of input data. -- as shown in the Flowchart [insert]-->
+<!-- The input can be images (3D or 4D), mesh (2D), or directly matrices of [observation x voxels/vertices]. The demos allow you to run the analyses on several formats of input data. As shown in the Flowchart [insert] -->
 
 </details>
- 
+
+
  Outlier removal is only legit when conducting a whole-brain analysis. Whole-brain vs. ROI? 
 
 
