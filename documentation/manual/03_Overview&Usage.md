@@ -17,11 +17,17 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 </ul></ol></p>
 
 # Usage 
-<p align="justify">Once that the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> has been retrieved for each voxel/vertex in the brain, you can use it to:
+<p align="justify">Once that the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> has been retrieved for each voxel/vertex in the brain, you can:
  
- <ol><li><i>deconvolve the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> from the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series</i> (for example to improve lag-based connectivity estimates);</li> 
+<details><summary><i>deconvolve the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> from the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series</i> (for example to improve lag-based connectivity estimates);</summary>
  
- <li><i>map the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shape </i> onto the brain surface (including white matter), and use it as a pathophysiological indicator.<!--[[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]--> <!--The  shape of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> can be characterized by three parameters, namely <abbr title="response height">RH</abbr>, <abbr title="time to peak">TTP</abbr>, and <abbr title="full width at half maximum">FWHM</abbr>)--></li></ol>
+</details>
+ 
+<details><summary><i>use the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> as a pathophysiological indicator</i> (by mapping the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> shape onto the brain surface and looking at the inter-subject variability).<!--[[4](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2019_NI.pdf)]--> <!--The  shape of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> can be characterized by three parameters, namely <abbr title="response height">RH</abbr>, <abbr title="time to peak">TTP</abbr>, and <abbr title="full width at half maximum">FWHM</abbr>)-->
+ 
+<!-- , including white matter,-->
+
+</details>
 
 <!--
 <b>rsHRF deconvolution.</b> Improve lag-based connectivity estimates.
