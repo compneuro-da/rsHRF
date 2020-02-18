@@ -5,7 +5,7 @@
 __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
 # Overview: The basic idea 
-<img align="left" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> 
+<img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> <!-- find other image to illustrate pseudo-point process + code to produce it -->
 <!-- <img align="center" src="https://github.com/guorongwu/rsHRF/raw/master/docs/FIR_Height_full_layout.png" alt="HRF_map" width="800"/> -->
 
 <p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the onsets of pseudo-events triggering an hemodynamic response from voxel-wise (or vertex-wise) resting-state fMRI BOLD signal. It is based on point process theory, and fits a model to retrieve the optimal lag between the events and the <abbr title="hemodynamic response function">HRF</abbr> onset, as well as the <abbr title="hemodynamic response function">HRF</abbr> shape, using one of the <abbr title="hemodynamic response function">HRF</abbr> basis functions, namely: <ul>
