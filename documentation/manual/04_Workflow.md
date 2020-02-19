@@ -14,16 +14,23 @@ __IMPORTANT__: Please use Google Chrome to browse the _Workflow_ Page! If you do
 <p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox allows you to run the analyses on several formats of input data: <ul><li>3D NIfTI;</li> <li>4D NIfTI;</li> <li>extracted signals (.mat) – [observation x voxels/vertices];</li> <li>2D surface-based (.gii) files.</li></p>
  
 <!-- The input can be images (3D or 4D), mesh (2D), or directly matrices of [observation x voxels/vertices]. The demos allow you to run the analyses on several formats of input data. As shown in the Flowchart [insert] -->
+<!-- example for every kind of input; .mat is ok (1 van de drie?); not for other two 
+examples are tested using MATLAB R2015b + which spm version
+
+<!--
+- nifti (3d & 4d)
+- mat: stand (ok)
+- 2g -->
 
 </details>
 
-<details><summary>Should the input data already be standardized (i.e. z-scored)?</summary> <!-- FAQ -->
+<details><summary>Should the input data already be standardized (i.e. z-scored)?</summary><br> <!-- FAQ -->
 
 <!-- to check; already included [?] -->
 
 </details>
 
-<details><summary>Should the input data already be denoised?</summary> <!-- FAQ -->
+<details><summary>Should the input data already be denoised?</summary><br> <!-- FAQ -->
 
 The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe, which could include: <!-- cf. e-mail OHBM - what to add? -->
 * nuisance variable regression 
@@ -39,23 +46,31 @@ It is also possible to use a <code>temporal mask</code> to exclude some time poi
 # Analysis:
 <details><summary>Whole-brain or ROI analysis?</summary> <!-- FAQ -->
 
-Both analyses are supported. However, outlier removal is only legit when conducting a whole-brain analysis.
+Both analyses are supported. However, outlier removal is only legit when conducting a whole-brain analysis. - in blokje tekst; 
+As mentioned in the installation page; the rsHRF toolbox consists of two main parts: retrieval & deconvultion + connectivity; both analysis can be performed on either whol-brain level or ROI level. However, outlier removal denoted by OMrl (see output example) is only legit when conducting whole brain analysis. rshrf retrieval and deconvl is available both in the matlab standalone as well as in the spm plugin; however connectivity analyis is currently only avalibale in the spm plugin. Here below, you can find an outline for workflow examples for both the standalone and the spm plugin. 
 
 </details>
 
-## rsHRF retrieval and deconvolution
+bugs!! tell us
 
-<!--
--- standalone: script demo 
--- SPM plugin:
+## rsHRF retrieval and deconvolution 
+
+<!-- for both the matlab standalone as well as the spm plugin, you can find a few examples; 
+matlab standalone; you can find the main scripts in; these will use the subfunctions (scripts) provide in the code folder
+the data needed, can be found; three different data types are used (remove bilgin?); one voxel of the a human connectome participant is used (which one?); which again demonstrates one of the values, the voxel-wise/vertex-wise level of the script. Vertex-wise exaple?
+The examples are demonstrated with the five different HRF basis functions: compare all five of them - same? document them; 
+-- standalone: script demo: test all + input&output
+-- SPM plugin: slide; demo batches
 SPM plugin
 The script spm_rsHRF.m is the main one, and it calls rsHRF.m. These two files are specific to the SPM plugin. 
 See [rsHRF_toolbox.pptx](https://github.com/guorongwu/rsHRF/raw/master/rsHRF_toolbox.pptx) for more details (Installation/Usage/Outputs).
 ![rsHRF GUI](https://github.com/guorongwu/rsHRF_data/raw/master/rsHRF_GUI.png)
     -- two videos
     -- can be visualized: how? one video; plus image batch
-    -- batch demo (in .zip)
+    -- batch demo (in .zip) - slide X till X
 --> 
 
 ## Connectivity analysis
-The connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) is only provided in the rsHRF SPM plugin. 
+The connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) is only provided in the rsHRF SPM plugin. --> show example!! 
+
+F9 for matlab to run
