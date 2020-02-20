@@ -8,7 +8,7 @@ __IMPORTANT__: Please use Google Chrome to browse the _Workflow_ Page! If you do
 # Preprocessing 
 ## Input:
 
-<details><summary>What is the prefered input data format?</summary> <!-- FAQ -->
+<details><summary><b>What is the prefered input data format?</b></summary> <!-- FAQ -->
 <br> <!-- insert image: batch: scans -->
 <!-- <img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/input_01.png" alt="Input_Format" width="200"/> -->
 <p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox allows you to run the analyses on several formats of input data: <i>3D NIfTI</i>, <i>4D NIfTI</i>, <i>extracted signals (.mat) – [observation x voxels/vertices]</i>, <i>2D surface-based (.gii) files</i>.</li></p>
@@ -22,13 +22,13 @@ examples are tested using MATLAB R2015b + which spm version
 
 </details>
 
-<details><summary>Should the input data be standardized (i.e. z-scored) a priori?</summary><br> <!-- FAQ -->
+<details><summary><b>Should the input data be standardized (i.e. z-scored) a priori?</b></summary><br> <!-- FAQ -->
 
-<p align="justify">No, the standardization of the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series has already been included in the code for the <abbr title="hemodynamic response function">HRF</abbr> basis functions (i.e. <code>wgr_rshrf_estimation_canonhrf2dd_par2.m</code>, <code>wgr_rsHRF_FIR.m</code>, <code>rsHRF_estimation_FIR.m</code>, <code>rsHRF_estimation_temporal_basis.m</code></a>, and <code>rsHRF_estimation_impulseest.m</code>).</p>
+<p align="justify">No, the standardization of the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series has already been included in the code for the <abbr title="hemodynamic response function">HRF</abbr> basis functions which you can find in the <code>rsHRF/code/</code> folder (i.e. <code>wgr_rshrf_estimation_canonhrf2dd_par2.m</code>, <code>wgr_rsHRF_FIR.m</code>, <code>rsHRF_estimation_FIR.m</code>, <code>rsHRF_estimation_temporal_basis.m</code></a>, and <code>rsHRF_estimation_impulseest.m</code>).</p>
 
 </details>
 
-<details><summary>Should the input data already be denoised?</summary><br> <!-- FAQ -->
+<details><summary><b>Should the input data already be denoised?</b></summary><br> <!-- FAQ -->
 
 <p align="justify">The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin: <ul><li> 
  nuisance variable regression;</li>
@@ -42,10 +42,10 @@ examples are tested using MATLAB R2015b + which spm version
 </details>
 
 # Analysis:
-<details><summary>Whole-brain or ROI analysis?</summary> <!-- FAQ -->
+<details><summary><b>Whole-brain or ROI analysis?</b></summary><br> <!-- FAQ -->
 
-Both analyses are supported. However, outlier removal is only legit when conducting a whole-brain analysis. - in blokje tekst; 
-As mentioned in the installation page; the rsHRF toolbox consists of two main parts: retrieval & deconvultion + connectivity; both analysis can be performed on either whol-brain level or ROI level. However, outlier removal denoted by OMrl (see output example) is only legit when conducting whole brain analysis. rshrf retrieval and deconvl is available both in the matlab standalone as well as in the spm plugin; however connectivity analyis is currently only avalibale in the spm plugin. Here below, you can find an outline for workflow examples for both the standalone and the spm plugin. 
+<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<b>v2.2</b>) consists of two main analysis options: 1) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> retrieval and deconvolution</i> and 2) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i>. Both analyses are supported on either whole-brain level or ROI level. However, outlier removal is only legit when conducting a whole-brain analysis. 
+ <!-- Both analyses can be performed  However, outlier removal denoted by OMrl (see output example) is only legit when conducting whole brain analysis. rshrf retrieval and deconvl is available both in the matlab standalone as well as in the spm plugin; however connectivity analyis is currently only avalibale in the spm plugin. Here below, you can find an outline for workflow examples for both the standalone and the spm plugin.</p>-->
 
 </details>
 
