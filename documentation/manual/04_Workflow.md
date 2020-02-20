@@ -12,11 +12,9 @@ __IMPORTANT__: Please use Google Chrome to browse the _Workflow_ Page! If you do
 <br> <!-- insert image: batch: scans -->
 <!-- <img align="right" src="https://github.com/compneuro-da/rsHRF/blob/update/img/input_01.png" alt="Input_Format" width="200"/> -->
 <p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox allows you to run the analyses on several formats of input data: <i>3D NIfTI</i>, <i>4D NIfTI</i>, <i>extracted signals (.mat) – [observation x voxels/vertices]</i>, <i>2D surface-based (.gii) files</i>.</li></p>
- 
 <!-- The input can be images (3D or 4D), mesh (2D), or directly matrices of [observation x voxels/vertices]. The demos allow you to run the analyses on several formats of input data. As shown in the Flowchart [insert] -->
 <!-- example for every kind of input; .mat is ok (1 van de drie?); not for other two 
 examples are tested using MATLAB R2015b + which spm version
-
 <!--
 - nifti (3d & 4d)
 - mat: stand (ok)
