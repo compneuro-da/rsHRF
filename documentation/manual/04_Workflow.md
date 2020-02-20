@@ -24,21 +24,22 @@ examples are tested using MATLAB R2015b + which spm version
 
 </details>
 
-<details><summary>Should the input data already be standardized (i.e. z-scored)?</summary><br> <!-- FAQ -->
+<details><summary>Should the input data be standardized (i.e. z-scored) a priori?</summary><br> <!-- FAQ -->
 
+No, the standardisation is already included in the <abbr title="hemodynamic response function">HRF</abbr> basis functions. 
 <!-- to check; already included [?] -->
 
 </details>
 
 <details><summary>Should the input data already be denoised?</summary><br> <!-- FAQ -->
 
-The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe, which could include: <!-- cf. e-mail OHBM - what to add? -->
-* nuisance variable regression 
-* bandpass filter in the 0.01-0.08 Hz interval
-* despiking
+The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin: <!-- cf. e-mail OHBM - what to add? -->
+* nuisance variable regression;
+* polynomial detrending; 
+* band-pass filter (e.g. in the 0.01 - 0.1 Hz interval);
+* despiking 
 
-These denoising steps are also provided in the SPM plugin.
-It is also possible to use a <code>temporal mask</code> to exclude some time points (for example after scrubbing).
+It is also possible to use a <code>temporal mask</code> to exclude some time points using the <code>temporal mask for event detection</code> included in the <abbr title="statistical parametric mapping">SPM</abbr> plugin.
 <!-- temporal_mask: generated from scrubbing. -->
 
 </details>
