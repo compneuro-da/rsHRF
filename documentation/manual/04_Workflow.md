@@ -30,7 +30,7 @@ examples are tested using MATLAB R2015b + which spm version
 
 <details><summary><b>Should the input data already be denoised?</b></summary><br> <!-- FAQ -->
 
-<p align="justify">The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<b>v2.2</b>): <ul><li> 
+<p align="justify">The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin: <ul><li> 
  nuisance variable regression;</li>
 <li> polynomial detrending;</li>
 <li> band-pass filter (e.g. in the 0.01 - 0.1 Hz interval);</li>
@@ -44,7 +44,7 @@ examples are tested using MATLAB R2015b + which spm version
 # Analysis:
 <details><summary><b>Whole-brain or ROI analysis?</b></summary><br> <!-- FAQ -->
 
-<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<b>v2.2</b>) consists of two main analysis options: 1) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> retrieval and deconvolution</i> and 2) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i>. Both analyses are supported on either the whole-brain or ROI level. However, outlier removal is only legit when conducting a whole-brain analysis. 
+<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox consists of two main analysis options: 1) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> retrieval and deconvolution</i> and 2) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i>. Both analyses are supported on either the whole-brain or ROI level. However, outlier removal is only legit when conducting a whole-brain analysis. 
  <!-- Both analyses can be performed  However, outlier removal denoted by OMrl (see output example) is only legit when conducting whole brain analysis. rshrf retrieval and deconvl is available both in the matlab standalone as well as in the spm plugin; however connectivity analyis is currently only avalibale in the spm plugin. Here below, you can find an outline for workflow examples for both the standalone and the spm plugin.</p>-->
 
 </details>
