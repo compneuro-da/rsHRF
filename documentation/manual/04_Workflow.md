@@ -30,7 +30,7 @@ examples are tested using MATLAB R2015b + which spm version
 
 <details><summary><b>Should the input data already be denoised?</b></summary><br> <!-- FAQ -->
 
-<p align="justify">The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin: <ul><li> 
+<p align="justify">The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin (<b>v2.2</b>): <ul><li> 
  nuisance variable regression;</li>
 <li> polynomial detrending;</li>
 <li> band-pass filter (e.g. in the 0.01 - 0.1 Hz interval);</li>
