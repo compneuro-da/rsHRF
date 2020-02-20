@@ -36,7 +36,7 @@ examples are tested using MATLAB R2015b + which spm version
 <li> band-pass filter (e.g. in the 0.01 - 0.1 Hz interval);</li>
 <li> despiking. </li></ul></p>
 
-<p align="justify">It is also possible to use a <code>temporal mask</code> to exclude some time points using the <code>temporal mask for event detection</code> included in the <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
+<p align="justify">It is also possible to use a <code>temporal mask</code> to exclude some time points using the <code>Temporal mask for event detection</code> included in the <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
 <!-- temporal_mask: generated from scrubbing. -->
 
 </details>
