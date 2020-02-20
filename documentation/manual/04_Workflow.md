@@ -44,12 +44,13 @@ examples are tested using MATLAB R2015b + which spm version
 # Analysis:
 <details><summary><b>Whole-brain or ROI analysis?</b></summary><br> <!-- FAQ -->
 
-<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<b>v2.2</b>) consists of two main analysis options: 1) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> retrieval and deconvolution</i> and 2) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i>. Both analyses are supported on either whole-brain or ROI level. However, outlier removal is only legit when conducting a whole-brain analysis. 
+<p align="justify">The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<b>v2.2</b>) consists of two main analysis options: 1) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> retrieval and deconvolution</i> and 2) <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i>. Both analyses are supported on either the whole-brain or ROI level. However, outlier removal is only legit when conducting a whole-brain analysis. 
  <!-- Both analyses can be performed  However, outlier removal denoted by OMrl (see output example) is only legit when conducting whole brain analysis. rshrf retrieval and deconvl is available both in the matlab standalone as well as in the spm plugin; however connectivity analyis is currently only avalibale in the spm plugin. Here below, you can find an outline for workflow examples for both the standalone and the spm plugin.</p>-->
 
 </details>
 
-## rsHRF retrieval and deconvolution 
+## Examples:
+__REMARK__: Examples for <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i> (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) are only provided for the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="statistical parametric mapping">SPM</abbr> plugin.
 
 <!-- for both the matlab standalone as well as the spm plugin, you can find a few examples; 
 matlab standalone; you can find the main scripts in; these will use the subfunctions (scripts) provide in the code folder
@@ -66,7 +67,4 @@ See [rsHRF_toolbox.pptx](https://github.com/guorongwu/rsHRF/raw/master/rsHRF_too
     -- batch demo (in .zip) - slide X till X
 --> 
 
-## Connectivity analysis
-The connectivity analysis (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) is only provided in the rsHRF SPM plugin. --> show example!! 
-
-F9 for matlab to run
+<!-- F9 for matlab to run -->
