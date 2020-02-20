@@ -2,8 +2,6 @@
 
 # :grey_question: Frequently Asked Questions (FAQ)
 
-
-which data to use? -- add Flowchart
-
+<!-- which data to use? -- add Flowchart
 1. input format: voxels, rois, signals
-2. 
+2. -->
