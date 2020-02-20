@@ -50,7 +50,7 @@ examples are tested using MATLAB R2015b + which spm version
 </details>
 
 ## Examples:
-__REMARK__: Examples for <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i> (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) are only provided for the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="statistical parametric mapping">SPM</abbr> plugin.
+__REMARK__: <p align="justify">Examples for <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i> (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) are only provided for the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
 
 <!-- for both the matlab standalone as well as the spm plugin, you can find a few examples; 
 matlab standalone; you can find the main scripts in; these will use the subfunctions (scripts) provide in the code folder
