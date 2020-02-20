@@ -1,5 +1,7 @@
 [WIP] <!-- discuss with Guorong; how much contribution? -->
 
+bugs!! tell us
+
 First off, thanks for taking the time to contribute to rsHRF toolbox!!
 recognizing contributions: https://github.com/LIMO-EEG-Toolbox/limo_tools/blob/master/contributing.md#recognizing-contributions
 For every contribution: 
