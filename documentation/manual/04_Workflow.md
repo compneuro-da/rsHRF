@@ -24,13 +24,13 @@ examples are tested using MATLAB R2015b + which spm version
 
 <details><summary><b>Should the input data be standardized (i.e. z-scored) a priori?</b></summary><br> <!-- FAQ -->
 
-<p align="justify">No, the standardization of the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> time series has already been included in the code for the <abbr title="hemodynamic response function">HRF</abbr> basis functions which you can find in the <code>rsHRF/code/</code> folder (i.e. <code>wgr_rshrf_estimation_canonhrf2dd_par2.m</code>, <code>wgr_rsHRF_FIR.m</code>, <code>rsHRF_estimation_FIR.m</code>, <code>rsHRF_estimation_temporal_basis.m</code></a>, and <code>rsHRF_estimation_impulseest.m</code>).</p>
+<p align="justify">No, the standardization of the resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> signal has already been included in the code for the <abbr title="hemodynamic response function">HRF</abbr> basis functions which you can find in the <code>rsHRF/code/</code> folder (i.e. <code>wgr_rshrf_estimation_canonhrf2dd_par2.m</code>, <code>wgr_rsHRF_FIR.m</code>, <code>rsHRF_estimation_FIR.m</code>, <code>rsHRF_estimation_temporal_basis.m</code></a>, and <code>rsHRF_estimation_impulseest.m</code>).</p>
 
 </details>
 
 <details><summary><b>Should the input data already be denoised?</b></summary><br> <!-- FAQ -->
 
-<p align="justify">The input data consists of voxelwise/vertexwise BOLD signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin: <ul><li> 
+<p align="justify">The input data consists of voxelwise/vertexwise resting-state <abbr title="functional Magnetic Resonance Imaging">fMRI</abbr> <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> signal, which you can already preprocesss according to your favorite recipe; however, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox also provides the following denoising steps implemented in the <abbr title="statistical parametric mapping">SPM</abbr> plugin: <ul><li> 
  nuisance variable regression;</li>
 <li> polynomial detrending;</li>
 <li> band-pass filter (e.g. in the 0.01 - 0.1 Hz interval);</li>
@@ -51,6 +51,11 @@ examples are tested using MATLAB R2015b + which spm version
 
 ## Examples:
 __REMARK__: Examples for <i><abbr title="resting-state hemodynamic response function">rsHRF</abbr> connectivity analysis</i> (functional connectivity: Pearson/Spearman correlation, Pairwise/Conditional/Partially Conditioned Granger causality) are only provided for the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> <abbr title="statistical parametric mapping">SPM</abbr> plugin.
+
+| MATLAB Standalone                    | SPM plugin                       |
+|:-------------------------------------|:---------------------------------|
+| :computer::book: scripts located in <code>rsHRF/code/demo/</code> <br><br><br>| :computer: <code>rsHRF/documentation/demo/demo_jobs.zip</code> <br> :book: <code>rsHRF/documentation/<a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/rsHRF_toolbox.pptx">rsHRF_toolbox.pptx</a></code> <br> :video_camera:| 
+
 
 <!-- for both the matlab standalone as well as the spm plugin, you can find a few examples; 
 matlab standalone; you can find the main scripts in; these will use the subfunctions (scripts) provide in the code folder
