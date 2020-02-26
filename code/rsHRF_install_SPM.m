@@ -15,9 +15,9 @@ rsHRF_file = { %which files do you need?
 'wgr_rsHRF_global_para.m'
 'rsHRF.m'
 'rsHRF_install_SPM.m'
-%'rsHRF_toolbox.pptx' %rsHRF/documentation
+%'rsHRF_toolbox.pptx' %rsHRF/documentation/
 'rsHRF.man'
-'rsHRF_logo.png' %additional to rsHRF/code
+'rsHRF_logo.png' %additional to rsHRF/code/
 'spm_rsHRF.m'
 'tbx_cfg_rsHRF.m'
 %'LICENSE' %rsHRF/
