@@ -7,26 +7,30 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 
 # Overview 
  <img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> <!-- find other image to illustrate pseudo-point process + code to produce it -->
-<p align="justify"><b>The basic idea.</b> According to the point process theory discrete <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> events (i.e. pseudo-events in the absence of an external stimulus) govern the brain dynamics at rest (e.g. Tagliazucchi et al. 2012). The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the neuronal  onsets of these pseudo-events with no explicit stimulus and timing, along with the hemodynamic response (<abbr title="resting-state hemodynamic response function">rsHRF</abbr>) it set off. To this end, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox first identifies the pseudo-events, i.e. when the <i>standardized</i> resting-state <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> signal crosses a given threshold (1 SD; see Figure). Thereafter, a model is fitted to retrieve: <ol>
+<p align="justify"><b>The basic idea.</b> According to the point process theory discrete <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> events (i.e. pseudo-events in the absence of an external stimulus) govern the brain dynamics at rest (e.g. Tagliazucchi et al. 2012). The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the neuronal  onsets of these pseudo-events with no explicit stimulus and timing, along with the hemodynamic response (<abbr title="resting-state hemodynamic response function">rsHRF</abbr>) it set off. To this end, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox first identifies the pseudo-events, i.e. when the <i>standardized</i> resting-state <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> signal crosses a given threshold (1 SD; see Figure). Thereafter, a model is fitted to retrieve: <ol type="A">
 <li>the <i>optimal lag</i> between the pseudo-events and the neuronal (<abbr title="resting-state hemodynamic response function">rsHRF</abbr>) onset; </li>
- <li>the <i>shape of the estimated <abbr title="resting-state hemodynamic response function">rsHRF</abbr></i> which will depend on the by-the-toolbox predefined <abbr title="hemodynamic response function">HRF</abbr> basis functions. Users of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<a href=""><b>v2.2</b></a>) can choose one of seven options:</li>
+ <li>the <i>shape of the estimated <abbr title="resting-state hemodynamic response function">rsHRF</abbr></i> which will depend on the by-the-toolbox predefined <abbr title="hemodynamic response function">HRF</abbr> basis functions. Users of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<a href=""><b>v2.2</b></a>) can choose one of eight options (<i>a</i> - <i>h</i>):
  
 <ul>
-<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>: 
- 
- <li> a canonical HRF with its delay derivative – <i>canontd</i>;</li>
- <li> a canonical HRF with its delay and dispersion derivatives – <i>canontdd</i>;</li>
- <li> Gamma functions (variable number of basis functions (<i>k</i>: e.g. 3-5));</li>
- <li> Fourier set (default number of basis functions (<i>k</i>): 3);</li>
- <li> Fourier set (Hanningg; default number of basis functions (<i>k</i>): 3);</li></li>
- 
+<li>included in the rsHRF <abbr title="graphical user interface">GUI</abbr>
+<ul><li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>: 
+  <ol> 
+  <li> <b>canontd</b>: a canonical HRF with its delay derivative;</li>
+  <li> <b>canontdd</b>: a canonical HRF with its delay and dispersion derivatives;</li>
+  <li> <b>Gamma Functions</b> with a variable number of basis functions (<i>k</i>), e.g. 3-5;</li>
+  <li> <b>Fourier Set</b> with a default number of basis functions (<i>k</i>) equal to 3;</li>
+  <li> <b>Fourier Set (Hanning)</b> with a default number of basis functions (<i>k</i>) equal to 3;</li>
+  </ol></li>
 <li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code></a>: 
- 
- <li>Finite Impulse Response basis functions – <i>FIR</i>;</li>
- <li>smoothed Finite Impulse Response basis functions – <i>sFIR</i>;</li></li>
-
-<li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>: non-parametric impulse response estimation (which is not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>).</li>
-</ul></ol></p>
+  <ol start="6">
+  <li><b>FIR</b>: Finite Impulse Response;</li>
+  <li><b>sFIR</b>: smoothed Finite Impulse Response;</li>
+  </ol></li></ul></li>
+<li>not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>
+<ul><li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>: 
+  <ol start="8">
+   <li><b>non-parametric impulse response estimation</b>.</li></ol></li></ul></li>
+</ul></li></ol></p>
 
 # Usage 
 <p align="justify">Once that the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> has been retrieved for each voxel/vertex in the brain, you can:
