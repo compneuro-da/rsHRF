@@ -6,7 +6,7 @@ Add rsHRF_viewer.m for HRF shapes visualization.
 Add a m-file (rsHRF_mvgc.m) for multivariate Granger causality analysis.
 Update HRF basis functions, add Gamma/Fourier basis function (more flexible, and supporting finer temporal grid). 
 Update (s)FIR model, using AR(k) for autocorrelated noise modeling.
-Add a m-file (rsHRF_estimation_impulseest.m, see code for help) for Nonparametric impulse response estimation (not included in rsHRF GUI). 
+Add a m-file (rsHRF_estimation_impulseest.m, see code for help) for nonparametric impulse response estimation (not included in rsHRF GUI). 
 ----------------------- 
 
 ------ v2.1, 201908 ----------- 
