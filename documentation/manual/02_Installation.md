@@ -9,7 +9,7 @@ __IMPORTANT__: Please use Google Chrome to browse the _Installation_ Page! If yo
 <p align="justify">To successfully run the MATLAB code for <i>rsHRF deconvolution and connectivity analysis</i>, <a href="https://nl.mathworks.com/help/install/"><b>MATLAB</b></a> and <a href="https://www.fil.ion.ucl.ac.uk/spm/software/download/"><abbr title="Statistical Parametric Mapping"><b>SPM</b></abbr></a> should be installed. <abbr title="Statistical Parametric Mapping">SPM</abbr> is still necessary because the MATLAB code uses some of its basis functions (e.g. <code>spm_vol.m</code>, <code>spm_read_vols.m</code>...). After completing the installation, open MATLAB and add the <abbr title="Statistical Parametric Mapping">SPM</abbr> directory including all its folders and subfolders to the MATLAB search path:</p>
 	
 ``` matlab
-spmdir = '/full/path/to/spm12/';
+spmdir = '/path/to/spm12/';
 addpath(genpath(spmdir));
  ```
 
