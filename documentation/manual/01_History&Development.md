@@ -310,7 +310,7 @@ Files with:
 
 # References: 
 
-* <a name="ref3">Song, X. W., Dong, Z. Y., Long, X. Y., Li, S. F., Zuo, X. N., Zhu, C. Z., ... & Zang, Y. F. (2011). REST: A toolkit for resting-state functional magnetic resonance imaging data processing. <i>PloS one</i>, <i>6</i>(9), e25031. <https://doi.org/10.1371/journal.pone.0025031> 
+* <a name="ref3">Song, X. W., Dong, Z. Y., Long, X. Y., Li, S. F., Zuo, X. N., Zhu, C. Z., ... & Zang, Y. F. (2011). REST: A toolkit for resting-state functional magnetic resonance imaging data processing. <i>PLoS One</i>, <i>6</i>(9), e25031. <https://doi.org/10.1371/journal.pone.0025031> 
 * <a name="ref2">Tagliazucchi, E., Balenzuela, P., Fraiman, D., & Chialvo, D. R. (2012). Criticality in large-scale brain fMRI dynamics unveiled by a novel point process analysis. <i>Frontiers in Physiology</i>, <i>3</i>, 15. <https://doi.org/10.3389/fphys.2012.00015> 
 
 <a href="#top">🔝</a>
