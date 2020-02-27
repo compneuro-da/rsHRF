@@ -73,7 +73,7 @@ Files with:
 +  💻 CODE: rsHRF_install_SPM.m
 ``` 
 
-<p align="justify">Running <code>rsHRF_install_SPM.m</code><sup><a href="https://github.com/compneuro-da/rsHRF/commits/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m">31</a></sup> in the Command Window within the downloaded <abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository will install <abbr title="Statistical Parametric Mapping">SPM</abbr> (if not yet available) and copy all files included in the <code>rsHRF_file</code> cell array to <code>./SPM/toolbox/rsHRF</code>.</p>
+<p align="justify">Running <code>rsHRF_install_SPM.m</code><sup><a href="https://github.com/compneuro-da/rsHRF/commits/master/rsHRF_install_SPM.m" title="rsHRF_install_SPM.m">31</a></sup> in the Command Window within the downloaded <abbr title="resting-state hemodynamic response function">rsHRF</abbr> GitHub repository will copy all files included in the <code>rsHRF_file</code> cell array to <code>path/to/spm12/toolbox/rsHRF</code>.</p>
 
 </details>
 
