@@ -7,12 +7,12 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 
 # Overview 
  <img align="right" src="https://github.com/guorongwu/rsHRF/raw/master/docs/example_hrf.png" alt="BOLD_HRF" width="350"/> <!-- find other image to illustrate pseudo-point process + code to produce it -->
-<p align="justify"><b>The basic idea.</b> According to the point process theory discrete <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> events (i.e. pseudo-events in the absence of an external stimulus) govern the brain dynamics at rest (e.g. Tagliazucchi et al. 2012). The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the neuronal  onsets of these pseudo-events with no explicit stimulus and timing, along with the hemodynamic response (<abbr title="resting-state hemodynamic response function">rsHRF</abbr>) it set off. To this end, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox first identifies the pseudo-events, i.e. when the <i>standardized</i> resting-state <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> signal crosses a given threshold (1 SD; see Figure). Thereafter, a model is fitted to retrieve: <ol type="A">
+<p align="justify"><b>The basic idea.</b> According to the point process theory discrete <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> events (i.e. pseudo-events in the absence of an external stimulus) govern the brain dynamics at rest (e.g. <a href="#ref5"Tagliazucchi et al. 2012</a>). The <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox is aimed to retrieve the neuronal  onsets of these pseudo-events with no explicit stimulus and timing, together with the hemodynamic response (<abbr title="resting-state hemodynamic response function">rsHRF</abbr>) it set off. To this end, the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox first identifies the pseudo-events, i.e. when the <i>standardized</i> resting-state <abbr title="Blood Oxygenation Level Dependent">BOLD</abbr> signal crosses a given threshold (1 SD; see Figure). Thereafter, a model is fitted to retrieve: <ol type="A">
 <li>the <i>optimal lag</i> between the pseudo-events and the neuronal (<abbr title="resting-state hemodynamic response function">rsHRF</abbr>) onset; </li>
  <li>the <i>shape of the estimated <abbr title="resting-state hemodynamic response function">rsHRF</abbr></i> which will depend on the by-the-toolbox predefined <abbr title="hemodynamic response function">HRF</abbr> basis functions. Users of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<a href=""><b>v2.2</b></a>) can choose one of eight options (<i>a</i> - <i>h</i>):
  
 <ul>
-<li>included in the rsHRF <abbr title="graphical user interface">GUI</abbr>
+<li>included in the rsHRF <abbr title="graphical user interface">GUI</abbr>:
 <ul><li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>: 
   <ol> 
   <li> <b>canontd</b>: a canonical HRF with its delay derivative;</li>
@@ -26,7 +26,7 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
   <li><b>FIR</b>: Finite Impulse Response;</li>
   <li><b>sFIR</b>: smoothed Finite Impulse Response;</li>
   </ol></li></ul></li>
-<li>not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>
+<li>not included in the rsHRF <abbr title="graphical user interface">GUI</abbr>:
 <ul><li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>: 
   <ol start="8">
    <li><b>non-parametric impulse response estimation</b>.</li></ol></li></ul></li>
@@ -77,6 +77,7 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 
 <!-- Chen, G., Adleman, N. E., Saad, Z. S., Leibenluft, E., & Cox, R. W. (2014). Applications of multivariate modeling to neuroimaging group analysis: A comprehensive alternative to univariate general linear model. NeuroImage, 99, 571-588. https://doi.org/10.1016/j.neuroimage.2014.06.027  -->
 
+* <a name="ref5">Tagliazucchi, E., Balenzuela, P., Fraiman, D., & Chialvo, D. R. (2012). Criticality in large-scale brain fMRI dynamics unveiled by a novel point process analysis. <i>Frontiers in Physiology</i>, <i>3</i>, 15. <https://doi.org/10.3389/fphys.2012.00015> 
 * <a name="ref1">Wu, G. R., Liao, W., Stramaglia, S., Ding, J. R., Chen, H., & Marinazzo, D. (2013). A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data. <i>Medical Image Analysis</i>, <i>17</i>(3), 365-374. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2013_MIA.pdf) 
 * <a name="ref2">Wu, G. R., & Marinazzo, D. (2016). Sensitivity of the resting-state haemodynamic response function estimation to autonomic nervous system fluctuations. <i>Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences</i>, <i>374</i>(2067), 20150190. [PDF](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/2016_PTA.pdf)
 * <a name="ref3">Wu, G. R., & Marinazzo, D. (2015). <i>Retrieving the Hemodynamic Response Function in resting state fMRI: Methodology and applications</i> (No. e1621). PeerJ PrePrints. [Poster2016](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/poster_OHBM2016_HRF.pdf), [Poster2018](https://github.com/compneuro-da/rsHRF_data/raw/master/docs/rs_HRF_OHBM2018_Daniele.pdf)
