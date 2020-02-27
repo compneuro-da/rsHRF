@@ -1,1 +1,11 @@
 theme: jekyll-theme-slate
+
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - README.md
+  - LICENSE.md
+  - ./documentation/manual/01_History&Development.md
