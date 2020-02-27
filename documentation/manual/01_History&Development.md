@@ -161,7 +161,7 @@ Files with:
 +  📖 DOCUMENTATION/DEMO: examples
 ``` 
 
-<p align="justify">The expanded demo applied to two specific <b><i>examples</i></b>, i.e., a sample voxel from the Human Connectome Project (HCP; <code>voxelsample_hcp.mat</code><sup><a href="https://github.com/compneuro-da/rsHRF/commits/master/voxelsample_hcp.mat" title="voxelsample_hcp.mat">16</a></sup>; XXX) and <code>calcium.mat</code><sup><a href="https://github.com/compneuro-da/rsHRF_data/commits/master/calcium.mat" title="calcium.mat">18</a></sup>, is committed to GitHub.</p> 
+<p align="justify">The expanded demo applied to two specific <b><i>examples</i></b>, i.e., a sample voxel from the Human Connectome Project (HCP; <code>voxelsample_hcp.mat</code><sup><a href="https://github.com/compneuro-da/rsHRF/commits/master/voxelsample_hcp.mat" title="voxelsample_hcp.mat">16</a></sup>) and <code>calcium.mat</code><sup><a href="https://github.com/compneuro-da/rsHRF_data/commits/master/calcium.mat" title="calcium.mat">18</a></sup>, is committed to GitHub.</p> 
 
 </details>
 
