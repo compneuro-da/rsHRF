@@ -40,7 +40,7 @@ addpath(genpath(spmdir));
 !  Main modifications (M):  
 ``` 
 
-* <p align="justify"><b>rsHRF_install_SPM.m</b>: <a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> has been added to the <code>code</code> folder to facilitate the installation of the <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
+* <p align="justify"><b>rsHRF_install_SPM.m</b>: <a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_install_SPM.m"><code>rsHRF_install_SPM.m</code></a> has been added to the <code>rsHRF/code/</code> folder to facilitate the installation of the <abbr title="statistical parametric mapping">SPM</abbr> plugin.</p>
 * <p align="justify"><b>functional connectivity</b>: a functional connectivity analysis module has been added to the processing pipeline, including the Pearson and Spearman correlation.</p>
 * <p align="justify"><b>effective connectivity</b>: an effective connectivity analysis module has been added to the processing pipeline, including the Pairwise/Conditional/Partially Conditioned Granger causality methods.</p>
 <br>
