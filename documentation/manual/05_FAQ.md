@@ -3,7 +3,7 @@
 
 :grey_question: Frequently Asked Questions (FAQ)
 ----
-__IMPORTANT__: Please use Google Chrome to browse the _History and Development_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
+__IMPORTANT__: Please use Google Chrome to browse the _FAQ_ Page! If you don't, you won't be able to expand the collapsibles. [<abbr title="Work In Progress"><i>WIP</i></abbr>]
 
 
 <!-- which data to use? -- add Flowchart
