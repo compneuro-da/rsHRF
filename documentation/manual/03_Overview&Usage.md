@@ -15,8 +15,8 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 <li>included in the rsHRF <abbr title="graphical user interface">GUI</abbr>:
 <ul><li><a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code></a>: 
   <ol> 
-  <li> <b>canontd</b>: a canonical HRF with its delay derivative;</li>
-  <li> <b>canontdd</b>: a canonical HRF with its delay and dispersion derivatives;</li>
+  <li> <b>canontd</b>: a canonical HRF with its time derivative;</li>
+  <li> <b>canontdd</b>: a canonical HRF with its time and dispersion derivatives;</li>
   <li> <b>Gamma Functions</b> with a variable number of basis functions (<i>k</i>), e.g. 3-5;</li>
   <li> <b>Fourier Set</b> with a default number of basis functions (<i>k</i>) equal to 3;</li>
   <li> <b>Fourier Set (Hanning)</b> with a default number of basis functions (<i>k</i>) equal to 3;</li>
