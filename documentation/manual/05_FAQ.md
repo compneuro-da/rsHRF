@@ -10,4 +10,8 @@ __IMPORTANT__: Please use Google Chrome to browse the _FAQ_ Page! If you don't, 
 1. input format: voxels, rois, signals
 2. -->
 
+<details><summary><a name="faq_bf"><b>Which one of the eigth HRF basis functions should I use?</summary><br>
+  <p align="justify"></p>
+</details>
+
 <a href="#top">🔝</a>
