@@ -11,7 +11,7 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 <li>the <i>optimal lag</i> between the pseudo-events and the neuronal (<abbr title="resting-state hemodynamic response function">rsHRF</abbr>) onset; </li>
 <li>the <i>shape of the estimated <abbr title="resting-state hemodynamic response function">rsHRF</abbr></i> which will depend on the by-the-toolbox predefined <abbr title="hemodynamic response function">HRF</abbr> basis functions. Users of the <abbr title="resting-state hemodynamic response function">rsHRF</abbr> toolbox (<a href=""><b>v2.2</b></a>) can choose one of eight options:<br><br>
 
-| Script         | HRF basis functions         | 
+| Code         | HRF basis functions         | 
 | :------------- |:-------------| 
 | <a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_temporal_basis.m"><code>rsHRF_estimation_temporal_basis.m</code> | <i>canontd</i>: a canonical HRF with its time derivative |
 | | <i>canontdd</i>: a canonical HRF with its time and dispersion derivatives |
