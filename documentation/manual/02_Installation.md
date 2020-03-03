@@ -85,6 +85,7 @@ addpath(genpath(spmdir));
 <p align="justify">In order to open the <abbr title="graphical user interface">GUI</abbr> of your choice, type respectively <code>rsHRF</code> or <code>rsHRF conn</code> in the MATLAB Command Window. If you would like to open the former (i.e. the Resting State HRF <abbr title="graphical user interface">GUI</abbr>) using the <abbr title="statistical parametric mapping">SPM</abbr> <abbr title="graphical user interface">GUI</abbr>, type <i>spm fmri</i> in the MATLAB Command Window; <i>note</i>: you have already added the <abbr title="Statistical Parametric Mapping">SPM</abbr> directory including all its folders and subfolders to the MATLAB search path. Once the <abbr title="statistical parametric mapping">SPM</abbr> <abbr title="graphical user interface">GUI</abbr> has appeared, go to the drop-down toolbox option under the <code>Display</code> button where you select the <code>rsHRF</code> toolbox. By doing so, the Resting State HRF GUI will open.
 	
 <a href="#top">🔝</a>
+<a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/03_Overview%26Usage.md">:arrow_forward:</a>
 	
 <!--
 <div style="width:100%; padding-bottom:56.25%; position:relative;">
