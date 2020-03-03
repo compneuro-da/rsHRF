@@ -57,6 +57,8 @@ __REMARK__: Examples for <i><abbr title="resting-state hemodynamic response func
 | :computer::book: scripts located in <code>rsHRF/code/demo/</code> <br><br><br>| :computer: <code>rsHRF/documentation/demo/demo_jobs.zip</code> <br> :book: <code>rsHRF/documentation/<a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/rsHRF_toolbox.pptx">rsHRF_toolbox.pptx</a></code> <br> :video_camera:| 
 
 <a href="#top">🔝</a>
+<a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/03_Overview%26Usage.md">:arrow_backward:</a>
+<a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/05_WorkflowFAQ.md">:arrow_forward:</a>
 
 <!-- for both the matlab standalone as well as the spm plugin, you can find a few examples; 
 matlab standalone; you can find the main scripts in; these will use the subfunctions (scripts) provide in the code folder
