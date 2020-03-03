@@ -314,3 +314,4 @@ Files with:
 * <a name="ref2">Tagliazucchi, E., Balenzuela, P., Fraiman, D., & Chialvo, D. R. (2012). Criticality in large-scale brain fMRI dynamics unveiled by a novel point process analysis. <i>Frontiers in Physiology</i>, <i>3</i>, 15. <https://doi.org/10.3389/fphys.2012.00015> 
 
 <a href="#top">🔝</a>
+<a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/02_Installation.md">:arrow_forward:</a>
