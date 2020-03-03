@@ -15,3 +15,4 @@ __IMPORTANT__: Please use Google Chrome to browse the _FAQ_ Page! If you don't, 
 </details>
 
 <a href="#top">🔝</a>
+<a href="https://github.com/compneuro-da/rsHRF/blob/update/documentation/manual/04_Workflow.md">:arrow_backward:</a>
