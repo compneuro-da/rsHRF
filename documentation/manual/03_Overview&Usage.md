@@ -20,7 +20,7 @@ __IMPORTANT__: Please use Google Chrome to browse the _Overview and Usage_ Page!
 | | <i>Fourier Set (Hanning)</i> with a default number of basis functions (<i>k</i>) equal to 3 |
 | <a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_FIR.m"><code>rsHRF_estimation_FIR.m</code> | <i>FIR</i>: Finite Impulse Response |
 | | <i>sFIR</i>: smoothed Finite Impulse Response |
-| (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code>) | <i>non-parametric impulse response estimation</i>: not included in the rsHRF <abbr title="graphical user interface">GUI</abbr> |
+| (<a href="https://github.com/compneuro-da/rsHRF/blob/update/code/rsHRF_estimation_impulseest.m"><code>rsHRF_estimation_impulseest.m</code></a>) | <i>non-parametric impulse response estimation</i>: not included in the rsHRF <abbr title="graphical user interface">GUI</abbr> |
 </li></ol></p>
 
 # Usage 
