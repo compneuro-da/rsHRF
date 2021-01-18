@@ -1,9 +1,12 @@
-function [beta_rshrf,event_bold] = rsHRF_estimation_FIR(data,para,temporal_mask)
+function [beta_rshrf,event_bold] = rsHRF_estimation_FIR(data,para,temporal_mask,flag_parfor)
 % temporal_mask: generated from scrubbing.
 % By: Guo-Rong Wu (gronwu@gmail.com).
 % Faculty of Psychology, Southwest University.
 % History:
 % - 2015-04-17 - Initial version.
+if nargin<4
+    flag_parfor = 1;
+end
 
 para.temporal_mask=temporal_mask;
 [N,nvar] = size(data);
@@ -11,8 +14,14 @@ para.temporal_mask=temporal_mask;
 % warning off
 beta_rshrf = cell(1,nvar);
 event_bold= cell(1,nvar);
-parfor i=1:nvar
-    [beta_rshrf{i}, event_bold{i}] = wgr_FIR_estimation_HRF(data(:,i),para,N);
+if flag_parfor
+    parfor i=1:nvar
+        [beta_rshrf{i}, event_bold{i}] = wgr_FIR_estimation_HRF(data(:,i),para,N);
+    end
+else
+    for i=1:nvar
+        [beta_rshrf{i}, event_bold{i}] = wgr_FIR_estimation_HRF(data(:,i),para,N);
+    end
 end
 beta_rshrf  =cell2mat(beta_rshrf);
 % warning on
@@ -28,7 +37,7 @@ if ~isfield(para,'localK')
 else
     localK = para.localK;
 end
-u = wgr_BOLD_event_vector(N,data,para.thr,localK,para.temporal_mask);
+u = rsHRF_find_event_vector(data,para.thr,localK,para.temporal_mask);
 u = find(full(u(:)));
 lag = para.lag;
 nlag = length(lag);
@@ -47,40 +56,12 @@ for i_lag=1:nlag
     end
     kk = kk+1;
 end
-[~, ind] = knee_pt(Cov_E); % this is a function to find the elbow point of a curve, there should be an equivalent in Python
+[~, ind] = rsHRF_knee_pt(Cov_E); % this is a function to find the elbow point of a curve, there should be an equivalent in Python
 if ind==length(Cov_E)
     ind = ind-1;
 end
 beta_hrf = hrf(:,ind+1);
 beta_hrf(end+1) = lag(ind+1);
-
-
-function data = wgr_BOLD_event_vector(N,matrix,thr,k,temporal_mask)
-%detect BOLD event.  event>thr & event<3.1
-data = sparse(1,N);
-% k=2;
-if isempty(temporal_mask)
-    matrix = zscore(matrix);
-    for t  = 1+k:N-k
-        if matrix(t,1) > thr && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
-%         if matrix(t,1) > thr(1) && matrix(t,1) < thr(2) && all(matrix(t-2:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+2,1))% detects threshold
-            data(t) = 1 ;
-        end
-    end
-else
-    datm = mean(matrix(temporal_mask));
-    datstd = std(matrix(temporal_mask));
-    datstd(datstd==0) = 1;%in case datstd==0;
-    matrix = (matrix-datm)./datstd;
-    for t  = 1+k:N-k
-        if temporal_mask(t)
-            if matrix(t,1) > thr && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
-                data(t) = 1 ;
-            end
-        end
-    end
-end
-return
 
 function [hrf,res_sum] = wgr_Fit_FIR2(input,output,para)
 % NN : length of impulse response

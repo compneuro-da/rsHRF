@@ -2,6 +2,7 @@ function st = rsHRF_viewer(job);
 % gronwu@gmail.com ;  Guo-Rong Wu
 % 2017, 18th May.
 % 2019, 25th Oct, updated.
+% 2020, 9th Oct, colorbar Yticklabel removed.
 underlay_img = job.underlay_nii{1};
 img = job.stat_nii{1};
 HRF_mat = job.HRF_mat;
@@ -10,12 +11,12 @@ clear st;
 spm_orthviews('Reset');
 global st
 st.fig = figure('Visible','on',...
-              'numbertitle','off',...                                       
+              'numbertitle','off',...                                   
               'menubar','none',...
               'units','normalized',...
               'color','w',...
               'position',[0.05,0.05,0.25,0.4],...
-              'name','HRF Viewer (v1.0)',...
+              'name','HRF Viewer (v1.1)',...
               'resize','on');
           
 h = spm_orthviews('Image', underlay_img, [0 0.05 1 1]);
@@ -187,7 +188,8 @@ for i=1:ng
     end
     
     mf(:,:,i) = mean(HRFa,3);
-    sf(:,:,i)  = std(HRFa,0,3);
+%     sf(:,:,i)  = std(HRFa,0,3);%std
+    sf(:,:,i)  = std(HRFa,0,3)./sqrt(k00);%SE
 end
 fprintf('Done\n')
 aa = load(group{j},'para');
@@ -375,6 +377,12 @@ st.h = spm_orthviews('Image', st.underlay_img, [0 0.05 1 1]);
 spm_orthviews('AddBlobs', st.h, st.tmpXYZ, st.tmpZ, st.v.mat);
 spm_orthviews('Reposition',mni_coord);
 fprintf('Peak MNI: [%d %d %d], Peak value: %2.3f\n',[round(peakcoord) peakintensity])
+spm_orthviews('Redraw');
+hh= cellfun(@(x) isempty(x), st.vols);
+id= find(hh);
+for i=2:id(1)-2
+    st.vols{i, 1}.blobs{1, 1}.cbar.YTickLabel={};
+end
 
 return 
 

@@ -1,11 +1,9 @@
-│   demo_4d_rsHRF.m
-│   mask_3mm_278ROIs.nii
 │   README.md
-|   wgr_get_parameters.m                
-|   knee_pt.m 
-|   wgr_rsHRF_FIR.m
-|   wgr_rshrf_estimation_canonhrf2dd_par2.m
-|
+│   rsHRF_get_parameters.m                
+│   rsHRF_knee_pt.m 
+│   rsHRF_estimation_FIR.m
+│   rsHRF_estimation_temporal_basis.m
+│
 │   
 ├───input_BOLD_data
 │   └───sub_001

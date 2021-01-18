@@ -1,4 +1,4 @@
-function [beta_hrf, bf, event_bold] = rsHRF_estimation_temporal_basis(data,xBF,temporal_mask);
+function [beta_hrf, bf, event_bold] = rsHRF_estimation_temporal_basis(data,xBF,temporal_mask,flag_parfor)
 % xBF.TR = 2;
 % xBF.T = 8;
 % xBF.T0 = fix(xBF.T/2); (reference time bin, see slice timing)
@@ -16,10 +16,13 @@ function [beta_hrf, bf, event_bold] = rsHRF_estimation_temporal_basis(data,xBF,t
 %                       addd AR_lag=0.
 %                       set paramater for local peak detection.
 % - 2019-08-01 - add temporal basis set (Fourier Set, Gamma function)
-
+if nargin<4
+    flag_parfor = 1;
+end
+    
 [N, nvar] = size(data);
 if isnan(xBF.order)
-    para = wgr_rsHRF_global_para;
+    para = rsHRF_global_para;
     xBF.order = para.num_basis;
 end
 bf = wgr_spm_get_bf(xBF);
@@ -27,11 +30,16 @@ warning('off','all')
 fprintf('#%d \n',nvar)
 beta_hrf = cell(1,nvar);
 event_bold= cell(1,nvar);
-parfor i=1:nvar
-%     fprintf('%d \n',i)
-    [beta_hrf{1,i},  event_bold{i}] =wgr_hrf_estimation(data(:,i),xBF,N,bf,temporal_mask);
+if flag_parfor
+    parfor i=1:nvar
+        [beta_hrf{1,i},  event_bold{i}] =wgr_hrf_estimation(data(:,i),xBF,N,bf,temporal_mask);
+    end
+else
+    for i=1:nvar
+        [beta_hrf{1,i},  event_bold{i}] =wgr_hrf_estimation(data(:,i),xBF,N,bf,temporal_mask);
+    end
 end
-
+    
 beta_hrf  =cell2mat(beta_hrf);
 
 warning on
@@ -173,7 +181,7 @@ if ~isfield(xBF,'localK')
 else
     localK = xBF.localK;
 end
-u0 = wgr_BOLD_event_vector(N,dat,thr,localK,temporal_mask);
+u0 = rsHRF_find_event_vector(dat,thr,localK,temporal_mask);
 u = [    full(u0)  
     zeros(xBF.T-1,N) ];
 u = reshape(u,1,[]);  %(microtime)
@@ -181,35 +189,6 @@ u = reshape(u,1,[]);  %(microtime)
 beta_hrf = beta; beta_hrf(end+1) = lag;
 
 u0 = find(full(u0(:))); 
-return
-
-function data = wgr_BOLD_event_vector(N,matrix,thr,k,temporal_mask)
-%detect BOLD event.  event>thr & event<3.1
-data = sparse(1,N);
-% k = 2;
-if isempty(temporal_mask)
-    matrix = zscore(matrix);
-    for t  = 1+k:N-k
-        if matrix(t,1) > thr && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
-%         if matrix(t,1) > thr && matrix(t,1) < 3.1 && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
-            data(t) = 1 ;
-        end
-    end
-else
-    datm = mean(matrix(temporal_mask));
-    datstd = std(matrix(temporal_mask));
-    datstd(datstd==0) = 1;%in case datstd==0;
-    matrix = (matrix-datm)./datstd;
-    for t  = 1+k:N-k
-        if temporal_mask(t)
-            if matrix(t,1) > thr  && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
-%             if matrix(t,1) > thr && matrix(t,1) < 3.1 && all(matrix(t-k:t-1,1)<matrix(t,1)) && all(matrix(t,1)>matrix(t+1:t+k,1))% detects threshold
-                data(t) = 1 ;
-            end
-        end
-    end
-end    
-
 return
 
 function  varargout = wgr_hrf_fit(dat,xBF,u,bf)
@@ -225,7 +204,7 @@ for i=1:nlag
     u_lag = [u(1,lag(i)+1:end) zeros(1,lag(i))]';
     [erm(i), beta(:,i)] = wgr_glm_estimation(dat,u_lag,bf,xBF.T,xBF.T0,AR_lag);
 end
-[~, id] = knee_pt(erm);
+[~, id] = rsHRF_knee_pt(erm);
 if id==nlag
     id = id-1;
 end
