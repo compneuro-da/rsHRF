@@ -14,7 +14,7 @@ Please refer to https://github.com/BIDS-Apps/rsHRF for Python standalone and BID
 
 Tutorial
 -------------
-Two datasets with the demo scripts are available in ./demo_codes/, see [./demo_codes/rsHRF_tutorials.md](https://github.com/compneuro-da/rsHRF/raw/master/demo_codes/rsHRF_tutorials.md) for details.
+Two datasets with the demo scripts are available in ./demo_codes/, see [./demo_codes/rsHRF_tutorials.md](https://github.com/compneuro-da/rsHRF/blob/master/demo_codes/rsHRF_tutorials.md) for details.
 
 Collaborators 
 -------------
