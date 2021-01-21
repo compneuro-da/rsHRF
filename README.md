@@ -4,7 +4,7 @@
 
 Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin)
 ========
-![](https://github.com/compneuro-da/rsHRF/raw/master/rsHRF_logo.png)
+<a href="https://github.com/compneuro-da/rsHRF"><img align="left" src="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_logo.png" alt="rsHRF" width="200"></a>
 
 Getting Started
 -------------

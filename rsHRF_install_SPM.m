@@ -35,9 +35,9 @@ rsHRF_file = { %which files do you need?
 'rsHRF_update_log.txt'  
 'tbx_cfg_rsHRF.m'
 'demo_jobs.zip'  
-''
+'tbx_cfg_rsHRF.m'
 %'README.md' 
-%'LICENSE' %rsHRF/
+%'LICENSE'
 };
 %number of files
 numfile = length(rsHRF_file);
