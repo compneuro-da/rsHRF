@@ -94,11 +94,11 @@ if flag_sliding_windows
         end
 
         x=1:length(HRF);
-        PARA = arrayfun(@(x) wgr_get_parameters(hrf_Blind(:,x),dt),1:size(hrf_Blind,2), 'UniformOutput', false);
+        PARA = arrayfun(@(x) rsHRF_get_HRF_parameters(hrf_Blind(:,x),dt),1:size(hrf_Blind,2), 'UniformOutput', false);
         PARA_Blind = cell2mat(PARA);
-        PARA = arrayfun(@(x) wgr_get_parameters(hrf_LFP_bin(:,x),dt),1:size(hrf_LFP_bin,2), 'UniformOutput', false);
+        PARA = arrayfun(@(x) rsHRF_get_HRF_parameters(hrf_LFP_bin(:,x),dt),1:size(hrf_LFP_bin,2), 'UniformOutput', false);
         PARA_LFP_bin = cell2mat(PARA);
-        PARA = arrayfun(@(x) wgr_get_parameters(hrf_LFP(:,x),dt),1:size(hrf_LFP,2), 'UniformOutput', false);
+        PARA = arrayfun(@(x) rsHRF_get_HRF_parameters(hrf_LFP(:,x),dt),1:size(hrf_LFP,2), 'UniformOutput', false);
         PARA_LFP = cell2mat(PARA);
         h1 = [PARA_Blind(1,:)' PARA_LFP_bin(1,:)' PARA_LFP(1,:)'];
         fwhm = [PARA_Blind(2,:)' PARA_LFP_bin(2,:)' PARA_LFP(2,:)'];
