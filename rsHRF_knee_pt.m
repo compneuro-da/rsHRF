@@ -1,5 +1,16 @@
-function [res_x, idx_of_result] = rsHRF_knee_pt(y,x,just_return)
-%function [res_x, idx_of_result] = knee_pt(y,x,just_return)
+function [res_x, idx_of_result] = rsHRF_knee_pt(y)
+res_x=[];
+[~,id] = knee_pt(y); 
+[~,idm] = min(y);
+ratio = abs(y(id)-y(idm))/range(y);
+if ratio>0.5
+    idx_of_result = idm;
+else
+    idx_of_result = id;
+end
+end
+
+function [res_x, idx_of_result] = knee_pt(y,x,just_return)
 %Returns the x-location of a (single) knee of curve y=f(x)
 %  (this is useful for e.g. figuring out where the eigenvalues peter out)
 %
