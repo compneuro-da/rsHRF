@@ -30,10 +30,26 @@ tempreg = Nf/(sqrdtempnorm);
 % using minkowski's ineq
 Pxx0 = abs( Y .* (conj(H)) ./(Phh + N*tempreg)).^2;
 Pxx = Pxx0;
+Sf = zeros(size(Pxx,1),Iterations+1);
+Sf(:,1) = Pxx;
 for i = 1:Iterations
     M = (conj(H) .* Pxx .* Y) ./ (Phh.*Pxx + Nf);% wiener estimate
     PxxY = (Pxx .* Nf) ./ (Phh.*Pxx + Nf);
     Pxx = PxxY + abs(M).^2;
+    Sf(:,i+1) = Pxx;
 end
+dSf=diff(Sf,1,2); dSfmse=mean(dSf.^2); 
+[~,id]=rsHRF_knee_pt(dSfmse); [~,idm] = min(dSfmse);ratio = abs(dSfmse(id)-dSfmse(idm))/range(dSfmse);
+if ratio>0.5
+    id0 = idm;
+else
+    id0 = id;
+end
+Pxx = Sf(:,id0+1);
+if flag_print
+    %figure(111);plot(dSfmse)
+    fprintf('local minum index %d\n',id0);
+end
+clear Sf dSf
 WienerFilterEst = (conj(H) .* Pxx) ./ ((abs(H).^2 .* Pxx) + Nf);
 xwiener  = real(ifft(WienerFilterEst .* Y));
