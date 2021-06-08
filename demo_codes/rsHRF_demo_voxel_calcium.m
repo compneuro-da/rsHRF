@@ -108,7 +108,8 @@ event_plot=nan(1,nobs);
 event_plot(event_bold{1,1})=1;
 figure(1);plot((1:length(hrfa(:,1)))*TR/para.T,hrfa(:,1),'b');xlabel('Time (s)')
 title(['HRF (',BF{bf_id},')'])
-figure('WindowState','maximized');
+%figure('WindowState','maximized');
+figure('units','normalized','outerposition',[0 0 1 1])
 % plot(BOLD_time,zscore(BOLD_calcium));
 hold all;
 plot(BOLD_time,zscore(data(:,1)));
