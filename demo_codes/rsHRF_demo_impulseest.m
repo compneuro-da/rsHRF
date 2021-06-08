@@ -12,6 +12,7 @@ data = rsHRF_band_filter(bold_sig,TR,bands);
 %%===========PARAMETERS========================
 para.TR = TR;
 options = impulseestOptions; % see impulseestOptions.m for help 
+options.RegulKernel = 'none';
 options.RegularizationKernel = 'none'; %Regularizing kernel, used for regularized estimates of impulse response for all input-output channels. Regularization reduces variance of estimated model coefficients and produces a smoother response by trading variance for bias
 para.options = options;
 
