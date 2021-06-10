@@ -22,7 +22,7 @@ xBF.lag = fix(4/xBF.dt):fix(9/xBF.dt);
 
 data_length = 40:40:1200;   % data length
 nv = 1:length(data_length); % number of events
-snr =  10;
+snr =  0;
 nkk = 2000;
 for hh=1:length(nv)
     k=1; beta_hrf={};
