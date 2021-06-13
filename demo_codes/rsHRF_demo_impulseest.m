@@ -12,8 +12,7 @@ data = rsHRF_band_filter(bold_sig,TR,bands);
 %%===========PARAMETERS========================
 para.TR = TR;
 options = impulseestOptions; % see impulseestOptions.m for help 
-options.RegulKernel = 'none';
-options.RegularizationKernel = 'none'; %Regularizing kernel, used for regularized estimates of impulse response for all input-output channels. Regularization reduces variance of estimated model coefficients and produces a smoother response by trading variance for bias
+options.RegulKernel = 'none'; %Regularizing kernel, used for regularized estimates of impulse response for all input-output channels. Regularization reduces variance of estimated model coefficients and produces a smoother response by trading variance for bias
 para.options = options;
 
 temporal_mask = []; % without mask, it means temporal_mask = logical(ones(nobs,1)); i.e. all time points included. nobs: number of observation = size(data,1). if want to exclude the first 1~5 time points, let temporal_mask(1:5)=0;
