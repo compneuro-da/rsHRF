@@ -118,9 +118,8 @@ end
 
 flag_plot_slidingwindows = 0;
 if flag_plot_slidingwindows
-%     load fa=100_len=26_HRF.mat
-    load fa=50_len=30_HRF.mat
-   %% Table 1
+    load(['fa=',num2str(fa),'_len=',num2str(para.len),'_HRF.mat'])
+    %% Table 1
     disp('Mean & STD')
     mean(HRFcorr)
     std(HRFcorr)
