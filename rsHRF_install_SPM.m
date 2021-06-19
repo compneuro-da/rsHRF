@@ -33,7 +33,6 @@ rsHRF_file = { %which files do you need?
 'rsHRF_read_NIfTI_job.m'             
 'rsHRF_write_file.m'                 
 'rsHRF_update_log.txt'  
-'tbx_cfg_rsHRF.m'
 'demo_jobs.zip'  
 %'README.md' 
 %'LICENSE'
@@ -75,6 +74,10 @@ for ifile=1:numfile
     end
     copyfile(fullfile(GHrepo_dir,rsHRF_file{ifile}),file)
 end
+
+% unit tests
+copyfile(fullfile(GHrepo_dir,'demo_codes'),fullfile(toolbox_dir,'demo_codes'))
+copyfile(fullfile(GHrepo_dir,'unittests'),fullfile(toolbox_dir,'unittests'))
 
 %unzip(fullfile(toolbox_dir,'demo_jobs.zip'),toolbox_dir) %rsHRF/documentation/demo/
 
