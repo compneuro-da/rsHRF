@@ -1,4 +1,10 @@
 code SPM plugin - additions and modifications to v1.0:
+------ v2.4, 202106 ----------- 
+Add a unit test.
+Add stop crition for iterations (rsHRF_iterative_wiener_deconv.m). 
+Modify demo codes for backward compatibility across different versions of Matlab
+----------------------- 
+
 ------ v2.3, 202009 ----------- 
 Update HRF deconvolution algorithm (rsHRF_iterative_wiener_deconv.m). 
 Modify several scripts name.
