@@ -1,6 +1,8 @@
 clc,clear
 %CIfTI toolbox
 addpath E:\HCP_Retest\cifti-matlab-master
+%SimTB toolbox
+addpath E:\simtb_v18\sim
 %data from HCP
 dat=cifti_read('E:\HCP_Retest\103818\MNINonLinear\Results\rfMRI_REST1_LR\rfMRI_REST1_LR_Atlas_MSMAll_hp2000_clean.dtseries.nii');
 data = dat.cdata';
