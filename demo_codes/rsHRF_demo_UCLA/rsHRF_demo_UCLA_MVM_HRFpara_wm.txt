@@ -1,7 +1,7 @@
 3dMVM -prefix ucla_wm_gamma3 -jobs 4   \
 	-mask /mnt/e/rsHRF_demo_UCLA/dependent_file/wm_mask095.nii\
 	-resid residual.nii \
-	-bsVars "Group+Sex+Scanner"        \
+	-bsVars "Group+Sex+Scanner+Age+meanFD"        \
         -qVars  "Age,meanFD"    \
         -wsVars 'Parameter'   \
         -num_glt 18               \
