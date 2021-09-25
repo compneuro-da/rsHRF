@@ -18,7 +18,7 @@ For information concerning 1) the Python Standalone, along with 2) the BIDS-App 
 	- Step-by-step instructions for resting-state HRF analysis are available in the [rsHRF Matlab Manual](https://github.com/compneuro-da/rsHRF/raw/master/rsHRF_manual_Matlab.pdf). 
 - <a href="https://github.com/compneuro-da/rsHRF/blob/master/demo_jobs.zip">Demos</a> & <a href="https://github.com/compneuro-da/rsHRF/blob/master/demo_codes/rsHRF_tutorials.md"> Tutorials</a> 
 - Demo videos: [install](https://www.bilibili.com/video/BV1A341127L4?spm_id_from=333.999.0.0), [3D volume analysis](https://www.bilibili.com/video/BV17Q4y1k7J6?spm_id_from=333.999.0.0), [2D surface analysis](https://www.bilibili.com/video/BV1z44y1b76m?spm_id_from=333.999.0.0), [HRF Visualization](https://www.bilibili.com/video/BV1134y1S7TD?spm_id_from=333.999.0.0).
-- 中文介绍[rsHRF](https://zhuanlan.zhihu.com/p/412029701）
+- [中文介绍](https://zhuanlan.zhihu.com/p/412029701)
 
 
 ## Collaborators 
