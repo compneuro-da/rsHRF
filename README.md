@@ -1,40 +1,35 @@
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+# rsHRF: A Toolbox for Resting State HRF Deconvolution and Connectivity Analysis (MATLAB)
 
-Code for resting state HRF estimation and deconvolution - Matlab (standalone and SPM plugin)
-========
-<a href="https://github.com/compneuro-da/rsHRF"><img align="left" src="https://github.com/compneuro-da/rsHRF/blob/master/rsHRF_logo.png" alt="rsHRF" width="200"></a>
+[![Dependencies](https://img.shields.io/badge/dependencies-SPM-green)]()
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-Getting Started
--------------
-Step-by-step instructions for resting-state HRF analysis are available in the [rsHRF Matlab Manual](https://github.com/compneuro-da/rsHRF/raw/master/rsHRF_manual_Matlab.pdf).
 
-Please refer to https://github.com/BIDS-Apps/rsHRF for Python standalone and BIDS app through Dockers
+<br>
 
-Tutorial
--------------
-Two datasets with the demo scripts are available in ./demo_codes/, see [./demo_codes/rsHRF_tutorials.md](https://github.com/compneuro-da/rsHRF/blob/master/demo_codes/rsHRF_tutorials.md) for details.
+<a href="https://github.com/compneuro-da/rsHRF"><img align="left" src="https://github.com/compneuro-da/rsHRF/blob/master/img/rsHRF_logo.png" alt="rsHRF" width="200"></a>
 
-Collaborators 
--------------
-* Guorong Wu
+<p align="justify"><b>MATLAB</b></abbr><b>.</b> The current GitHub repository contains the MATLAB code for rsHRF deconvolution and connectivity analysis, both for 1) the MATLAB Standalone as well as 2) the [SPM plugin](https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF)
+<p align="justify"><b>Python</b></abbr><b>.</b> For information concerning 1) the Python Standalone, along with 2) the BIDS-App through Dockers/[brainlife](https://github.com/brainlife/app-rsHRF), head over to http://bids-apps.neuroimaging.io/rsHRF </p>
+<br>
+
+   
+## Getting Started
+- <a href="https://github.com/compneuro-da/rsHRF/blob/master/Overview_Usage.md">Overview and Usage</a>
+	- Step-by-step instructions for resting-state HRF analysis are available in the [rsHRF Matlab Manual](https://github.com/compneuro-da/rsHRF/raw/master/rsHRF_manual_Matlab.pdf). 
+- <a href="https://github.com/compneuro-da/rsHRF/blob/master/demo_jobs.zip">Demos</a> & <a href="https://github.com/compneuro-da/rsHRF/blob/master/demo_codes/rsHRF_tutorials.md"> Tutorials</a> 
+
+
+## Collaborators 
+* Guo-Rong Wu
 * Nigel Colenbier
 * Sofie Van Den Bossche
 * Daniele Marinazzo
-
 * Madhur Tandon (Python - BIDS)
 * Asier Erramuzpe (Python - BIDS)
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars1.githubusercontent.com/u/23309041?s=400&u=805568da438fcb3d8d5aaf92362098b393b3a57a&v=4" width="100px;" alt=""/><br /><sub><b>Sofie Van Den Bossche</b></sub></a><br /><a href="" title="Content">🖋</a> <a href="" title="">🤔</a> <a href="" title="Code">💻</a></td>
-  </tr>
-</table>
+## References:
+Guo-Rong Wu, Nigel Colenbier, Sofie Van Den Bossche, Kenzo Clauw, Amogh Johri, Madhur Tandon, Daniele Marinazzo. “rsHRF: A Toolbox for Resting-State HRF Estimation and Deconvolution.” Neuroimage, 2021, 244: 118591. DOI:[10.1016/j.neuroimage.2021.118591](https://doi.org/10.1016/j.neuroimage.2021.118591)
 
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo. “A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data.” Medical Image Analysis 2013, 17:365-374. DOI:[10.1016/j.media.2013.01.003](https://doi.org/10.1016/j.media.2013.01.003)
+
+If you think rsHRF is useful for your work, citing it in your paper would be greatly appreciated.
