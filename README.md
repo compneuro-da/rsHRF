@@ -9,7 +9,7 @@
 <a href="https://github.com/compneuro-da/rsHRF"><img align="left" src="https://github.com/compneuro-da/rsHRF/raw/master/rsHRF_logo.png" alt="rsHRF" width="200"></a>
 
 ### MATLAB 
-The current GitHub repository contains the MATLAB code for rsHRF deconvolution and connectivity analysis, both for 1) the MATLAB Standalone as well as 2) the [SPM plugin](https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF)
+The current GitHub repository contains the MATLAB code for rsHRF estimation, deconvolution, visualization, and connectivity analysis, both for 1) the MATLAB Standalone as well as 2) the [SPM plugin](https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF)
 ### Python
 For information concerning 1) the Python Standalone, along with 2) the BIDS-App through [Dockers](https://hub.docker.com/r/bids/rshrf/)/[brainlife](https://github.com/brainlife/app-rsHRF), head over to http://bids-apps.neuroimaging.io/rsHRF
    
@@ -17,6 +17,8 @@ For information concerning 1) the Python Standalone, along with 2) the BIDS-App 
 - <a href="https://github.com/compneuro-da/rsHRF/blob/master/Overview_Usage.md">Overview and Usage</a>
 	- Step-by-step instructions for resting-state HRF analysis are available in the [rsHRF Matlab Manual](https://github.com/compneuro-da/rsHRF/raw/master/rsHRF_manual_Matlab.pdf). 
 - <a href="https://github.com/compneuro-da/rsHRF/blob/master/demo_jobs.zip">Demos</a> & <a href="https://github.com/compneuro-da/rsHRF/blob/master/demo_codes/rsHRF_tutorials.md"> Tutorials</a> 
+- Demo videos: [install](https://www.bilibili.com/video/BV1A341127L4?spm_id_from=333.999.0.0), [3D volume analysis](https://www.bilibili.com/video/BV17Q4y1k7J6?spm_id_from=333.999.0.0), [2D surface analysis](https://www.bilibili.com/video/BV1z44y1b76m?spm_id_from=333.999.0.0), [HRF Visualization](https://www.bilibili.com/video/BV1134y1S7TD?spm_id_from=333.999.0.0).
+- 中文介绍[rsHRF](https://zhuanlan.zhihu.com/p/412029701）
 
 
 ## Collaborators 
