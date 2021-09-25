@@ -8,10 +8,10 @@
 
 <a href="https://github.com/compneuro-da/rsHRF"><img align="left" src="https://github.com/compneuro-da/rsHRF/raw/master/rsHRF_logo.png" alt="rsHRF" width="200"></a>
 
-<p align="justify"><b>MATLAB</b></abbr><b>.</b> The current GitHub repository contains the MATLAB code for rsHRF deconvolution and connectivity analysis, both for 1) the MATLAB Standalone as well as 2) the [SPM plugin](https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF)
-<p align="justify"><b>Python</b></abbr><b>.</b> For information concerning 1) the Python Standalone, along with 2) the BIDS-App through Dockers/[brainlife](https://github.com/brainlife/app-rsHRF), head over to http://bids-apps.neuroimaging.io/rsHRF </p>
-<br>
-
+### MATLAB 
+The current GitHub repository contains the MATLAB code for rsHRF deconvolution and connectivity analysis, both for 1) the MATLAB Standalone as well as 2) the [SPM plugin](https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF)
+### Python
+For information concerning 1) the Python Standalone, along with 2) the BIDS-App through Dockers/[brainlife](https://github.com/brainlife/app-rsHRF), head over to http://bids-apps.neuroimaging.io/rsHRF
    
 ## Getting Started
 - <a href="https://github.com/compneuro-da/rsHRF/blob/master/Overview_Usage.md">Overview and Usage</a>
