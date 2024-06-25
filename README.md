@@ -11,7 +11,9 @@
 ### MATLAB 
 The current GitHub repository contains the MATLAB code for resting-state HRF estimation, deconvolution, visualization, and connectivity analysis, both for 1) the MATLAB Standalone as well as 2) the [SPM plugin](https://www.fil.ion.ucl.ac.uk/spm/ext/#rsHRF)
 ### Python
-For information concerning 1) the Python Standalone, along with 2) the BIDS-App through [Dockers](https://hub.docker.com/r/bids/rshrf/)/[brainlife](https://github.com/brainlife/app-rsHRF), head over to http://bids-apps.neuroimaging.io/rsHRF
+For information concerning 1) the Python Standalone, along with 2) the BIDS-App through [Docker](https://hub.docker.com/r/bids/rshrf/)/[brainlife](https://github.com/brainlife/app-rsHRF), head over to [the BIDS apps page](http://bids-apps.neuroimaging.io/rsHRF)
+
+Also at [NITRC](https://www.nitrc.org/projects/rshrf) and [EBRAINS](https://www.ebrains.eu/tools/rshrf).
    
 ## Getting Started
 - <a href="https://github.com/compneuro-da/rsHRF/blob/master/Overview_Usage.md">Overview and Usage</a>
@@ -28,32 +30,13 @@ For information concerning 1) the Python Standalone, along with 2) the BIDS-App 
 * Daniele Marinazzo
 * Kenzo Clauw (BIDS)
 * Madhur Tandon (Python - BIDS)
+* Amogh Johri (Python - BIDS)
 * Asier Erramuzpe (Python - BIDS)
 
 ## References:
 Guo-Rong Wu, Nigel Colenbier, Sofie Van Den Bossche, Kenzo Clauw, Amogh Johri, Madhur Tandon, Daniele Marinazzo. “rsHRF: A Toolbox for Resting-State HRF Estimation and Deconvolution.” Neuroimage, 2021, 244: 118591. DOI:[10.1016/j.neuroimage.2021.118591](https://doi.org/10.1016/j.neuroimage.2021.118591)
 
-Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo. “A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data.” Medical Image Analysis 2013, 17:365-374. DOI:[10.1016/j.media.2013.01.003
+Guo-Rong Wu, Wei Liao, Sebastiano Stramaglia, Ju-Rong Ding, Huafu Chen, Daniele Marinazzo. “A blind deconvolution approach to recover effective connectivity brain networks from resting state fMRI data.” Medical Image Analysis 2013, 17:365-374. DOI:[10.1016/j.media.2013.01.003](https://doi.org/10.1016/j.media.2013.01.003)
 
-            
-            
-
-              
-                1 comment on PubPeer (by: Daniele Marinazzo)
-              
-            
-
-          
-
-            
-            
-
-              
-                1 comment on PubPeer (by: Daniele Marinazzo)
-              
-            
-
-          
-](https://doi.org/10.1016/j.media.2013.01.003)
 
 If you think rsHRF is useful for your work, citing it in your paper would be greatly appreciated.
