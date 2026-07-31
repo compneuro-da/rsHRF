@@ -49,6 +49,8 @@ else
         para.estimation = 'sFIR';
     end
     para.T=1; % this needs to be = 1 for FIR
+    para.dt  = para.TR/para.T; % fine scale time resolution.
+    para.lag  = fix(min_onset_search/para.dt):fix(max_onset_search/para.dt);
     [beta_hrf,event_bold] = rsHRF_estimation_FIR(data,para, temporal_mask,flag_parfor);
     hrfa = beta_hrf(1:end-2,:); %HRF
     hrf_baseline = beta_hrf(end-1,:); %HRF baseline value for PSC calculation.
